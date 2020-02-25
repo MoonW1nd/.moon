@@ -271,6 +271,11 @@ let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
 let NERDTreeBookmarksFile= $HOME . '/.vim/.NERDTreeBookmarks'
 
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
+
 " Opening position NERDTree
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeWinSize = 60
