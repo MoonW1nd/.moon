@@ -97,7 +97,6 @@ call plug#end()
 
 set termguicolors                                       " Opaque Background
 set mouse=                                              " disable mouse
-set clipboard+=unnamedplus                              " use system clipboard by default
 
 " ===================== Other Configurations ===================== "
 
@@ -582,10 +581,6 @@ nmap g# g#zz
 " Select all text
 noremap vA ggVG
 
-" use a different buffer for dd
-nnoremap d "_d
-vnoremap d "_d
-
 " Same as normal H/L behavior, but preserves scrolloff
 nnoremap H :call JumpWithScrollOff('H')<CR>
 nnoremap L :call JumpWithScrollOff('L')<CR>
@@ -602,11 +597,6 @@ inoremap ∆ <Esc>:m .+1<CR>==gi
 inoremap ˚ <Esc>:m .-2<CR>==gi
 vnoremap ∆ :m '>+1<CR>gv=gv
 vnoremap ˚ :m '<-2<CR>gv=g
-
-" emulate windows copy, cut behavior
-vnoremap <LeftRelease> "+y<LeftRelease>
-vnoremap <C-c> "+y<CR>
-vnoremap <C-x> "+d<CR>
 
 nnoremap <C-p> :FzfPreviewDirectoryFiles <Cr>
 nnoremap <C-g> :Rg<Cr>
