@@ -689,6 +689,8 @@ augroup Affiliate
 augroup END
 
 " figitive
+call SetupCommandAlias("gs","vertical G")
+
 augroup fugitiveSettings
     autocmd!
     autocmd FileType gitcommit setlocal nolist
