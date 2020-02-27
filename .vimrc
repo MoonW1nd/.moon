@@ -560,7 +560,6 @@ nmap <leader>bb :Buffers<CR>
 nmap <leader>g :Goyo<CR>
 nmap <leader>] :bnext<CR>
 nmap <leader>[ :bprevious<CR>
-inoremap jj <ESC>
 
 " Copy current file path to clipboard
 nnoremap <leader>% :call CopyCurrentFilePath()<CR>
