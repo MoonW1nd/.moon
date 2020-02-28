@@ -1,6 +1,8 @@
-### Setup environment
+# Setup environment
 
-## Alacritty
+## Terminal
+
+### Alacritty
 
 [github](https://github.com/alacritty/alacritty)
 
@@ -8,8 +10,7 @@
 brew cask install alacritty
 ```
 
-
-## pure them
+### pure theme
 
 [github](https://github.com/sindresorhus/pure)
 
@@ -17,7 +18,9 @@ brew cask install alacritty
 npm install --global pure-prompt
 ```
 
-## ripgrep
+## CL
+
+### ripgrep
 
 [github](https://github.com/BurntSushi/ripgrep)
 
@@ -25,7 +28,7 @@ npm install --global pure-prompt
 brew install ripgrep
 ```
 
-## fzf
+### fzf
 
 [github](https://github.com/junegunn/fzf)
 
@@ -36,7 +39,7 @@ brew install fzf
 $(brew --prefix)/opt/fzf/install
 
 ```
-## silver search (ag)
+### silver search (ag)
 
 [github](https://github.com/ggreer/the_silver_searcher)
 
@@ -44,7 +47,7 @@ $(brew --prefix)/opt/fzf/install
 brew install the_silver_searcher
 ```
 
-## bat 
+### bat 
 
 [github](https://github.com/sharkdp/bat)
 
@@ -52,7 +55,7 @@ brew install the_silver_searcher
 brew install bat
 ```
 
-## exa
+### exa
 
 [github](https://github.com/ogham/exa)
 
@@ -60,7 +63,7 @@ brew install bat
 brew install exa
 ```
 
-## Tmux plugin manager
+### Tmux plugin manager
 
 [github](https://github.com/tmux-plugins/tpm)
 
@@ -68,11 +71,10 @@ brew install exa
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
-## xkbswitch
+### xkbswitch
 
-[github]()
+[github](https://github.com/myshov/xkbswitch-macosx/blob/master/README.md)
 
-## Installation
 For installation put executable file from bin directory in any directory in your $PATH
 variable. For example you can put it into  `/usr/local/bin` with this command (if source
 files of utility in your `Download` directory):
@@ -81,7 +83,23 @@ files of utility in your `Download` directory):
 $ cp ~/Download/xkbswitch-macosx/bin/xkbswitch /usr/local/bin
 ```
 
-## python && python3
+### fd
+
+```shell
+brew install fd
+```
+
+### tmuxinator
+
+[github](https://github.com/tmuxinator/tmuxinator)
+
+```
+brew install tmuxinator
+```
+
+## Languages
+
+### python && python3
 
 We need neovim python providers
 
@@ -91,11 +109,25 @@ pip3 install pynvim
 pip install pynvim
 ```
 
-## zsh-autosuggestions
+## zsh plugins
+
+### zsh-autosuggestions
 
 [github](https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md)
 
 
-## zsh-highlighting
+### zsh-highlighting
 
 [github](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
+
+### Homebrew Command Not Found
+
+[github](https://github.com/Homebrew/homebrew-command-not-found)
+
+### web-search
+
+[github](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/web-search)
+
+### zsh-completions
+
+[github](https://github.com/zsh-users/zsh-completions)
