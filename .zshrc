@@ -68,10 +68,16 @@ alias cat=ccat
 plugins=(
     git
     vi-mode
+    zsh-autosuggestions
+    urltools
+    web-search
+    zsh-completions
 )
 
 source $ZSH/oh-my-zsh.sh
 
+# zsh-completions
+autoload -U compinit && compinit
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -108,9 +114,15 @@ autoload -U promptinit; promptinit
 PURE_CMD_MAX_EXEC_TIME=10
 prompt pure
 
+# aliases
+alias ls=exa
+alias vim=nvim
+
+# plugins
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source "$HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh"
+
+# command not found plugin
+if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
