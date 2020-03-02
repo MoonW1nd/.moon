@@ -1,4 +1,4 @@
-set nocompatible              " be iMproved, required
+set nocompatible              " be improved, required
 filetype off                  " required
 " ============= Vim-Plug ============== "
 
@@ -111,12 +111,10 @@ set wrap breakindent                                    " wrap long lines to the
 set encoding=utf-8                                      " text encoding
 set number                                              " enable numbers on the left
 set relativenumber                                      " current line is 0
-" set title                                               " tab title as file file
-" set conceallevel=2                                      " set this so we wont break indentation plugin
 set splitright                                          " open vertical split to the right
 set splitbelow                                          " open horizontal split to the bottom
 set emoji                                               " enable emojis
-let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
+" let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
 " au BufEnter * set fo-=c fo-=r fo-=o                     " stop annoying auto commenting on new conceallevellines
 set undofile                                            " enable persistent undo
 set undodir=~/.nvim/tmp                                 " undo temp file directory
@@ -126,12 +124,16 @@ set noswapfile                                          " disable creating of *.
 
 set nowrap " Не переносить строки
 set textwidth=0 " disable auto break long lines
-set expandtab " Преобразование Таба в пробелы
+set expandtab " Преобразование Tab в пробелы
 set path=.,**
+set autoread
+set spell spelllang=ru_ru,en_us
+" set spell spelllang=ru_ru
 
-" Python VirtualEnv
+" Python Virtual Environment
 let g:python_host_prog =  expand('/usr/bin/python')
 let g:python3_host_prog = expand('/Library/Frameworks/Python.framework/Versions/3.7/bin/python3')
+
 
 " Coloring
 set background=dark
@@ -171,7 +173,6 @@ highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#FFA500
 highlight ALEVirtualTextError ctermfg=9 ctermbg=15 guifg=#C30500
 highlight ALEVirtualTextWarning ctermfg=11 ctermbg=15 guifg=#FFA500
 " highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500
-" highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#FFA500
 
 " performance tweaks
 set nocursorline
