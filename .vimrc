@@ -62,6 +62,7 @@ Plug 'joshdick/onedark.vim'                             " theme OneDark
 Plug 'mhinz/vim-startify'
 Plug 'alvan/vim-closetag'                               " auto close html tags
 Plug 'Yggdroot/indentLine'                              " show indentation lines
+Plug 'airblade/vim-gitgutter'
 
 " languages
 Plug 'yuezk/vim-js'
