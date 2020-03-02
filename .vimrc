@@ -94,8 +94,9 @@ call plug#end()
 
 
 " ==================== general config ======================== "
-
-set termguicolors                                       " Opaque Background
+if (has("termguicolors"))
+  set termguicolors
+endif
 set mouse=                                              " disable mouse
 
 " ===================== Other Configurations ===================== "
@@ -150,8 +151,11 @@ highlight clear SignColumn                              " use number color for s
 " hi CursorLineNr gui=bold                                " make relative number bold
 
 " fugitive diff highlight
-hi DiffDelete gui=NONE guifg=#ff0000 guibg=#550000
-hi DiffChange guibg=#33373e
+hi DiffDelete gui=NONE guifg=#6E0004 guibg=#6E0004
+hi DiffAdd gui=NONE guifg=NONE guibg=#19381C
+hi DiffChange ctermbg=237 guibg=#203C3D cterm=NONE gui=NONE guifg=NONE
+hi DiffText ctermbg=237 guibg=#26494A guifg=NONE
+
 
 " colors for git (especially the gutter)
 " hi DiffAdd guibg='#282c34'
@@ -161,6 +165,10 @@ hi DiffChange guibg=#33373e
 " hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
 
 " Ale
+highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500
+highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#FFA500
+highlight ALEVirtualTextError ctermfg=9 ctermbg=15 guifg=#C30500
+highlight ALEVirtualTextWarning ctermfg=11 ctermbg=15 guifg=#FFA500
 " highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500
 " highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#FFA500
 
@@ -708,3 +716,5 @@ augroup fugitiveSettings
     autocmd FileType gitcommit setlocal nolist
     autocmd BufReadPost fugitive://* setlocal bufhidden=delete
 augroup END
+
+hi SpellBad guifg=NONE cterm=undercurl
