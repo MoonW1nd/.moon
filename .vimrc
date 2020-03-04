@@ -146,11 +146,7 @@ let g:airline_theme='onedark'
 " highlight Normal gui=none
 " highlight NonText guibg=none
 highlight clear SignColumn                              " use number color for sign column color
-" hi Search guibg=orange                                  " search string highlight color
-" autocmd ColorScheme * highlight VertSplit cterm=NONE    " split color
-" hi NonText guifg=bg                                     " mask ~ on empty lines
-" hi clear CursorLineNr                                   " use the theme color for relative number
-" hi CursorLineNr gui=bold                                " make relative number bold
+hi EasyMotionMoveHLDefault gui=NONE cterm=NONE term=NONE ctermfg=235 ctermbg=180 guifg=#282C34 guibg=#E5C07B
 
 " fugitive diff highlight
 hi DiffDelete gui=NONE guifg=#6E0004 guibg=#6E0004
@@ -606,10 +602,10 @@ vnoremap <F8> :CarbonNowSh<CR>
 "" easy motion stuff
 
 " search behavior
-" map  / <Plug>(easymotion-sn)
-" omap / <Plug>(easymotion-tn)
-" map  n <Plug>(easymotion-next)
-" map  N <Plug>(easymotion-prev)
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
 
 " quick navigation
 map <Leader><Leader>l <Plug>(easymotion-lineforward)
