@@ -211,6 +211,9 @@ endfun
 let g:gundo_right = 1
 call SetupCommandAlias("ut","GundoToggle")
 
+" Ferret
+let g:FerretHlsearch=1
+
 " snippets
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 " let g:UltiSnipsExpandTrigger="<tab>"
