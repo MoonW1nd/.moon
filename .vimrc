@@ -52,6 +52,7 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'yuki-ycino/fzf-preview.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'MattesGroeger/vim-bookmarks'
+Plug 'Shougo/neomru.vim'
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -84,7 +85,6 @@ Plug 'takac/vim-hardtime'                               " hard mode on vim
 Plug 'tomtom/tcomment_vim'                              " better commenting
 Plug 'kristijanhusak/vim-carbon-now-sh'                 " lit code Screenshots
 Plug 'tpope/vim-fugitive'                               " git support
-" Plug 'psliwka/vim-smoothie'                             " some very smooth ass scrolling
 Plug 'farmergreg/vim-lastplace'                         " open files at the last edited place
 Plug 'romainl/vim-cool'                                 " disable hl until another search is performed
 Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
@@ -114,8 +114,7 @@ set relativenumber                                      " current line is 0
 set splitright                                          " open vertical split to the right
 set splitbelow                                          " open horizontal split to the bottom
 set emoji                                               " enable emojis
-" let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
-" au BufEnter * set fo-=c fo-=r fo-=o                     " stop annoying auto commenting on new conceallevellines
+let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
 set undofile                                            " enable persistent undo
 set undodir=~/.nvim/tmp                                 " undo temp file directory
 set nofoldenable                                        " disable folding
@@ -423,8 +422,6 @@ let g:EasyMotion_smartcase = 1                          " ignore case
 
 "" FZF
 
-" general
-let g:fzf_layout = { 'window': 'call CreateCenteredFloatingWindow()' }
 let $FZF_DEFAULT_OPTS="--reverse --bind ctrl-a:select-all" " top to bottom
 " CTRL-A CTRL-Q to select all and build quickfix list
 
@@ -497,73 +494,6 @@ endfunction
 
 nnoremap <F5> :call Rotate()<CR>
 
-
-" floating fzf window with borders
-function! CreateCenteredFloatingWindow()
-    let width = min([&columns - 4, max([80, &columns - 20])])
-    let height = min([&lines - 4, max([20, &lines - 10])])
-    let top = ((&lines - height) / 2) - 1
-    let left = (&columns - width) / 2
-    let opts = {'relative': 'editor', 'row': top, 'col': left, 'width': width, 'height': height, 'style': 'minimal'}
-
-    let top = "╭" . repeat("─", width - 2) . "╮"
-    let mid = "│" . repeat(" ", width - 2) . "│"
-    let bot = "╰" . repeat("─", width - 2) . "╯"
-    let lines = [top] + repeat([mid], height - 2) + [bot]
-    let s:buf = nvim_create_buf(v:false, v:true)
-    call nvim_buf_set_lines(s:buf, 0, -1, v:true, lines)
-    call nvim_open_win(s:buf, v:true, opts)
-    set winhl=Normal:Floating
-    let opts.row += 1
-    let opts.height -= 2
-    let opts.col += 2
-    let opts.width -= 4
-    call nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-    au BufWipeout <buffer> exe 'bw '.s:buf
-endfunction
-
-" Files + devicons + floating fzf
-function! Fzf_dev()
-  let l:fzf_files_options = '--preview "bat --line-range :'.&lines.' --theme="OneHalfDark" --style=numbers,changes --color always {2..-1}" --expect=ctrl-v,ctrl-x,ctrl-t'
-  function! s:files()
-    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
-    return s:prepend_icon(l:files)
-  endfunction
-
-  function! s:prepend_icon(candidates)
-    let l:result = []
-    for l:candidate in a:candidates
-      let l:filename = fnamemodify(l:candidate, ':p:t')
-      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
-      call add(l:result, printf('%s %s', l:icon, l:candidate))
-    endfor
-
-    return l:result
-  endfunction
-
-    function! s:edit_file(lines)
-        if len(a:lines) < 2 | return | endif
-
-        let l:cmd = get({'ctrl-x': 'split',
-                         \ 'ctrl-v': 'vertical split',
-                         \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
-
-        for l:item in a:lines[1:]
-            let l:pos = stridx(l:item, ' ')
-            let l:file_path = l:item[pos+1:-1]
-            execute 'silent '. l:cmd . ' ' . l:file_path
-        endfor
-    endfunction
-
-    call fzf#run({
-        \ 'source': <sid>files(),
-        \ 'sink*':   function('s:edit_file'),
-        \ 'options': '-m --reverse ' . l:fzf_files_options,
-        \ 'down':    '40%',
-        \ 'window': 'call CreateCenteredFloatingWindow()'})
-
-endfunction
-
 " ======================== Custom Mappings ====================== "
 
 " the essentials
@@ -577,8 +507,8 @@ map <F4> :Vista!!<CR>
 nmap <leader>r :so ~/.config/nvim/init.vim<CR>
 nmap <leader>t :call TrimWhitespace()<CR>
 nmap <leader>q :bd<CR>
-nnoremap <leader>f :NERDTreeToggle<CR>
-nnoremap <silent> <leader>v :call NERDTreeToggleAndFind()<CR>
+nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <silent> <leader>nf :call NERDTreeToggleAndFind()<CR>
 nmap <leader>bb :Buffers<CR>
 nmap <leader>g :Goyo<CR>
 nmap <leader>] :bnext<CR>
@@ -620,10 +550,28 @@ inoremap ˚ <Esc>:m .-2<CR>==gi
 vnoremap ∆ :m '>+1<CR>gv=gv
 vnoremap ˚ :m '<-2<CR>gv=g
 
-nnoremap <C-p> :FzfPreviewDirectoryFiles <Cr>
-nnoremap <C-g> :Rg<Cr>
-nnoremap <leader><C-g> :FzfPreviewProjectGrep<Cr>
-nnoremap <C-s> :FzfPreviewGitStatus<Cr>
+nmap <Leader>f [fzf-p]
+xmap <Leader>f [fzf-p]
+
+nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
+nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
+nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
+nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
+nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
+nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
+nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
+xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
+nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
+
+nnoremap <C-g>a :FzfPreviewProjectGrep ''<Cr>
+nnoremap <leader><C-g>a :FzfPreviewProjectGrep -resume ''<Cr>
+nnoremap <C-g> :FzfPreviewProjectGrep -add-fzf-arg=--nth=3 ''<Cr>
+nnoremap <leader><C-g> :FzfPreviewProjectGrep -resume -add-fzf-arg=--nth=3 ''<Cr>
 
 "" coc mappings
 " Remap keys for gotos
