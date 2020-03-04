@@ -127,7 +127,6 @@ set expandtab " Преобразование Tab в пробелы
 set path=.,**
 set autoread
 set spell spelllang=ru_ru,en_us
-" set spell spelllang=ru_ru
 
 " Python Virtual Environment
 let g:python_host_prog =  expand('/usr/bin/python')
@@ -137,37 +136,22 @@ let g:python3_host_prog = expand('/Library/Frameworks/Python.framework/Versions/
 " Coloring
 set background=dark
 colorscheme onedark
-" colorscheme gruvbox
-" let g:gruvbox_italic=1
-" let g:gruvbox_invert_selection=0
 let g:airline_theme='onedark'
-" highlight Pmenu guibg='00010a' guifg=white              " popup menu colors
-" highlight Comment gui=bold                              " bold comments
-" highlight Normal gui=none
-" highlight NonText guibg=none
 highlight clear SignColumn                              " use number color for sign column color
 hi EasyMotionMoveHLDefault gui=NONE cterm=NONE term=NONE ctermfg=235 ctermbg=180 guifg=#282C34 guibg=#E5C07B
 
+" colors for git (especially the gutter)
 " fugitive diff highlight
 hi DiffDelete gui=NONE guifg=#6E0004 guibg=#6E0004
 hi DiffAdd gui=NONE guifg=NONE guibg=#19381C
 hi DiffChange ctermbg=237 guibg=#203C3D cterm=NONE gui=NONE guifg=NONE
 hi DiffText ctermbg=237 guibg=#26494A guifg=NONE
 
-
-" colors for git (especially the gutter)
-" hi DiffAdd guibg='#282c34'
-" hi DiffChange guibg='#282c34'
-
-" coc multi cursor highlight color
-" hi CocCursorRange guibg=#b16286 guifg=#ebdbb2
-
 " Ale
 highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500
 highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#FFA500
 highlight ALEVirtualTextError ctermfg=9 ctermbg=15 guifg=#C30500
 highlight ALEVirtualTextWarning ctermfg=11 ctermbg=15 guifg=#FFA500
-" highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500
 
 " performance tweaks
 set nocursorline
@@ -209,12 +193,6 @@ call SetupCommandAlias("ut","GundoToggle")
 
 " Ferret
 let g:FerretHlsearch=1
-
-" snippets
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -392,7 +370,6 @@ let g:ale_fixers = {
             \'json': ['prettier'],
             \}
 let g:ale_fix_on_save = 1
-" let g:ale_javascript_eslint_use_global = 1
 " Don't use the sign column/gutter for ALE
 " Lint always in Normal Mode
 let g:ale_lint_on_text_changed = 'normal'
@@ -400,7 +377,6 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 " Set ALE's 200ms delay to zero
 let g:ale_lint_delay = 0
-" let g:ale_lint_on_text_changed = 'never'
 let g:ale_sign_warning = '⚠'
 let g:ale_sign_error = '✘'
 let g:ale_sign_info = ''
@@ -420,7 +396,7 @@ let g:EasyMotion_startofline = 0                        " keep cursor column whe
 let g:EasyMotion_smartcase = 1                          " ignore case
 
 "" FZF
-
+" general
 let $FZF_DEFAULT_OPTS="--reverse --bind ctrl-a:select-all" " top to bottom
 " CTRL-A CTRL-Q to select all and build quickfix list
 
