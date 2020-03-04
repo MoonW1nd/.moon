@@ -474,6 +474,12 @@ nnoremap <F5> :call Rotate()<CR>
 " the essentials
 let mapleader=" "
 
+" fugitive
+" Fugitive Conflict Resolution
+nnoremap <leader>gd :Gvdiff<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
+
 " clever-f.vim support native vim binding for repeat search
 map ; <Plug>(clever-f-repeat-forward)
 map , <Plug>(clever-f-repeat-back)
