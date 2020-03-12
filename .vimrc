@@ -228,18 +228,20 @@ let g:bufExplorerSplitOutPathName = 1
 
 " fzf-preview
 let g:fzf_preview_quit_map = 1
-let g:fzf_preview_use_floating_window = 1
 let g:fzf_preview_command = 'bat --map-syntax js:jsx  --color=always --style=grid {-1}' " Installed bat
+let g:fzf_preview_if_binary_command = '[[ "$(file --mime {})" =~ binary ]]'
+let g:fzf_binary_preview_command = 'echo "{} is a binary file"'
 let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --glob "!.git/*"' " Installed ripgrep
 let g:fzf_preview_directory_files_command = 'rg --files --hidden --follow --glob "!.git/*"'
 let g:fzf_preview_git_status_command = "git status --short --untracked-files=all "
 let g:fzf_preview_preview_key_bindings = 'ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
+let g:fzf_preview_filelist_postprocess_command = 'gxargs -d "\n" exa --color=always'
 let g:fzf_preview_fzf_color_option = ''
-let g:fzf_preview_split_key_map = 'ctrl-x'
+let g:fzf_preview_split_key_map = 'ctrl-s'
 let g:fzf_preview_vsplit_key_map = 'ctrl-v'
 let g:fzf_preview_tabedit_key_map = 'ctrl-t'
 let g:fzf_preview_build_quickfix_key_map = 'ctrl-q'
-let g:fzf_preview_use_dev_icons = 0
+let g:fzf_preview_use_dev_icons = 1
 
 " Nerd Tree
 let g:NERDTreeHijackNetrw = 0
@@ -534,10 +536,10 @@ vnoremap ˚ :m '<-2<CR>gv=g
 nmap <Leader>f [fzf-p]
 xmap <Leader>f [fzf-p]
 
+
+" FzfPrevew
+
 nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
-nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
-nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
-nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
 nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
 nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
 nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
@@ -553,6 +555,59 @@ nnoremap <C-g>a :FzfPreviewProjectGrep ''<Cr>
 nnoremap <leader><C-g>a :FzfPreviewProjectGrep -resume ''<Cr>
 nnoremap <C-g> :FzfPreviewProjectGrep -add-fzf-arg=--nth=3 ''<Cr>
 nnoremap <leader><C-g> :FzfPreviewProjectGrep -resume -add-fzf-arg=--nth=3 ''<Cr>
+
+" integration with vim-fugitive
+nnoremap <silent> [fzf-p]gs :<C-u>FzfPreviewGitStatus -processors=g:fzf_preview_fugitive_processors<CR>
+nnoremap <silent> [fzf-p]b :<C-u>FzfPreviewBuffers -processors=g:fzf_preview_buffer_delete_processors<CR>
+nnoremap <silent> [fzf-p]B :<C-u>FzfPreviewAllBuffers -processors=g:fzf_preview_buffer_delete_processors<CR>
+
+augroup fzf_preview
+  autocmd!
+  autocmd User fzf_preview#initialized call s:fzf_preview_settings()
+augroup END
+
+function! s:fugitive_add(paths) abort
+  for path in a:paths
+    execute 'silent G add ' . path
+  endfor
+  echomsg 'Git add ' . join(a:paths, ', ')
+endfunction
+
+function! s:fugitive_reset(paths) abort
+  for path in a:paths
+    execute 'silent G reset ' . path
+  endfor
+  echomsg 'Git reset ' . join(a:paths, ', ')
+endfunction
+
+function! s:fugitive_patch(paths) abort
+  for path in a:paths
+    execute 'silent tabedit ' . path . ' | silent Gdiff'
+  endfor
+  echomsg 'Git add --patch ' . join(a:paths, ', ')
+endfunction
+
+function! s:buffers_delete_from_lines(lines) abort
+  for line in a:lines
+    let matches = matchlist(line, '^buffer \(\d\+\)$')
+    if len(matches) >= 1
+      execute 'bdelete! ' . matches[1]
+    else
+      execute 'bdelete! ' . line
+    endif
+  endfor
+endfunction
+
+function! s:fzf_preview_settings() abort
+  let g:fzf_preview_buffer_delete_processors = fzf_preview#resource_processor#get_default_processors()
+  let g:fzf_preview_buffer_delete_processors['ctrl-x'] = function('s:buffers_delete_from_lines')
+
+  let g:fzf_preview_fugitive_processors = fzf_preview#resource_processor#get_processors()
+  let g:fzf_preview_fugitive_processors['ctrl-a'] = function('s:fugitive_add')
+  let g:fzf_preview_fugitive_processors['ctrl-r'] = function('s:fugitive_reset')
+  let g:fzf_preview_fugitive_processors['ctrl-c'] = function('s:fugitive_patch')
+endfunction
+
 
 "" coc mappings
 " Remap keys for gotos
