@@ -229,7 +229,7 @@ let g:bufExplorerSplitOutPathName = 1
 " fzf-preview
 let g:fzf_preview_quit_map = 1
 let g:fzf_preview_use_floating_window = 1
-let g:fzf_preview_command = 'bat --color=always --style=grid {-1}' " Installed bat
+let g:fzf_preview_command = 'bat --map-syntax js:jsx  --color=always --style=grid {-1}' " Installed bat
 let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --glob "!.git/*"' " Installed ripgrep
 let g:fzf_preview_directory_files_command = 'rg --files --hidden --follow --glob "!.git/*"'
 let g:fzf_preview_git_status_command = "git status --short --untracked-files=all "
