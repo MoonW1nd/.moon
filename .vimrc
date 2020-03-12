@@ -110,6 +110,7 @@ set fillchars+=vert:\▏                                  " requires a patched n
 set wrap breakindent                                    " wrap long lines to the width set by tw
 set encoding=utf-8                                      " text encoding
 set number                                              " enable numbers on the left
+set autowriteall
 set relativenumber                                      " current line is 0
 set splitright                                          " open vertical split to the right
 set splitbelow                                          " open horizontal split to the bottom
@@ -702,5 +703,8 @@ augroup fugitiveSettings
     autocmd FileType gitcommit setlocal nolist
     autocmd BufReadPost fugitive://* setlocal bufhidden=delete
 augroup END
+
+" save on focus lost
+au FocusLost * silent! wa
 
 hi SpellBad guifg=NONE cterm=undercurl
