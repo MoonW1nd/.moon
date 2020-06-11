@@ -5,7 +5,7 @@ filetype off                  " required
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
 let g:vim_bootstrap_langs = "c,erlang,go"
-let g:vim_bootstrap_editor = "nvim"				" Nvim or Vim
+let g:vim_bootstrap_editor = "nvim"                 " Nvim or Vim
 
 if !filereadable(vimplug_exists)
   if !executable("curl")
@@ -23,12 +23,9 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 
 " ================= looks and GUI stuff ================== "
 
-Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'                          " airline status bar
 Plug 'vim-airline/vim-airline-themes'                   " airline themes
 Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
-Plug 'hzchirs/vim-material'                             " material color themes
-Plug 'junegunn/goyo.vim'                                " Zen mode
 Plug 'gregsexton/MatchTag'                              " highlight matching html tags
 Plug 'preservim/nerdtree'                               " nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin'                      " git-nerdtree
@@ -37,7 +34,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'                      " git-nerdtree
 
 " auto completion, Lang servers and stuff
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -61,16 +58,14 @@ Plug 'honza/vim-snippets'                               " actual snippets
 " visual
 Plug 'joshdick/onedark.vim'                             " theme OneDark
 Plug 'mhinz/vim-startify'
-Plug 'alvan/vim-closetag'                               " auto close html tags
 Plug 'Yggdroot/indentLine'                              " show indentation lines
 Plug 'airblade/vim-gitgutter'
 
 " languages
+Plug 'ludovicchabant/vim-gutentags'                     " work with ctags
+Plug 'liuchengxu/vista.vim'                             " View and search LSP symbols, tags in Vim/NeoVim.
 Plug 'yuezk/vim-js'
-" TypeScript
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'othree/yajs.vim'
-Plug 'hail2u/vim-css3-syntax'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'othree/html5.vim'
 Plug 'tpope/vim-liquid'                                 " liquid language support
@@ -78,6 +73,8 @@ Plug 'othree/javascript-libraries-syntax.vim'           " highlight libraries
 Plug 'alexlafroscia/postcss-syntax.vim'
 
 " other
+Plug 'alvan/vim-closetag'                               " auto close html tags
+Plug 'AndrewRadev/tagalong.vim'                         " rename tags
 Plug 'sjl/gundo.vim'                                    " undo tree in vim
 Plug 'vim-scripts/ReplaceWithRegister'                  " replace word on copy buffer
 Plug 'tpope/vim-surround'                               " surround brackets
@@ -88,9 +85,7 @@ Plug 'tpope/vim-fugitive'                               " git support
 Plug 'farmergreg/vim-lastplace'                         " open files at the last edited place
 Plug 'romainl/vim-cool'                                 " disable hl until another search is performed
 Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
-Plug 'liuchengxu/vista.vim'                             " a bar of tags
 Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
-Plug 'machakann/vim-sandwich'                           " make sandwiches
 call plug#end()
 
 
@@ -234,6 +229,7 @@ let g:fzf_preview_if_binary_command = '[[ "$(file --mime {})" =~ binary ]]'
 let g:fzf_binary_preview_command = 'echo "{} is a binary file"'
 let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --glob "!.git/*"' " Installed ripgrep
 let g:fzf_preview_directory_files_command = 'rg --files --hidden --follow --glob "!.git/*"'
+let g:fzf_preview_grep_cmd = 'rg --color=always --line-number --follow --no-heading --hidden --glob "!.git/*"'
 let g:fzf_preview_git_status_command = "git status --short --untracked-files=all "
 let g:fzf_preview_preview_key_bindings = 'ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
 let g:fzf_preview_filelist_postprocess_command = 'gxargs -d "\n" exa --color=always'
@@ -243,6 +239,9 @@ let g:fzf_preview_vsplit_key_map = 'ctrl-v'
 let g:fzf_preview_tabedit_key_map = 'ctrl-t'
 let g:fzf_preview_build_quickfix_key_map = 'ctrl-q'
 let g:fzf_preview_use_dev_icons = 1
+
+" tagalong
+let g:tagalong_filetypes = ['html', 'xml', 'jsx', 'eruby', 'ejs', 'eco', 'php', 'htmldjango', 'javascriptreact', 'typescriptreact', 'typescript', 'javascript']
 
 " Nerd Tree
 let g:NERDTreeHijackNetrw = 0
@@ -319,6 +318,7 @@ let airline#extensions#vista#enabled = 1                " vista integration
 
 " coc
 " use tab for completion trigger
+set updatetime=300
 let g:coc_node_path = $HOME . '/.nvm/versions/node/v12.10.0/bin/node'
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -329,6 +329,7 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " Navigate snippet placeholders using tab
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
+let b:coc_root_patterns = ['.git', '.env']
 
 " Library usedSettings
 let g:used_javascript_libs = 'react,ramda'
@@ -364,6 +365,7 @@ let g:coc_global_extensions = [
 let g:ale_fixers = {
             \'*': ['remove_trailing_lines', 'trim_whitespace'],
             \'javascript': ['eslint'],
+            \'typescript': ['eslint'],
             \'c' : ['clang-format'],
             \'cpp' : ['clang-format'],
             \'css' : ['stylelint'],
@@ -421,12 +423,88 @@ command! -bang -nargs=* Rg
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
+command! -bang -nargs=* Rga
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview({'options': '--delimiter :'}), <bang>0)
+
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
   set grepprg=rg\ --vimgrep
   command! -bang -nargs=* Find call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 endif
 
+function! s:tags_sink(line)
+  let parts = split(a:line, '\t\zs')
+  let excmd = matchstr(parts[2:], '^.*\ze;"\t')
+  execute 'silent e' parts[1][:-2]
+  let [magic, &magic] = [&magic, 0]
+  execute excmd
+  let &magic = magic
+endfunction
+
+function! s:tags()
+  if empty(tagfiles())
+    echohl WarningMsg
+    echom 'Preparing tags'
+    echohl None
+    call system('ctags -R')
+  endif
+
+  call fzf#run({
+  \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
+  \            '| grep -v -a ^!',
+  \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+  \ 'down':    '40%',
+  \ 'sink':    function('s:tags_sink')})
+endfunction
+
+function! s:align_lists(lists)
+  let maxes = {}
+  for list in a:lists
+    let i = 0
+    while i < len(list)
+      let maxes[i] = max([get(maxes, i, 0), len(list[i])])
+      let i += 1
+    endwhile
+  endfor
+  for list in a:lists
+    call map(list, "printf('%-'.maxes[v:key].'s', v:val)")
+  endfor
+  return a:lists
+endfunction
+
+function! s:btags_source()
+  let lines = map(split(system(printf(
+    \ 'ctags -f - --sort=no --excmd=number --language-force=%s %s',
+    \ &filetype, expand('%:S'))), "\n"), 'split(v:val, "\t")')
+  if v:shell_error
+    throw 'failed to extract tags'
+  endif
+  return map(s:align_lists(lines), 'join(v:val, "\t")')
+endfunction
+
+command! Tags call s:tags()
+
+function! s:btags_sink(line)
+  execute split(a:line, "\t")[2]
+endfunction
+
+function! s:btags()
+  try
+    call fzf#run({
+    \ 'source':  s:btags_source(),
+    \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+    \ 'down':    '40%',
+    \ 'sink':    function('s:btags_sink')})
+  catch
+    echohl WarningMsg
+    echom v:exception
+    echohl None
+  endtry
+endfunction
+
+command! BTags call s:btags()
 " ======================== Filetype-Specific Configurations ============================= "
 
 " Markdown
@@ -494,7 +572,6 @@ nmap <leader>q :bd<CR>
 nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <silent> <leader>nf :call NERDTreeToggleAndFind()<CR>
 nmap <leader>bb :Buffers<CR>
-nmap <leader>g :Goyo<CR>
 nmap <leader>] :bnext<CR>
 nmap <leader>[ :bprevious<CR>
 
@@ -537,7 +614,6 @@ vnoremap ˚ :m '<-2<CR>gv=g
 nmap <Leader>f [fzf-p]
 xmap <Leader>f [fzf-p]
 
-
 " FzfPrevew
 
 nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
@@ -552,10 +628,10 @@ nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
 nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
 nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
 
-nnoremap <C-g>a :FzfPreviewProjectGrep ''<Cr>
-nnoremap <leader><C-g>a :FzfPreviewProjectGrep -resume ''<Cr>
-nnoremap <C-g> :FzfPreviewProjectGrep -add-fzf-arg=--nth=3 ''<Cr>
-nnoremap <leader><C-g> :FzfPreviewProjectGrep -resume -add-fzf-arg=--nth=3 ''<Cr>
+" nnoremap <C-g>a :FzfPreviewProjectGrep ''<Cr>
+" nnoremap <leader><C-g>a :FzfPreviewProjectGrep -resume ''<Cr>
+nnoremap <leader><C-g> :FzfPreviewProjectGrep -add-fzf-arg=--nth=3<Space>
+nnoremap <C-g> :FzfPreviewProjectGrep<Space>
 
 " integration with vim-fugitive
 nnoremap <silent> [fzf-p]gs :<C-u>FzfPreviewGitStatus -processors=g:fzf_preview_fugitive_processors<CR>
@@ -615,7 +691,7 @@ endfunction
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implemeitation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gu <Plug>(coc-references)
 nmap <silent> gl :CocListResume<Cr>
 
 " multi cursor shortcuts
@@ -640,10 +716,10 @@ vnoremap <F8> :CarbonNowSh<CR>
 "" easy motion stuff
 
 " search behavior
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-map  n <Plug>(easymotion-next)
-map  N <Plug>(easymotion-prev)
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
+" map  n <Plug>(easymotion-next)
+" map  N <Plug>(easymotion-prev)
 
 " quick navigation
 map <Leader><Leader>l <Plug>(easymotion-lineforward)
@@ -697,6 +773,8 @@ augroup END
 
 " figitive
 call SetupCommandAlias("gs","vertical G")
+call SetupCommandAlias("gr","Rg")
+call SetupCommandAlias("gra","Rga")
 
 augroup fugitiveSettings
     autocmd!
