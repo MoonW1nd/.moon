@@ -8,6 +8,11 @@ export FZF_DEFAULT_OPTS='--border'
 
 alias cat=ccat
 
+alias ya=~/.yatool/ya
+
+alias tvmknife='ya tool tvmknife'
+
+alias ctags="`brew --prefix`/bin/ctags"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -134,7 +139,10 @@ if [ -f ~/.tokens ]; then
     source .tokens # Не светим токенами, если шарим конфиг шелла между тачками
 fi
 
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_COMPLETION_OPTS="--preview '(bat --map-syntax js:jsx --color=always {} || cat {} || tree -C {}) 2> /dev/null | head -200'"
+export FZF_CTRL_T_OPTS="$FZF_COMPLETION_OPTS"
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!node_modules/*"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
 # ff - Find any folder and cd to selected directory
@@ -154,3 +162,4 @@ lf() {
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
+export PATH="$PATH:$HOME/go/bin"
