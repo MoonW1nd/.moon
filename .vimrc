@@ -71,6 +71,7 @@ Plug 'othree/html5.vim'
 Plug 'tpope/vim-liquid'                                 " liquid language support
 Plug 'othree/javascript-libraries-syntax.vim'           " highlight libraries
 Plug 'alexlafroscia/postcss-syntax.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " other
 Plug 'alvan/vim-closetag'                               " auto close html tags
@@ -142,6 +143,17 @@ hi DiffDelete gui=NONE guifg=#6E0004 guibg=#6E0004
 hi DiffAdd gui=NONE guifg=NONE guibg=#19381C
 hi DiffChange ctermbg=237 guibg=#203C3D cterm=NONE gui=NONE guifg=NONE
 hi DiffText ctermbg=237 guibg=#26494A guifg=NONE
+
+" go syntax highlight
+let g:go_highlight_structs = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 
 " Ale
 highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500
@@ -318,6 +330,9 @@ let airline#extensions#vista#enabled = 1                " vista integration
 
 " coc
 " use tab for completion trigger
+" remove go definition by vim-go
+let g:go_def_mapping_enabled = 0
+
 set updatetime=300
 let g:coc_node_path = $HOME . '/.nvm/versions/node/v12.10.0/bin/node'
 inoremap <silent><expr> <TAB>
