@@ -42,6 +42,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " auto switch keyboard map
 Plug 'lyokha/vim-xkbswitch'
 
+" async run commands
+Plug 'skywind3000/asyncrun.vim'
+
 " search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                                " fuzzy search integration
@@ -647,7 +650,7 @@ nnoremap <leader>lp :SClose<CR>
 " ======================== Autocommands ====================== "
 " affiliate sync-rsync
 augroup Affiliate
-    autocmd BufWritePost /Users/moonw1nd/Documents/Develop/work/affiliate/* silent! !/Users/moonw1nd/Documents/Develop/work/rsync.sh
+    autocmd BufWritePost /Users/moonw1nd/Documents/Develop/work/affiliate/* silent! :AsyncRun /Users/moonw1nd/Documents/Develop/work/rsync.sh
 augroup END
 
 " figitive
