@@ -28,50 +28,48 @@ Plug 'vim-airline/vim-airline-themes'                   " airline themes
 Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
 Plug 'gregsexton/MatchTag'                              " highlight matching html tags
 Plug 'preservim/nerdtree'                               " nerdtree
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'          " nerdtree color file names
 Plug 'Xuyuanp/nerdtree-git-plugin'                      " git-nerdtree
+Plug 'tpope/vim-vinegar'                                " navigation tree from the current file
+Plug 'blueyed/vim-diminactive'                          " dim inactive splits
+Plug 'editorconfig/editorconfig-vim'                    " consistent coding style
 
 " ================= Functionalities ================= "
 
 " auto completion, Lang servers and stuff
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dense-analysis/ale'
+
+" auto switch keyboard map
+Plug 'lyokha/vim-xkbswitch'
 
 " search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                                " fuzzy search integration
 Plug 'wincent/ferret'
+Plug 'majutsushi/tagbar'                               " tags map on current file
 
 " navigation
 Plug 'tpope/vim-repeat'
 Plug 'easymotion/vim-easymotion'                        " make movement a lot faster and easier
 Plug 'rhysd/clever-f.vim'
-Plug 'jlanzarotta/bufexplorer'
-Plug 'yuki-ycino/fzf-preview.vim'
-Plug 'tpope/vim-unimpaired'
+" Plug 'tpope/vim-unimpaired'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'Shougo/neomru.vim'
-
-" snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'                               " actual snippets
 
 " visual
 Plug 'joshdick/onedark.vim'                             " theme OneDark
 Plug 'mhinz/vim-startify'
-Plug 'Yggdroot/indentLine'                              " show indentation lines
 Plug 'airblade/vim-gitgutter'
 
 " languages
-Plug 'ludovicchabant/vim-gutentags'                     " work with ctags
-Plug 'liuchengxu/vista.vim'                             " View and search LSP symbols, tags in Vim/NeoVim.
 Plug 'yuezk/vim-js'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'othree/html5.vim'
-Plug 'tpope/vim-liquid'                                 " liquid language support
 Plug 'othree/javascript-libraries-syntax.vim'           " highlight libraries
 Plug 'alexlafroscia/postcss-syntax.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript', 'typescript'] }
 
 " other
 Plug 'alvan/vim-closetag'                               " auto close html tags
@@ -86,7 +84,6 @@ Plug 'tpope/vim-fugitive'                               " git support
 Plug 'farmergreg/vim-lastplace'                         " open files at the last edited place
 Plug 'romainl/vim-cool'                                 " disable hl until another search is performed
 Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
-Plug 'tpope/vim-eunuch'                                 " run common Unix commands inside Vim
 call plug#end()
 
 
@@ -98,6 +95,7 @@ set mouse=                                              " disable mouse
 
 " ===================== Other Configurations ===================== "
 
+let mapleader=" "
 filetype plugin indent on                               " enable indentations
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent            " tab key actions
 set incsearch ignorecase smartcase hlsearch             " highlight text while searching
@@ -111,19 +109,48 @@ set relativenumber                                      " current line is 0
 set splitright                                          " open vertical split to the right
 set splitbelow                                          " open horizontal split to the bottom
 set emoji                                               " enable emojis
-let g:indentLine_setConceal = 0                         " actually fix the annoying markdown links conversion
 set undofile                                            " enable persistent undo
 set undodir=~/.nvim/tmp                                 " undo temp file directory
 set nofoldenable                                        " disable folding
 set scrolloff=999                                       " always keep cursor at the middle of screen
 set noswapfile                                          " disable creating of *.swp file
 
+set cursorline " highlight cursorline
 set nowrap " Не переносить строки
-set textwidth=0 " disable auto break long lines
+set textwidth=0 " disable auto brset cursorlineeak long lines
 set expandtab " Преобразование Tab в пробелы
 set path=.,**
 set autoread
 set spell spelllang=ru_ru,en_us
+
+" ========== tagbar
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_show_linenumbers = 2
+let g:tagbar_type_javascript = {
+      \ 'ctagstype': 'javascript',
+      \ 'kinds': [
+      \ 'A:arrays',
+      \ 'P:properties',
+      \ 'T:tags',
+      \ 'O:objects',
+      \ 'G:generator functions',
+      \ 'U:functions',
+      \ 'K:constructors/classes',
+      \ 'M:methods',
+      \ 'V:variables',
+      \ 'I:imports',
+      \ 'E:exports',
+      \ 'S:styled components'
+      \ ]}
+
+let g:tagbar_type_css = {
+\ 'ctagstype' : 'Css',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 's:selectors',
+        \ 'i:identities'
+    \ ]
+\ }
 
 " Python Virtual Environment
 let g:python_host_prog =  expand('/usr/bin/python')
@@ -155,14 +182,8 @@ let g:go_highlight_functions = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 
-" Ale
-highlight ALEErrorSign ctermfg=9 ctermbg=15 guifg=#C30500
-highlight ALEWarningSign ctermfg=11 ctermbg=15 guifg=#FFA500
-highlight ALEVirtualTextError ctermfg=9 ctermbg=15 guifg=#C30500
-highlight ALEVirtualTextWarning ctermfg=11 ctermbg=15 guifg=#FFA500
-
 " performance tweaks
-set nocursorline
+" set nocursorline
 set nocursorcolumn
 set scrolljump=5
 set lazyredraw
@@ -195,6 +216,12 @@ fun! SetupCommandAlias(from, to)
 endfun
 
 " ======================== Plugin Configurations ======================== "
+" switch keyboard enabled
+let g:XkbSwitchEnabled = 0
+let g:XkbSwitchLib = '/usr/local/bin/xkbswitch'
+" fix errors on airlaine
+let g:airline#extensions#xkblayout#enabled = 0
+
 " Gundo.vim
 let g:gundo_right = 1
 call SetupCommandAlias("ut","GundoToggle")
@@ -226,31 +253,6 @@ let g:startify_custom_header = [
   \ '   ┗┛    ╹   ╹ ╹',
   \ '   ',
   \ ]
-
-" bufexplorer
-let g:bufExplorerShowDirectories = 0
-let g:bufExplorerShowRelativePath = 1
-let g:bufExplorerShowUnlisted = 0
-let g:bufExplorerSortBy = 'mru'
-let g:bufExplorerSplitOutPathName = 1
-
-" fzf-preview
-let g:fzf_preview_quit_map = 1
-let g:fzf_preview_command = 'bat --map-syntax js:jsx  --color=always --style=grid {-1}' " Installed bat
-let g:fzf_preview_if_binary_command = '[[ "$(file --mime {})" =~ binary ]]'
-let g:fzf_binary_preview_command = 'echo "{} is a binary file"'
-let g:fzf_preview_filelist_command = 'rg --files --hidden --follow --glob "!.git/*"' " Installed ripgrep
-let g:fzf_preview_directory_files_command = 'rg --files --hidden --follow --glob "!.git/*"'
-let g:fzf_preview_grep_cmd = 'rg --color=always --line-number --follow --no-heading --hidden --glob "!.git/*"'
-let g:fzf_preview_git_status_command = "git status --short --untracked-files=all "
-let g:fzf_preview_preview_key_bindings = 'ctrl-d:preview-page-down,ctrl-u:preview-page-up,?:toggle-preview'
-let g:fzf_preview_filelist_postprocess_command = 'gxargs -d "\n" exa --color=always'
-let g:fzf_preview_fzf_color_option = ''
-let g:fzf_preview_split_key_map = 'ctrl-s'
-let g:fzf_preview_vsplit_key_map = 'ctrl-v'
-let g:fzf_preview_tabedit_key_map = 'ctrl-t'
-let g:fzf_preview_build_quickfix_key_map = 'ctrl-q'
-let g:fzf_preview_use_dev_icons = 1
 
 " tagalong
 let g:tagalong_filetypes = ['html', 'xml', 'jsx', 'eruby', 'ejs', 'eco', 'php', 'htmldjango', 'javascriptreact', 'typescriptreact', 'typescript', 'javascript']
@@ -300,6 +302,7 @@ function! BookmarkMapKeys()
     nmap mkk :BookmarkMoveUp
     nmap mjj :BookmarkMoveDown
 endfunction
+
 function! BookmarkUnmapKeys()
     unmap mm
     unmap mi
@@ -328,40 +331,19 @@ let g:airline_section_warning = ''
 let g:airline#extensions#ale#enabled = 1                " ALE integration
 let airline#extensions#vista#enabled = 1                " vista integration
 
-" coc
-" use tab for completion trigger
 " remove go definition by vim-go
 let g:go_def_mapping_enabled = 0
 
 set updatetime=300
-let g:coc_node_path = $HOME . '/.nvm/versions/node/v12.10.0/bin/node'
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" Navigate snippet placeholders using tab
-let g:coc_snippet_next = '<Tab>'
-let g:coc_snippet_prev = '<S-Tab>'
-let b:coc_root_patterns = ['.git', '.env']
 
 " Library usedSettings
 let g:used_javascript_libs = 'react,ramda'
 
-" Use enter to accept snippet expansion
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
+" ========== nvim-coc settings ============= "
+let g:coc_node_path = $HOME . '/.nvm/versions/node/v12.10.0/bin/node'
+" привет мир
 " list of the extensions required
 let g:coc_global_extensions = [
-            \'coc-yank',
             \'coc-pairs',
             \'coc-json',
             \'coc-css',
@@ -369,41 +351,136 @@ let g:coc_global_extensions = [
             \'coc-tsserver',
             \'coc-yaml',
             \'coc-lists',
-            \'coc-snippets',
-            \'coc-ultisnips',
             \'coc-python',
             \'coc-xml',
-            \'coc-syntax',
+            \'coc-cssmodules',
+            \'coc-prettier',
+            \'coc-eslint',
+            \'coc-stylelintplus',
             \]
 
-" ALE
-let g:ale_fixers = {
-            \'*': ['remove_trailing_lines', 'trim_whitespace'],
-            \'javascript': ['eslint'],
-            \'typescript': ['eslint'],
-            \'c' : ['clang-format'],
-            \'cpp' : ['clang-format'],
-            \'css' : ['stylelint'],
-            \'html' : ['prettier'],
-            \'markdown' : ['prettier'],
-            \'yaml': ['prettier'],
-            \'json': ['prettier'],
-            \}
-let g:ale_fix_on_save = 1
-" Don't use the sign column/gutter for ALE
-" Lint always in Normal Mode
-let g:ale_lint_on_text_changed = 'normal'
-" Lint when leaving Insert Mode but don't lint when in Insert Mode
-let g:ale_lint_on_insert_leave = 1
-" Set ALE's 200ms delay to zero
-let g:ale_lint_delay = 0
-let g:ale_sign_warning = '⚠'
-let g:ale_sign_error = '✘'
-let g:ale_sign_info = ''
+" TextEdit might fail if hidden is not set.
+set hidden
 
-" indentLine
-let g:indentLine_char = '▏'
-let g:indentLine_color_gui = '#363949'
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+nmap <silent> <leader>- <Plug>VinegarUp
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
 
 " lastplace
  let g:lastplace_ignore_buftype = "quickfix,nofile,help"
@@ -418,7 +495,27 @@ let g:EasyMotion_smartcase = 1                          " ignore case
 "" FZF
 " general
 let $FZF_DEFAULT_OPTS="--reverse --bind ctrl-a:select-all" " top to bottom
+let $FZF_PREVIEW_COMMAND="bat --style=numbers --map-syntax js:jsx --theme base16 --color=always {} || cat {} || tree -C {}"
 " CTRL-A CTRL-Q to select all and build quickfix list
+" ======= fzf
+command! -bang -nargs=? -complete=dir GFiles
+    \ call fzf#vim#gitfiles(<q-args>,  <q-args> == "?" ? {} : fzf#vim#with_preview(), <bang>0)
+
+nmap <leader>f [fzf-p]
+xmap <leader>f [fzf-p]
+
+" user leader f to search for not ignored file paths
+nnoremap <silent> [fzf-p]p :GFiles<cr>
+nnoremap <silent> [fzf-p]b :Buffers<cr>
+nnoremap <silent> [fzf-p]s :Snippets<cr>
+nnoremap <silent> [fzf-p]w :Windows<cr>
+nnoremap <silent> [fzf-p]h :History<cr>
+nnoremap <silent> [fzf-p]g :Rg<cr>
+" buffer list with fuzzy search
+nnoremap <leader>gs :GFiles?<cr>
+nnoremap <silent> <leader>t :TagbarToggle<cr>
+" start in a popup
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 function! s:build_quickfix_list(lines)
   call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
@@ -449,78 +546,7 @@ if executable('rg')
   command! -bang -nargs=* Find call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 endif
 
-function! s:tags_sink(line)
-  let parts = split(a:line, '\t\zs')
-  let excmd = matchstr(parts[2:], '^.*\ze;"\t')
-  execute 'silent e' parts[1][:-2]
-  let [magic, &magic] = [&magic, 0]
-  execute excmd
-  let &magic = magic
-endfunction
-
-function! s:tags()
-  if empty(tagfiles())
-    echohl WarningMsg
-    echom 'Preparing tags'
-    echohl None
-    call system('ctags -R')
-  endif
-
-  call fzf#run({
-  \ 'source':  'cat '.join(map(tagfiles(), 'fnamemodify(v:val, ":S")')).
-  \            '| grep -v -a ^!',
-  \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
-  \ 'down':    '40%',
-  \ 'sink':    function('s:tags_sink')})
-endfunction
-
-function! s:align_lists(lists)
-  let maxes = {}
-  for list in a:lists
-    let i = 0
-    while i < len(list)
-      let maxes[i] = max([get(maxes, i, 0), len(list[i])])
-      let i += 1
-    endwhile
-  endfor
-  for list in a:lists
-    call map(list, "printf('%-'.maxes[v:key].'s', v:val)")
-  endfor
-  return a:lists
-endfunction
-
-function! s:btags_source()
-  let lines = map(split(system(printf(
-    \ 'ctags -f - --sort=no --excmd=number --language-force=%s %s',
-    \ &filetype, expand('%:S'))), "\n"), 'split(v:val, "\t")')
-  if v:shell_error
-    throw 'failed to extract tags'
-  endif
-  return map(s:align_lists(lines), 'join(v:val, "\t")')
-endfunction
-
-command! Tags call s:tags()
-
-function! s:btags_sink(line)
-  execute split(a:line, "\t")[2]
-endfunction
-
-function! s:btags()
-  try
-    call fzf#run({
-    \ 'source':  s:btags_source(),
-    \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
-    \ 'down':    '40%',
-    \ 'sink':    function('s:btags_sink')})
-  catch
-    echohl WarningMsg
-    echom v:exception
-    echohl None
-  endtry
-endfunction
-
-command! BTags call s:btags()
-" ======================== Filetype-Specific Configurations ============================= "
+nnoremap <C-g> :Rga<Space>
 
 " Markdown
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -544,31 +570,8 @@ function! TerminalPreviewMarkdown()
     vsp | terminal ! mdv %
 endfu
 
-" tabs manipulation
-function! Rotate() " switch between horizontal and vertical split mode for open splits
-    " save the original position, jump to the first window
-    let initial = winnr()
-    exe 1 . "wincmd w"
-
-    wincmd l
-    if winnr() != 1
-        " succeeded moving to the right window
-        wincmd J                " make it the bot window
-    else
-        " cannot move to the right, so we are at the top
-        wincmd H                " make it the left window
-    endif
-
-    " restore cursor to the initial window
-    exe initial . "wincmd w"
-endfunction
-
-nnoremap <F5> :call Rotate()<CR>
-
 " ======================== Custom Mappings ====================== "
 
-" the essentials
-let mapleader=" "
 
 " fugitive
 " Fugitive Conflict Resolution
@@ -579,14 +582,13 @@ nnoremap gdl :diffget //3<CR>
 " clever-f.vim support native vim binding for repeat search
 map ; <Plug>(clever-f-repeat-forward)
 map , <Plug>(clever-f-repeat-back)
+map q] :cn<CR>
+map q[ :cp<CR>
 
-map <F4> :Vista!!<CR>
 nmap <leader>r :so ~/.config/nvim/init.vim<CR>
-nmap <leader>t :call TrimWhitespace()<CR>
 nmap <leader>q :bd<CR>
 nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <silent> <leader>nf :call NERDTreeToggleAndFind()<CR>
-nmap <leader>bb :Buffers<CR>
 nmap <leader>] :bnext<CR>
 nmap <leader>[ :bprevious<CR>
 
@@ -609,15 +611,6 @@ nmap g# g#zz
 " Select all text
 noremap vA ggVG
 
-" Same as normal H/L behavior, but preserves scrolloff
-nnoremap H :call JumpWithScrollOff('H')<CR>
-nnoremap L :call JumpWithScrollOff('L')<CR>
-function! JumpWithScrollOff(key) " {{{
-  set scrolloff=0
-  execute 'normal! ' . a:key
-  set scrolloff=999
-endfunction " }}}
-
 " Move line UP or Down
 nnoremap ∆ :m .+1<CR>==
 nnoremap ˚ :m .-2<CR>==
@@ -626,115 +619,12 @@ inoremap ˚ <Esc>:m .-2<CR>==gi
 vnoremap ∆ :m '>+1<CR>gv=gv
 vnoremap ˚ :m '<-2<CR>gv=g
 
-nmap <Leader>f [fzf-p]
-xmap <Leader>f [fzf-p]
-
-" FzfPrevew
-
-nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
-nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
-nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
-nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
-nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'"<CR>
-nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines -add-fzf-arg=--no-sort -add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
-nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
-xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
-nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
-nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
-nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
-
-" nnoremap <C-g>a :FzfPreviewProjectGrep ''<Cr>
-" nnoremap <leader><C-g>a :FzfPreviewProjectGrep -resume ''<Cr>
-nnoremap <leader><C-g> :FzfPreviewProjectGrep -add-fzf-arg=--nth=3<Space>
-nnoremap <C-g> :FzfPreviewProjectGrep<Space>
-
-" integration with vim-fugitive
-nnoremap <silent> [fzf-p]gs :<C-u>FzfPreviewGitStatus -processors=g:fzf_preview_fugitive_processors<CR>
-nnoremap <silent> [fzf-p]b :<C-u>FzfPreviewBuffers -processors=g:fzf_preview_buffer_delete_processors<CR>
-nnoremap <silent> [fzf-p]B :<C-u>FzfPreviewAllBuffers -processors=g:fzf_preview_buffer_delete_processors<CR>
-
-augroup fzf_preview
-  autocmd!
-  autocmd User fzf_preview#initialized call s:fzf_preview_settings()
-augroup END
-
-function! s:fugitive_add(paths) abort
-  for path in a:paths
-    execute 'silent G add ' . path
-  endfor
-  echomsg 'Git add ' . join(a:paths, ', ')
-endfunction
-
-function! s:fugitive_reset(paths) abort
-  for path in a:paths
-    execute 'silent G reset ' . path
-  endfor
-  echomsg 'Git reset ' . join(a:paths, ', ')
-endfunction
-
-function! s:fugitive_patch(paths) abort
-  for path in a:paths
-    execute 'silent tabedit ' . path . ' | silent Gdiff'
-  endfor
-  echomsg 'Git add --patch ' . join(a:paths, ', ')
-endfunction
-
-function! s:buffers_delete_from_lines(lines) abort
-  for line in a:lines
-    let matches = matchlist(line, '^buffer \(\d\+\)$')
-    if len(matches) >= 1
-      execute 'bdelete! ' . matches[1]
-    else
-      execute 'bdelete! ' . line
-    endif
-  endfor
-endfunction
-
-function! s:fzf_preview_settings() abort
-  let g:fzf_preview_buffer_delete_processors = fzf_preview#resource_processor#get_default_processors()
-  let g:fzf_preview_buffer_delete_processors['ctrl-x'] = function('s:buffers_delete_from_lines')
-
-  let g:fzf_preview_fugitive_processors = fzf_preview#resource_processor#get_processors()
-  let g:fzf_preview_fugitive_processors['ctrl-a'] = function('s:fugitive_add')
-  let g:fzf_preview_fugitive_processors['ctrl-r'] = function('s:fugitive_reset')
-  let g:fzf_preview_fugitive_processors['ctrl-c'] = function('s:fugitive_patch')
-endfunction
-
-
-"" coc mappings
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implemeitation)
-nmap <silent> gu <Plug>(coc-references)
-nmap <silent> gl :CocListResume<Cr>
-
-" multi cursor shortcuts
-nmap <silent> <C-c> <Plug>(coc-cursors-position)
-nmap <silent> <C-a> <Plug>(coc-cursors-word)
-xmap <silent> <C-a> <Plug>(coc-cursors-range)
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" for global rename
-nmap <leader>rn <Plug>(coc-rename)
-
 " for project wide search
 nmap <leader>/ <Plug>(FerretAck)
 nmap <leader>* <Plug>(FerretAckWord)
 
 " carbon sh now
 vnoremap <F8> :CarbonNowSh<CR>
-
-"" easy motion stuff
-
-" search behavior
-" map  / <Plug>(easymotion-sn)
-" omap / <Plug>(easymotion-tn)
-" map  n <Plug>(easymotion-next)
-" map  N <Plug>(easymotion-prev)
 
 " quick navigation
 map <Leader><Leader>l <Plug>(easymotion-lineforward)
@@ -747,32 +637,6 @@ nnoremap <Leader>hn :leftabove  vnew<CR>
 nnoremap <Leader>ln :rightbelow vnew<CR>
 nnoremap <Leader>kn :leftabove  new<CR>
 nnoremap <Leader>jn :rightbelow new<CR>
-
-" If split in given direction exists - jump, else create new split
-function! JumpOrOpenNewSplit(key, cmd, fzf) " {{{
-  let current_window = winnr()
-  execute 'wincmd' a:key
-  if current_window == winnr()
-    execute a:cmd
-    if a:fzf
-      Files
-    endif
-  else
-    if a:fzf
-      Files
-    endif
-  endif
-endfunction " }}}
-nnoremap <silent> <Leader>hh :call JumpOrOpenNewSplit('h', ':leftabove vsplit', 0)<CR>
-nnoremap <silent> <Leader>ll :call JumpOrOpenNewSplit('l', ':rightbelow vsplit', 0)<CR>
-nnoremap <silent> <Leader>kk :call JumpOrOpenNewSplit('k', ':leftabove split', 0)<CR>
-nnoremap <silent> <Leader>jj :call JumpOrOpenNewSplit('j', ':rightbelow split', 0)<CR>
-
-" Same as above, except it opens unite at the end
-nnoremap <silent> <Leader>h<Space> :call JumpOrOpenNewSplit('h', ':leftabove vsplit', 1)<CR>
-nnoremap <silent> <Leader>l<Space> :call JumpOrOpenNewSplit('l', ':rightbelow vsplit', 1)<CR>
-nnoremap <silent> <Leader>k<Space> :call JumpOrOpenNewSplit('k', ':leftabove split', 1)<CR>
-nnoremap <silent> <Leader>j<Space> :call JumpOrOpenNewSplit('j', ':rightbelow split', 1)<CR>
 
 " `SPC l s` - save current session
 nnoremap <leader>ls :SSave<CR>
@@ -801,3 +665,5 @@ augroup END
 au FocusLost * silent! wa
 
 hi SpellBad guifg=NONE cterm=undercurl
+
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
