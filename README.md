@@ -83,6 +83,13 @@ files of utility in your `Download` directory):
 $ cp ~/Download/xkbswitch-macosx/bin/xkbswitch /usr/local/bin
 ```
 
+For integration with vim-xkbswitch
+[github](https://github.com/myshov/libxkbswitch-macosx)
+
+```shell
+$ cp ~/Download/libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib
+```
+
 ### fd
 
 ```shell
