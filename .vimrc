@@ -55,7 +55,7 @@ Plug 'majutsushi/tagbar'                               " tags map on current fil
 Plug 'tpope/vim-repeat'
 Plug 'easymotion/vim-easymotion'                        " make movement a lot faster and easier
 Plug 'rhysd/clever-f.vim'
-" Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'Shougo/neomru.vim'
 
@@ -585,8 +585,6 @@ nnoremap gdl :diffget //3<CR>
 " clever-f.vim support native vim binding for repeat search
 map ; <Plug>(clever-f-repeat-forward)
 map , <Plug>(clever-f-repeat-back)
-map q] :cn<CR>
-map q[ :cp<CR>
 
 nmap <leader>r :so ~/.config/nvim/init.vim<CR>
 nmap <leader>q :bd<CR>
