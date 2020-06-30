@@ -36,14 +36,10 @@ Plug 'editorconfig/editorconfig-vim'                    " consistent coding styl
 
 " ================= Functionalities ================= "
 
-" auto completion, Lang servers and stuff
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" auto switch keyboard map
-Plug 'lyokha/vim-xkbswitch'
-
-" async run commands
-Plug 'skywind3000/asyncrun.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}         " auto completion, Lang servers and stuff
+Plug 'lyokha/vim-xkbswitch'                             " auto switch keyboard map
+Plug 'diepm/vim-rest-console'                           " REST client
+Plug 'skywind3000/asyncrun.vim'                         " async run commands
 
 " search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
