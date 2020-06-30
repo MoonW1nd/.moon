@@ -216,10 +216,20 @@ endfun
 
 " ======================== Plugin Configurations ======================== "
 " switch keyboard enabled
-let g:XkbSwitchEnabled = 0
-let g:XkbSwitchLib = '/usr/local/bin/xkbswitch'
+let g:XkbSwitchEnabled = 1
+let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
 " fix errors on airlaine
-let g:airline#extensions#xkblayout#enabled = 0
+let g:XkbSwitchIMappings = ['ru', 'de']
+let g:XkbSwitchIMappingsTr = {
+          \ 'ru':
+          \ {'<': 'qwertyuiop[]asdfghjkl;''zxcvbnm,.`/'.
+          \       'QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>?~@#$^&|',
+          \  '>': 'йцукенгшщзхъфывапролджэячсмитьбюё.'.
+          \       'ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,Ё"№;:?/'},
+          \ 'de':
+          \ {'<': 'yz-[];''/YZ{}:"<>?~@#^&*_\',
+          \  '>': 'zyßü+öä-ZYÜ*ÖÄ;:_°"§&/(?#'},
+          \ }
 
 " Gundo.vim
 let g:gundo_right = 1
