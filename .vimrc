@@ -25,7 +25,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 
 Plug 'vim-airline/vim-airline'                          " airline status bar
 Plug 'vim-airline/vim-airline-themes'                   " airline themes
-Plug 'ryanoasis/vim-devicons'                           " pretty icons everywhere
+Plug 'ryanoasis/vim-devicons'                          " pretty icons everywhere
 Plug 'gregsexton/MatchTag'                              " highlight matching html tags
 Plug 'preservim/nerdtree'                               " nerdtree
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'          " nerdtree color file names
@@ -41,7 +41,7 @@ Plug 'lyokha/vim-xkbswitch'                             " auto switch keyboard m
 Plug 'diepm/vim-rest-console'                           " REST client
 Plug 'skywind3000/asyncrun.vim'                         " async run commands
 
-" search
+" " search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                                " fuzzy search integration
 Plug 'wincent/ferret'
@@ -55,22 +55,24 @@ Plug 'tpope/vim-unimpaired'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'Shougo/neomru.vim'
 
-" visual
+" " visual
 Plug 'joshdick/onedark.vim'                             " theme OneDark
 Plug 'mhinz/vim-startify'
 Plug 'airblade/vim-gitgutter'
 
-" languages
+" " languages
+Plug 'neoclide/jsonc.vim'
 Plug 'yuezk/vim-js'
 Plug 'HerringtonDarkholme/yats.vim'
-Plug 'maxmellon/vim-jsx-pretty'
+Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'othree/html5.vim'
 Plug 'othree/javascript-libraries-syntax.vim'           " highlight libraries
 Plug 'alexlafroscia/postcss-syntax.vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript', 'typescript'] }
-
-" other
+"
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" " other
 Plug 'alvan/vim-closetag'                               " auto close html tags
 Plug 'AndrewRadev/tagalong.vim'                         " rename tags
 Plug 'sjl/gundo.vim'                                    " undo tree in vim
@@ -121,6 +123,9 @@ set expandtab " Преобразование Tab в пробелы
 set path=.,**
 set autoread
 set spell spelllang=ru_ru,en_us
+
+" for yats 
+set re=0
 
 " ========== tagbar
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
@@ -186,17 +191,6 @@ let g:go_highlight_build_constraints = 1
 set nocursorcolumn
 set scrolljump=5
 set lazyredraw
-set re=1
-
-" required by coc
-set hidden
-set nobackup
-set nowritebackup
-set cmdheight=2
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
-
 
 " tmux cursor shape
 if exists('$TMUX')
@@ -219,17 +213,17 @@ endfun
 let g:XkbSwitchEnabled = 1
 let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
 " fix errors on airlaine
-let g:XkbSwitchIMappings = ['ru', 'de']
-let g:XkbSwitchIMappingsTr = {
-          \ 'ru':
-          \ {'<': 'qwertyuiop[]asdfghjkl;''zxcvbnm,.`/'.
-          \       'QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>?~@#$^&|',
-          \  '>': 'йцукенгшщзхъфывапролджэячсмитьбюё.'.
-          \       'ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,Ё"№;:?/'},
-          \ 'de':
-          \ {'<': 'yz-[];''/YZ{}:"<>?~@#^&*_\',
-          \  '>': 'zyßü+öä-ZYÜ*ÖÄ;:_°"§&/(?#'},
-          \ }
+" let g:XkbSwitchIMappings = ['ru', 'de']
+" let g:XkbSwitchIMappingsTr = {
+"           \ 'ru':
+"           \ {'<': 'qwertyuiop[]asdfghjkl;''zxcvbnm,.`/'.
+"           \       'QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>?~@#$^&|',
+"           \  '>': 'йцукенгшщзхъфывапролджэячсмитьбюё.'.
+"           \       'ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,Ё"№;:?/'},
+"           \ 'de':
+"           \ {'<': 'yz-[];''/YZ{}:"<>?~@#^&*_\',
+"           \  '>': 'zyßü+öä-ZYÜ*ÖÄ;:_°"§&/(?#'},
+"           \ }
 
 " Gundo.vim
 let g:gundo_right = 1
@@ -431,7 +425,7 @@ nmap <silent> <leader>- <Plug>VinegarUp
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> ga <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -450,13 +444,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -510,6 +497,8 @@ let $FZF_PREVIEW_COMMAND="bat --style=numbers --map-syntax js:jsx --theme base16
 command! -bang -nargs=? -complete=dir GFiles
     \ call fzf#vim#gitfiles(<q-args>,  <q-args> == "?" ? {} : fzf#vim#with_preview(), <bang>0)
 
+command! Dab %bd|e#|bd#
+
 nmap <leader>f [fzf-p]
 xmap <leader>f [fzf-p]
 
@@ -532,8 +521,15 @@ function! s:build_quickfix_list(lines)
   cc
 endfunction
 
+function! s:build_location_list(lines)
+  call setloclist(0, map(copy(a:lines), '{ "filename": v:val }'))
+  lopen
+  ll
+endfunction
+
 let g:fzf_action = {
   \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-l': function('s:build_location_list'),
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
@@ -599,6 +595,10 @@ nnoremap <silent> <leader>nf :call NERDTreeToggleAndFind()<CR>
 nmap <leader>] :bnext<CR>
 nmap <leader>[ :bprevious<CR>
 
+" map for work with location list
+nmap ]l :lnext<CR>
+nmap [l :lprev<CR>
+
 " Copy current file path to clipboard
 nnoremap <leader>% :call CopyCurrentFilePath()<CR>
 function! CopyCurrentFilePath() " {{{
@@ -627,8 +627,7 @@ vnoremap ∆ :m '>+1<CR>gv=gv
 vnoremap ˚ :m '<-2<CR>gv=g
 
 " for project wide search
-nmap <leader>/ <Plug>(FerretAck)
-nmap <leader>* <Plug>(FerretAckWord)
+nmap <leader>/ <Plug>(FerretLack)
 
 " carbon sh now
 vnoremap <F8> :CarbonNowSh<CR>
@@ -661,6 +660,7 @@ augroup END
 call SetupCommandAlias("gs","vertical G")
 call SetupCommandAlias("gr","Rg")
 call SetupCommandAlias("gra","Rga")
+call SetupCommandAlias("dab","Dab")
 
 augroup fugitiveSettings
     autocmd!
@@ -674,3 +674,8 @@ au FocusLost * silent! wa
 hi SpellBad guifg=NONE cterm=undercurl
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
+
+autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
