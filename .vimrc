@@ -61,6 +61,9 @@ Plug 'mhinz/vim-startify'
 Plug 'airblade/vim-gitgutter'
 
 " " languages
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'neoclide/jsonc.vim'
 Plug 'yuezk/vim-js'
 Plug 'HerringtonDarkholme/yats.vim'
@@ -191,6 +194,8 @@ let g:go_highlight_build_constraints = 1
 set nocursorcolumn
 set scrolljump=5
 set lazyredraw
+let g:airline_highlighting_cache=1
+set ttyfast
 
 " tmux cursor shape
 if exists('$TMUX')
@@ -512,6 +517,8 @@ nnoremap <silent> [fzf-p]g :Rg<cr>
 " buffer list with fuzzy search
 nnoremap <leader>gs :GFiles?<cr>
 nnoremap <silent> <leader>t :TagbarToggle<cr>
+
+nmap <silent> gcb :TCommentBlock<cr>
 " start in a popup
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
@@ -576,7 +583,6 @@ function! TerminalPreviewMarkdown()
 endfu
 
 " ======================== Custom Mappings ====================== "
-
 
 " fugitive
 " Fugitive Conflict Resolution
