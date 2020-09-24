@@ -10,12 +10,20 @@
 brew cask install alacritty
 ```
 
-### pure theme
+### pure prompt
 
 [github](https://github.com/sindresorhus/pure)
 
 ```shell
 npm install --global pure-prompt
+```
+
+### spacehsip prompt 
+
+[github](https://github.com/denysdovhan/spaceship-prompt)
+
+```shell
+npm install -g spaceship-prompt
 ```
 
 ## CL
