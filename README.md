@@ -71,6 +71,14 @@ brew install bat
 brew install exa
 ```
 
+### jq
+
+[github](https://github.com/stedolan/jq)
+Json formater, useful with curl
+```shell
+brew install j1
+```
+
 ### Tmux plugin manager
 
 [github](https://github.com/tmux-plugins/tpm)
