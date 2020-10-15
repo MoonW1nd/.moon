@@ -121,8 +121,7 @@ autoload -U compinit && compinit
 ZSH_THEME=""
 DEFAULT_USER=`whoami`
 autoload -U promptinit; promptinit
-PURE_CMD_MAX_EXEC_TIME=10
-prompt pure
+prompt spaceship
 
 # aliases
 alias ls=exa
@@ -199,3 +198,7 @@ z() {
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
+
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship
