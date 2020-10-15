@@ -123,6 +123,7 @@ prompt pure
 
 # aliases
 alias ls=exa
+alias -g Z='| fzf'
 alias vim=nvim
 
 # plugins
