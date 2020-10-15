@@ -6,6 +6,9 @@ export ZSH="/Users/moonw1nd/.oh-my-zsh"
 # export PATH=/Users/moonw1nd/Library/Python/3.7/bin:$PATH
 export FZF_DEFAULT_OPTS='--border'
 
+# on go modules
+export GO111MODULE=on
+
 export EDITOR='nvim'
 
 alias cat=ccat
