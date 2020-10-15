@@ -52,8 +52,8 @@ Plug 'tpope/vim-repeat'
 Plug 'easymotion/vim-easymotion'                        " make movement a lot faster and easier
 Plug 'rhysd/clever-f.vim'
 Plug 'tpope/vim-unimpaired'
-Plug 'MattesGroeger/vim-bookmarks'
 Plug 'Shougo/neomru.vim'
+Plug 'kshenoy/vim-signature'
 
 " " visual
 Plug 'joshdick/onedark.vim'                             " theme OneDark
@@ -297,33 +297,9 @@ function! NERDTreeToggleAndFind()
     endif
 endfunction
 
-" off bookmarks on NERDTree active
-let g:bookmark_no_default_key_mappings = 1
-function! BookmarkMapKeys()
-    nmap mm :BookmarkToggle<CR>
-    nmap mi :BookmarkAnnotate<CR>
-    nmap mn :BookmarkNext<CR>
-    nmap mp :BookmarkPrev<CR>
-    nmap ma :BookmarkShowAll<CR>
-    nmap mc :BookmarkClear<CR>
-    nmap mx :BookmarkClearAll<CR>
-    nmap mkk :BookmarkMoveUp
-    nmap mjj :BookmarkMoveDown
+function! ClearAllMarks()
+    execute ':delm! | delm A-Z0-9'
 endfunction
-
-function! BookmarkUnmapKeys()
-    unmap mm
-    unmap mi
-    unmap mn
-    unmap mp
-    unmap ma
-    unmap mc
-    unmap mx
-    unmap mkk
-    unmap mjj
-endfunction
-autocmd BufEnter * :call BookmarkMapKeys()
-autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 
 " hard mode vim active
 let g:hardtime_default_on = 1
@@ -683,6 +659,7 @@ call SetupCommandAlias("gs","vertical G")
 call SetupCommandAlias("gr","Rg")
 call SetupCommandAlias("gra","Rga")
 call SetupCommandAlias("dab","Dab")
+call SetupCommandAlias("cam","call ClearAllMarks()")
 
 augroup fugitiveSettings
     autocmd!
