@@ -38,8 +38,8 @@ Plug 'editorconfig/editorconfig-vim'                    " consistent coding styl
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}         " auto completion, Lang servers and stuff
 Plug 'lyokha/vim-xkbswitch'                             " auto switch keyboard map
-Plug 'diepm/vim-rest-console'                           " REST client
 Plug 'skywind3000/asyncrun.vim'                         " async run commands
+Plug 'moonw1nd/vim-rest-console'                           " REST client
 
 " " search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -328,6 +328,21 @@ autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 " hard mode vim active
 let g:hardtime_default_on = 1
 
+" Vim rest console 
+let g:vrc_curl_opts = {
+  \ '--connect-timeout': 10,
+  \ '--max-time': 60,
+\}
+
+" let g:vrc_split_request_body = 1
+" let g:vrc_show_command = 1
+let g:vrc_auto_format_response_enabled = 1
+let g:vrc_output_buffer_name = '__VRC_OUTPUT.<filetype>'
+    let g:vrc_auto_format_response_patterns = {
+      \ 'json': 'jq .',
+      \ 'xml': 'xmllint --format -',
+    \}
+
 " Airline
 let g:airline_powerline_fonts = 0
 let g:airline#themes#clean#palette = 1
@@ -514,6 +529,7 @@ nnoremap <silent> [fzf-p]s :Snippets<cr>
 nnoremap <silent> [fzf-p]w :Windows<cr>
 nnoremap <silent> [fzf-p]h :History<cr>
 nnoremap <silent> [fzf-p]g :Rg<cr>
+nnoremap <silent> [fzf-p]a :Files dev/api/<cr>
 " buffer list with fuzzy search
 nnoremap <leader>gs :GFiles?<cr>
 nnoremap <silent> <leader>t :TagbarToggle<cr>
