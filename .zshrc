@@ -182,6 +182,15 @@ if [[ $TERM = dumb ]]; then
   unset zle_bracketed_paste
 fi
 
+. ~/dotfiles/utils/z/z.sh
+
+unalias z 2> /dev/null
+z() {
+    [ $# -gt 0 ] && _z "$*" && return
+    cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+}
+
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
