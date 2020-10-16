@@ -71,6 +71,15 @@ brew install bat
 brew install exa
 ```
 
+### delta
+> Better git diff experiance
+
+[github](https://github.com/dandavison/delta)
+
+```shell
+brew install git-delta
+```
+
 ### jq
 
 [github](https://github.com/stedolan/jq)
