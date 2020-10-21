@@ -17,6 +17,9 @@ alias ya=~/.yatool/ya
 
 alias tvmknife='ya tool tvmknife'
 
+alias ot=open-current-ticket
+alias ob=open-current-branch
+
 alias ctags="`brew --prefix`/bin/ctags"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -123,6 +126,10 @@ DEFAULT_USER=`whoami`
 autoload -U promptinit; promptinit
 prompt spaceship
 
+if [ -f $HOME/.tokens ]; then
+    source .tokens # Не светим токенами, если шарим конфиг шелла между тачками
+fi
+
 # aliases
 alias ls=exa
 alias -g Z='| fzf'
@@ -130,6 +137,8 @@ alias vim=nvim
 
 # plugins
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/dotfiles/scripts/openCurrentTicket.sh
+source $HOME/dotfiles/scripts/openCurrentBranch.sh
 
 # command not found plugin
 if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi
@@ -139,10 +148,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-if [ -f ~/.tokens ]; then
-    source .tokens # Не светим токенами, если шарим конфиг шелла между тачками
-fi
 
 export FZF_COMPLETION_OPTS="--preview '(bat --map-syntax js:jsx --theme base16 --color=always {} || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_CTRL_T_OPTS="$FZF_COMPLETION_OPTS"
