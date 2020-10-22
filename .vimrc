@@ -76,6 +76,7 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript', 'typescript'] }
 "
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " " other
+Plug 'machakann/vim-highlightedyank'                    " highlight yanked file
 Plug 'alvan/vim-closetag'                               " auto close html tags
 Plug 'AndrewRadev/tagalong.vim'                         " rename tags
 Plug 'sjl/gundo.vim'                                    " undo tree in vim
@@ -483,6 +484,12 @@ let g:tagbar_autofocus = 1
 " easymotion
 let g:EasyMotion_startofline = 0                        " keep cursor column when JK motion
 let g:EasyMotion_smartcase = 1                          " ignore case
+
+if !exists('##TextYankPost')
+  map y <Plug>(highlightedyank)
+endif
+
+let g:highlightedyank_highlight_duration = 200
 
 "" FZF
 " general
