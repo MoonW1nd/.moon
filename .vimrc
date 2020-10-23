@@ -677,6 +677,8 @@ augroup END
 " save on focus lost
 au FocusLost * silent! wa
 
+command! Prettier call CocAction('runCommand', 'prettier.formatFile')
+
 hi SpellBad guifg=NONE cterm=undercurl
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
