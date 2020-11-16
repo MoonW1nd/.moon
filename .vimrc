@@ -231,6 +231,9 @@ let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
 "           \  '>': 'zyßü+öä-ZYÜ*ÖÄ;:_°"§&/(?#'},
 "           \ }
 
+" emmet
+imap ,, <C-y>,
+
 " Gundo.vim
 let g:gundo_right = 1
 call SetupCommandAlias("ut","GundoToggle")
