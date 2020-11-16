@@ -662,7 +662,9 @@ augroup Affiliate
 augroup END
 
 " figitive
-call SetupCommandAlias("gs","vertical G")
+call SetupCommandAlias("gs","Gstatus<CR><C-w>30+")
+call SetupCommandAlias("gmt","G mergetool")
+call SetupCommandAlias("gdt","G difftool")
 call SetupCommandAlias("gr","Rg")
 call SetupCommandAlias("gra","Rga")
 call SetupCommandAlias("dab","Dab")
