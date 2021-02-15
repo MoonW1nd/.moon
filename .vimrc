@@ -40,6 +40,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}         " auto completion, Lang 
 Plug 'lyokha/vim-xkbswitch'                             " auto switch keyboard map
 Plug 'skywind3000/asyncrun.vim'                         " async run commands
 Plug 'moonw1nd/vim-rest-console'                           " REST client
+Plug 'vim-test/vim-test'
 
 " " search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -494,6 +495,15 @@ endif
 
 let g:highlightedyank_highlight_duration = 200
 
+" vim-test
+let test#strategy = {
+  \ 'nearest': 'neovim',
+  \ 'file':    'basic',
+  \ 'suite':   'basic',
+\}
+
+let g:test#javascript#jest#executable = 'BABEL_ENV=test npx jest'
+
 "" FZF
 " general
 let $FZF_DEFAULT_OPTS="--reverse --bind ctrl-a:select-all" " top to bottom
@@ -585,6 +595,7 @@ function! TerminalPreviewMarkdown()
 endfu
 
 " ======================== Custom Mappings ====================== "
+nmap <leader>gt :TestFile<CR>
 
 " fugitive
 " Fugitive Conflict Resolution
