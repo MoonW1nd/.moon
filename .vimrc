@@ -637,6 +637,9 @@ nmap g# g#zz
 " Select all text
 noremap vA ggVG
 
+" Paste without changed "" register
+vnoremap <leader>p "_dP
+
 " Move line UP or Down
 nnoremap ∆ :m .+1<CR>==
 nnoremap ˚ :m .-2<CR>==
