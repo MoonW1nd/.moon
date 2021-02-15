@@ -1,11 +1,23 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# For share history before tmux pane
+shopt -s histappend # Append to history, don't overwrite it
+shopt -s histreedit # Re-edit a history substitution line if it failed
+shopt -s histverify # # Edit a recalled history line before executing
+HISTFILE=~/.bash_history # Set the filename to save history to
+HISTSIZE=1000000 # Set your history file to be reasonably huge
+HISTTIMEFORMAT="[%F %T %Z]"
+
+# Append, clear, and read history after each command
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# Ignore duplicate commands, and commands that start with spaces
+HISTCONTROL='ignoreboth'
+
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/moonw1nd/.oh-my-zsh"
 # export PATH=/anaconda3/bin:$PATH
 # export PATH=/Users/moonw1nd/Library/Python/3.7/bin:$PATH
-export FZF_DEFAULT_OPTS='--border'
-export FZF_DEFAULT_OPTS='--border --height 40% --reverse '
+export FZF_DEFAULT_OPTS="--border --height 40% --reverse --history=$HOME/.fzf_history"
 
 # on go modules
 export GO111MODULE=on
