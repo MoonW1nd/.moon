@@ -332,8 +332,11 @@ call airline#parts#define_accent('linenr', 'bold')
 let g:airline_section_z = airline#section#create(['%3p%%  ',
             \ g:airline_symbols.linenr .' ', 'linenr', ':%c '])
 let g:airline_section_warning = ''
-let g:airline#extensions#ale#enabled = 1                " ALE integration
-let airline#extensions#vista#enabled = 1                " vista integration
+let g:airline_highlighting_cache = 1
+" disable tagbar integration (can be slow)
+let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#wordcount#enabled = 0
+let g:airline#extensions#whitespace#enabled = 0
 
 " remove go definition by vim-go
 let g:go_def_mapping_enabled = 0
