@@ -567,6 +567,11 @@ command! -bang -nargs=* Rga
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview({'options': '--delimiter :'}), <bang>0)
 
+command! -bang -nargs=* GRga
+  \ call fzf#vim#grep(
+  \   "git diff --name-only --diff-filter=d origin/master | tr '\n' ' ' | xargs rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'options': '--delimiter :'}), <bang>0)
+
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
   set grepprg=rg\ --vimgrep
@@ -574,6 +579,8 @@ if executable('rg')
 endif
 
 nnoremap <C-g> :Rga<Space>
+nnoremap <leader><C-g> :GRga<Space>
+inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
 
 " Markdown
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
