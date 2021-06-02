@@ -706,6 +706,8 @@ augroup END
 " save on focus lost
 au FocusLost * silent! wa
 
+command! MakeTs call moonw1nd#typescript#check()
+
 command! Prettier call CocAction('runCommand', 'prettier.formatFile')
 
 hi SpellBad guifg=NONE cterm=undercurl
