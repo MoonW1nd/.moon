@@ -121,6 +121,13 @@ $ cp ~/Download/libxkbswitch-macosx/bin/libxkbswitch.dylib /usr/local/lib
 brew install fd
 ```
 
+### moreutils
+need for use `vipe` in command
+
+```shell
+brew install moreutils
+```
+
 ### tmuxinator
 
 [github](https://github.com/tmuxinator/tmuxinator)
