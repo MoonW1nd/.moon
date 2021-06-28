@@ -32,6 +32,9 @@ alias tvmknife='ya tool tvmknife'
 
 alias ot=open-current-ticket
 alias ob=open-current-branch
+alias pms="pomodoro start"
+alias pmf="pomodoro finish"
+alias pmts="termdown 25m && osascript -e 'display notification \"Time to break\" with title \"Pomodoro\" subtitle \"Finish\" sound name \"piece-of-cake-611\"'"
 
 alias ctags="`brew --prefix`/bin/ctags"
 # Set name of the theme to load --- if set to "random", it will
@@ -153,6 +156,7 @@ alias tdat=todoist-add-task
 # plugins
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/dotfiles/scripts/todoist.sh
+source $HOME/dotfiles/scripts/pomodoroWork.sh
 source $HOME/dotfiles/scripts/openCurrentTicket.sh
 source $HOME/dotfiles/scripts/openCurrentBranch.sh
 
