@@ -17,7 +17,7 @@ HISTCONTROL='ignoreboth'
 export ZSH="/Users/moonw1nd/.oh-my-zsh"
 # export PATH=/anaconda3/bin:$PATH
 # export PATH=/Users/moonw1nd/Library/Python/3.7/bin:$PATH
-export FZF_DEFAULT_OPTS="--border --height 40% --reverse --history=$HOME/.fzf_history"
+export FZF_DEFAULT_OPTS="--border --height 40% --reverse --history=$HOME/.fzf_history --ansi"
 
 # on go modules
 export GO111MODULE=on
