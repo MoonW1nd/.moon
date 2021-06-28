@@ -147,9 +147,12 @@ fi
 alias ls=exa
 alias -g Z='| fzf'
 alias vim=nvim
+alias td=todoist
+alias tdat=todoist-add-task
 
 # plugins
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/dotfiles/scripts/todoist.sh
 source $HOME/dotfiles/scripts/openCurrentTicket.sh
 source $HOME/dotfiles/scripts/openCurrentBranch.sh
 
