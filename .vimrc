@@ -37,7 +37,6 @@ Plug 'editorconfig/editorconfig-vim'                    " consistent coding styl
 " ================= Functionalities ================= "
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}         " auto completion, Lang servers and stuff
-Plug 'lyokha/vim-xkbswitch'                             " auto switch keyboard map
 Plug 'skywind3000/asyncrun.vim'                         " async run commands
 Plug 'moonw1nd/vim-rest-console'                           " REST client
 Plug 'vim-test/vim-test'
@@ -53,8 +52,7 @@ Plug 'tpope/vim-repeat'
 Plug 'easymotion/vim-easymotion'                        " make movement a lot faster and easier
 Plug 'rhysd/clever-f.vim'
 Plug 'tpope/vim-unimpaired'
-Plug 'Shougo/neomru.vim'
-Plug 'kshenoy/vim-signature'
+Plug 'kshenoy/vim-signature'                            " display marks
 
 " " visual
 Plug 'joshdick/onedark.vim'                             " theme OneDark
@@ -216,22 +214,6 @@ fun! SetupCommandAlias(from, to)
 endfun
 
 " ======================== Plugin Configurations ======================== "
-" switch keyboard enabled
-let g:XkbSwitchEnabled = 1
-let g:XkbSwitchLib = '/usr/local/lib/libxkbswitch.dylib'
-" fix errors on airlaine
-" let g:XkbSwitchIMappings = ['ru', 'de']
-" let g:XkbSwitchIMappingsTr = {
-"           \ 'ru':
-"           \ {'<': 'qwertyuiop[]asdfghjkl;''zxcvbnm,.`/'.
-"           \       'QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>?~@#$^&|',
-"           \  '>': 'йцукенгшщзхъфывапролджэячсмитьбюё.'.
-"           \       'ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ,Ё"№;:?/'},
-"           \ 'de':
-"           \ {'<': 'yz-[];''/YZ{}:"<>?~@#^&*_\',
-"           \  '>': 'zyßü+öä-ZYÜ*ÖÄ;:_°"§&/(?#'},
-"           \ }
-
 " emmet
 imap ,, <C-y>,
 
@@ -347,7 +329,7 @@ set updatetime=300
 let g:used_javascript_libs = 'react,ramda'
 
 " ========== nvim-coc settings ============= "
-let g:coc_node_path = $HOME . '/.nvm/versions/node/v12.10.0/bin/node'
+let g:coc_node_path = $HOME . '/.nvm/versions/node/v14.17.0/bin/node'
 " привет мир
 " list of the extensions required
 let g:coc_global_extensions = [
@@ -505,7 +487,7 @@ let test#strategy = {
   \ 'suite':   'basic',
 \}
 
-let g:test#javascript#jest#executable = 'BABEL_ENV=test npx jest'
+let g:test#javascript#jest#executable = 'BABEL_ENV=test npx jest --maxWorkers=50%'
 
 "" FZF
 " general
