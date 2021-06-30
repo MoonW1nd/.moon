@@ -677,7 +677,7 @@ augroup END
 " save on focus lost
 au FocusLost * silent! wa
 
-command! MakeTs call moonw1nd#typescript#check()
+command! MakeTs AsyncRun npx tsc --noEmit -p ./
 
 command! Prettier call CocAction('runCommand', 'prettier.formatFile')
 
