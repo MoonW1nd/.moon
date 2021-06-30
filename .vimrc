@@ -38,7 +38,8 @@ Plug 'editorconfig/editorconfig-vim'                    " consistent coding styl
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}         " auto completion, Lang servers and stuff
 Plug 'skywind3000/asyncrun.vim'                         " async run commands
-Plug 'moonw1nd/vim-rest-console'                           " REST client
+Plug 'moonw1nd/vim-rest-console'                        " REST client
+Plug 'SirVer/ultisnips'                                 " snippets
 Plug 'vim-test/vim-test'
 
 " " search
@@ -216,6 +217,14 @@ endfun
 " ======================== Plugin Configurations ======================== "
 " emmet
 imap ,, <C-y>,
+
+" [ultisnips] trigger configuration. 
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+
+" [ultisnips] If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 " Gundo.vim
 let g:gundo_right = 1

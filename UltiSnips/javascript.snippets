@@ -1,0 +1,49 @@
+snippet /* "documentation block"
+/**
+ * $1
+ */
+endsnippet
+
+snippet todo "do this later"
+/**
+ * TODO [MoonW1nd]: $1
+ */
+endsnippet
+
+snippet cl "console.log"
+console.log(${1:logme})
+endsnippet
+
+snippet iif "ignore the whole file"
+/* istanbul ignore file */
+endsnippet
+
+snippet iin "ignore the next thing"
+/* istanbul ignore next */
+endsnippet
+
+snippet ednl "eslint-disable-next-line comment"
+// eslint-disable-next-line ${0:rule-name}
+endsnippet
+
+snippet ed "export default"
+export default ${0:exported-entity};
+endsnippet
+
+snippet  "^import" "import statement" rbA
+import ${2:thing} from '${1:package}';
+endsnippet
+
+snippet ir "import React"
+import React from 'react';
+endsnippet
+
+snippet is "import styles"
+import styles from './styles.module.css';
+endsnippet
+
+snippet afn "create function"
+const ${1:name} = (${2:args}) => {$0
+}
+endsnippet
+
