@@ -643,7 +643,7 @@ nnoremap <leader>lp :SClose<CR>
 " ======================== Autocommands ====================== "
 " affiliate sync-rsync
 augroup Affiliate
-    autocmd BufWritePost /Users/moonw1nd/Documents/Develop/work/affiliate/* silent! :AsyncRun /Users/moonw1nd/Documents/Develop/work/rsync.sh
+    autocmd BufWritePost /Users/moonw1nd/Documents/Develop/work/affiliate/* :AsyncRun -mode=3 /Users/moonw1nd/Documents/Develop/work/rsync.sh
 augroup END
 
 " figitive
