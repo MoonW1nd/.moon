@@ -88,6 +88,7 @@ Plug 'tpope/vim-fugitive'                               " git support
 Plug 'farmergreg/vim-lastplace'                         " open files at the last edited place
 Plug 'romainl/vim-cool'                                 " disable hl until another search is performed
 Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
+Plug 'wincent/terminus'                                 " sensible defaults
 call plug#end()
 
 
@@ -187,6 +188,9 @@ endfun
 " ======================== Plugin Configurations ======================== "
 " emmet
 imap ,, <C-y>,
+
+" [terminus]
+let g:TerminusCursorShape=0
 
 " [ultisnips] trigger configuration. 
 let g:UltiSnipsExpandTrigger="<tab>"
