@@ -660,7 +660,9 @@ augroup Affiliate
 augroup END
 
 " figitive
-call SetupCommandAlias("gs","Gstatus<CR><C-w>30+")
+call SetupCommandAlias("gs","vertical Git<CR>")
+call SetupCommandAlias("gcn","silent Git commit -n<CR>")
+call SetupCommandAlias("gpn","Git push --no-verify<CR>")
 call SetupCommandAlias("gmt","G mergetool")
 call SetupCommandAlias("gdt","G difftool")
 call SetupCommandAlias("gr","Rg")
