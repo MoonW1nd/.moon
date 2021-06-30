@@ -481,21 +481,6 @@ command! -bang -nargs=? -complete=dir GFiles
 
 command! Dab %bd|e#|bd#
 
-nmap <leader>f [fzf-p]
-xmap <leader>f [fzf-p]
-
-" user leader f to search for not ignored file paths
-nnoremap <silent> [fzf-p]p :GFiles<cr>
-nnoremap <silent> [fzf-p]b :Buffers<cr>
-nnoremap <silent> [fzf-p]s :Snippets<cr>
-nnoremap <silent> [fzf-p]w :Windows<cr>
-nnoremap <silent> [fzf-p]h :History<cr>
-nnoremap <silent> [fzf-p]g :Rg<cr>
-nnoremap <silent> [fzf-p]a :Files dev/api/<cr>
-" buffer list with fuzzy search
-nnoremap <leader>gs :GFiles?<cr>
-
-nmap <silent> gcb :TCommentBlock<cr>
 " start in a popup
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
@@ -534,11 +519,35 @@ command! -bang -nargs=* GRga
   \   "git diff --name-only --diff-filter=d origin/master | tr '\n' ' ' | xargs rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 0,
   \   fzf#vim#with_preview({'options': '--delimiter :'}), <bang>0)
 
+command! -bang Args call fzf#run(fzf#wrap('args',
+    \ fzf#vim#with_preview({'source': map([argidx()]+(argidx()==0?[]:range(argc())[0:argidx()-1])+range(argc())[argidx()+1:], 'argv(v:val)')}),<bang>0))
+
+command! -bang GDf call fzf#run(fzf#wrap('args',
+    \ fzf#vim#with_preview({'source': "git diff --name-only --diff-filter=d origin/master"}),<bang>0))
+
 if executable('rg')
   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
   set grepprg=rg\ --vimgrep
   command! -bang -nargs=* Find call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 endif
+
+nmap <leader>f [fzf-p]
+xmap <leader>f [fzf-p]
+
+" user leader f to search for not ignored file paths
+nnoremap <silent> [fzf-p]p :GFiles<cr>
+nnoremap <silent> [fzf-p]P :GDf<cr>
+nnoremap <silent> [fzf-p]b :Buffers<cr>
+nnoremap <silent> [fzf-p]s :Snippets<cr>
+nnoremap <silent> [fzf-p]w :Windows<cr>
+nnoremap <silent> [fzf-p]h :History<cr>
+nnoremap <silent> [fzf-p]g :Rg<cr>
+nnoremap <silent> [fzf-p]a :Args<cr>
+nnoremap <silent> [fzf-p]r :Files ~/.dev/api/<cr>
+
+" buffer list with fuzzy search
+nnoremap <leader>gs :GFiles?<cr>
+nmap <silent> gcb :TCommentBlock<cr>
 
 nnoremap <C-g> :Rga<Space>
 nnoremap <leader><C-g> :GRga<Space>
