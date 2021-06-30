@@ -46,7 +46,6 @@ Plug 'vim-test/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'                                " fuzzy search integration
 Plug 'wincent/ferret'
-Plug 'majutsushi/tagbar'                               " tags map on current file
 
 " navigation
 Plug 'tpope/vim-repeat'
@@ -130,35 +129,6 @@ set spell spelllang=ru_ru,en_us
 
 " for yats 
 set re=0
-
-" ========== tagbar
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-let g:tagbar_show_linenumbers = 2
-let g:tagbar_type_javascript = {
-      \ 'ctagstype': 'javascript',
-      \ 'kinds': [
-      \ 'A:arrays',
-      \ 'P:properties',
-      \ 'T:tags',
-      \ 'O:objects',
-      \ 'G:generator functions',
-      \ 'U:functions',
-      \ 'K:constructors/classes',
-      \ 'M:methods',
-      \ 'V:variables',
-      \ 'I:imports',
-      \ 'E:exports',
-      \ 'S:styled components'
-      \ ]}
-
-let g:tagbar_type_css = {
-\ 'ctagstype' : 'Css',
-    \ 'kinds'     : [
-        \ 'c:classes',
-        \ 's:selectors',
-        \ 'i:identities'
-    \ ]
-\ }
 
 " Python Virtual Environment
 let g:python_host_prog =  expand('/usr/bin/python')
@@ -324,8 +294,6 @@ let g:airline_section_z = airline#section#create(['%3p%%  ',
             \ g:airline_symbols.linenr .' ', 'linenr', ':%c '])
 let g:airline_section_warning = ''
 let g:airline_highlighting_cache = 1
-" disable tagbar integration (can be slow)
-let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#wordcount#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 
@@ -476,9 +444,6 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " lastplace
  let g:lastplace_ignore_buftype = "quickfix,nofile,help"
 
-" tagbar
-let g:tagbar_autofocus = 1
-
 " easymotion
 let g:EasyMotion_startofline = 0                        " keep cursor column when JK motion
 let g:EasyMotion_smartcase = 1                          " ignore case
@@ -522,7 +487,6 @@ nnoremap <silent> [fzf-p]g :Rg<cr>
 nnoremap <silent> [fzf-p]a :Files dev/api/<cr>
 " buffer list with fuzzy search
 nnoremap <leader>gs :GFiles?<cr>
-nnoremap <silent> <leader>t :TagbarToggle<cr>
 
 nmap <silent> gcb :TCommentBlock<cr>
 " start in a popup
