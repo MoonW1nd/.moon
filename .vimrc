@@ -655,12 +655,15 @@ nnoremap <leader>lp :SClose<CR>
 
 " ======================== Autocommands ====================== "
 " affiliate sync-rsync
+command! AffRSync AsyncRun -mode=3 /Users/moonw1nd/Documents/Develop/work/rsync.sh
+ 
 augroup Affiliate
-    autocmd BufWritePost /Users/moonw1nd/Documents/Develop/work/affiliate/* :AsyncRun -mode=3 /Users/moonw1nd/Documents/Develop/work/rsync.sh
+    autocmd BufWritePost /Users/moonw1nd/Documents/Develop/work/affiliate/* :AffRSync
 augroup END
 
 " figitive
 call SetupCommandAlias("gs","vertical Git<CR>")
+call SetupCommandAlias("rs","<CR>")
 call SetupCommandAlias("gcn","silent Git commit -n<CR>")
 call SetupCommandAlias("gpn","Git push --no-verify<CR>")
 call SetupCommandAlias("gmt","G mergetool")
