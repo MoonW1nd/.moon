@@ -543,15 +543,30 @@ nnoremap <silent> [fzf-p]w :Windows<cr>
 nnoremap <silent> [fzf-p]h :History<cr>
 nnoremap <silent> [fzf-p]g :Rg<cr>
 nnoremap <silent> [fzf-p]a :Args<cr>
+nnoremap <silent> [fzf-p]f :GFiles?<cr>
 nnoremap <silent> [fzf-p]r :Files ~/.dev/api/<cr>
 
 " buffer list with fuzzy search
-nnoremap <leader>gs :GFiles?<cr>
 nmap <silent> gcb :TCommentBlock<cr>
 
 nnoremap <C-g> :Rga<Space>
 nnoremap <leader><C-g> :GRga<Space>
 inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
+
+" fugitive
+nmap <leader>g [git-p]
+xmap <leader>g [git-p]
+
+nnoremap <silent> [git-p]p :Git push<cr>
+nnoremap <silent> [git-p]P :Git push --no-verify<cr>
+nnoremap <silent> [git-p]c :Git commit<cr>
+nnoremap <silent> [git-p]C :Git commit -n<cr>
+nnoremap <silent> [git-p]s :vertical Git<cr>
+nnoremap <silent> [git-p]d :Gvdiff<cr>
+
+" Fugitive Conflict Resolution
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
 
 " Markdown
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -577,12 +592,6 @@ endfu
 
 " ======================== Custom Mappings ====================== "
 nmap <leader>gt :TestFile<CR>
-
-" fugitive
-" Fugitive Conflict Resolution
-nnoremap <leader>gd :Gvdiff<CR>
-nnoremap gdh :diffget //2<CR>
-nnoremap gdl :diffget //3<CR>
 
 " clever-f.vim support native vim binding for repeat search
 map ; <Plug>(clever-f-repeat-forward)
