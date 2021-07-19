@@ -1,0 +1,25 @@
+{
+  "title": "rcmd to opt + shift",
+  "rules": [
+    {
+      "manipulators": [
+        {
+          "description": "Change right option to command+control+option+shift.",
+          "from": {
+            "key_code": "right_command",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_command",
+              "modifiers": ["left_control", "left_option", "left_shift"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
