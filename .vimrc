@@ -55,7 +55,8 @@ Plug 'tpope/vim-unimpaired'
 Plug 'kshenoy/vim-signature'                            " display marks
 
 " " visual
-Plug 'joshdick/onedark.vim'                             " theme OneDark
+Plug 'joshdick/onedark.vim'                             " dark theme
+Plug 'preservim/vim-colors-pencil'                      " light theme
 Plug 'mhinz/vim-startify'
 Plug 'airblade/vim-gitgutter'
 
@@ -137,9 +138,15 @@ let g:python3_host_prog = expand('/Library/Frameworks/Python.framework/Versions/
 
 
 " Coloring
+" set background=light
+" colorscheme one
+" let g:airline_theme='pencil'
 set background=dark
 colorscheme onedark
 let g:airline_theme='onedark'
+" let g:pencil_higher_contrast_ui = 1
+
+
 highlight clear SignColumn                              " use number color for sign column color
 hi EasyMotionMoveHLDefault gui=NONE cterm=NONE term=NONE ctermfg=235 ctermbg=180 guifg=#282C34 guibg=#E5C07B
 
@@ -364,7 +371,7 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-tab> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
@@ -404,40 +411,12 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
-
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+nmap <leader>cr :CocRestart<cr>;
 
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
 
 " lastplace
  let g:lastplace_ignore_buftype = "quickfix,nofile,help"
@@ -569,7 +548,7 @@ nnoremap <silent> [arg-p]a :arga %<cr>
 nnoremap <silent> [arg-p]d :argd %<cr>
 " clear all arglist
 nnoremap <silent> [arg-p]c :argd *.*<cr>
-" fzf files arglist
+" find files in arglist
 nnoremap <silent> [arg-p]f :Args<cr>
 
 " Markdown
@@ -614,6 +593,7 @@ nmap [l :lprev<CR>
 
 " Copy current file path to clipboard
 nnoremap <leader>% :call CopyCurrentFilePath()<CR>
+
 function! CopyCurrentFilePath() " {{{
   let @+ = expand('%')
   echo @+
