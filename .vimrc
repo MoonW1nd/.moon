@@ -559,6 +559,19 @@ nnoremap <silent> [git-p]d :Gvdiff<cr>
 nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
 
+" arslist
+nmap <leader>a [arg-p]
+xmap <leader>a [arg-p]
+
+" add current file to arglist
+nnoremap <silent> [arg-p]a :arga %<cr>
+" delete current file from arglist
+nnoremap <silent> [arg-p]d :argd %<cr>
+" clear all arglist
+nnoremap <silent> [arg-p]c :argd *.*<cr>
+" fzf files arglist
+nnoremap <silent> [arg-p]f :Args<cr>
+
 " Markdown
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType markdown set spell
