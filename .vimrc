@@ -76,6 +76,7 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript', 'typescript'] }
 "
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " " other
+Plug 'wellle/targets.vim'                               " improve text objects API
 Plug 'machakann/vim-highlightedyank'                    " highlight yanked file
 Plug 'alvan/vim-closetag'                               " auto close html tags
 Plug 'AndrewRadev/tagalong.vim'                         " rename tags
