@@ -602,12 +602,33 @@ endfunction
 " }}}
 
 " Keep search results at the center of screen
-nmap n nzz
-nmap N Nzz
-nmap * *zz
-nmap # #zz
-nmap g* g*zz
-nmap g# g#zz
+nmap n nzzzv
+nmap N Nzzzv
+nmap * *zzzv
+nmap # #zzzv
+nmap g* g*zzzv
+nmap g# g#zzzv
+nnoremap J mzJ`z
+
+" Undo with breakpoints
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap : :<c-g>u
+inoremap ; ;<c-g>u
+inoremap ] ]<c-g>u
+inoremap [ [<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y gg"+yG
+
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" noremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k';
+" noremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j';
 
 " Select all text
 noremap vA ggVG
@@ -615,13 +636,13 @@ noremap vA ggVG
 " Paste without changed "" register
 vnoremap <leader>p "_dP
 
-" Move line UP or Down
-nnoremap ∆ :m .+1<CR>==
+" Move line UP or Down alt-jk
 nnoremap ˚ :m .-2<CR>==
+nnoremap ∆ :m .+1<CR>==
 inoremap ∆ <Esc>:m .+1<CR>==gi
 inoremap ˚ <Esc>:m .-2<CR>==gi
 vnoremap ∆ :m '>+1<CR>gv=gv
-vnoremap ˚ :m '<-2<CR>gv=g
+vnoremap ˚ :m '<-2<CR>gv=gv
 
 " for project wide search
 nmap <leader>/ <Plug>(FerretLack)
@@ -641,11 +662,15 @@ nnoremap <Leader>ln :rightbelow vnew<CR>
 nnoremap <Leader>kn :leftabove  new<CR>
 nnoremap <Leader>jn :rightbelow new<CR>
 
+nnoremap <Leader>cd :CocDiagnostics<CR>
+
 " `SPC l s` - save current session
 nnoremap <leader>ls :SSave<CR>
 
 " `SPC l l` - list sessions / switch to different project
 nnoremap <leader>lp :SClose<CR>
+
+nnoremap Y yg_;
 
 " ======================== Autocommands ====================== "
 " affiliate sync-rsync
@@ -655,9 +680,11 @@ augroup Affiliate
     autocmd BufWritePost /Users/moonw1nd/Documents/Develop/work/affiliate/* :AffRSync
 augroup END
 
+command! Todo Rga @todo\s\[MoonW1nd]:
+
 " figitive
 call SetupCommandAlias("gs","vertical Git<CR>")
-call SetupCommandAlias("rs","<CR>")
+call SetupCommandAlias("td",'Todo')
 call SetupCommandAlias("gcn","silent Git commit -n<CR>")
 call SetupCommandAlias("gpn","Git push --no-verify<CR>")
 call SetupCommandAlias("gmt","G mergetool")
