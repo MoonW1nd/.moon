@@ -7,92 +7,11 @@ let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 let g:vim_bootstrap_langs = "c,erlang,go"
 let g:vim_bootstrap_editor = "nvim"                 " Nvim or Vim
 
-if !filereadable(vimplug_exists)
-  if !executable("curl")
-    echoerr "You have to install curl or first install vim-plug yourself!"
-    execute "q!"
-  endif
-  echo "Installing Vim-Plug..."
-  echo ""
-  silent exec "!\curl -fLo " . vimplug_exists . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  let g:not_finish_vimplug = "yes"
-  autocmd VimEnter * PlugInstall
-endif
+luafile ~/.config/nvim/config/pluggings.lua
 
-call plug#begin(expand('~/.config/nvim/plugged'))
-
-" ================= looks and GUI stuff ================== "
-
-Plug 'vim-airline/vim-airline'                          " airline status bar
-Plug 'vim-airline/vim-airline-themes'                   " airline themes
-Plug 'ryanoasis/vim-devicons'                          " pretty icons everywhere
-Plug 'gregsexton/MatchTag'                              " highlight matching html tags
-Plug 'preservim/nerdtree'                               " nerdtree
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'          " nerdtree color file names
-Plug 'Xuyuanp/nerdtree-git-plugin'                      " git-nerdtree
-Plug 'tpope/vim-vinegar'                                " navigation tree from the current file
-Plug 'blueyed/vim-diminactive'                          " dim inactive splits
-Plug 'editorconfig/editorconfig-vim'                    " consistent coding style
-
-" ================= Functionalities ================= "
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}         " auto completion, Lang servers and stuff
-Plug 'skywind3000/asyncrun.vim'                         " async run commands
-Plug 'moonw1nd/vim-rest-console'                        " REST client
-Plug 'SirVer/ultisnips'                                 " snippets
-Plug 'vim-test/vim-test'
-
-" " search
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'                                " fuzzy search integration
-Plug 'wincent/ferret'
-
-" navigation
-Plug 'tpope/vim-repeat'
-Plug 'easymotion/vim-easymotion'                        " make movement a lot faster and easier
-Plug 'rhysd/clever-f.vim'
-Plug 'tpope/vim-unimpaired'
-Plug 'kshenoy/vim-signature'                            " display marks
-
-" " visual
-Plug 'joshdick/onedark.vim'                             " dark theme
-Plug 'preservim/vim-colors-pencil'                      " light theme
-Plug 'mhinz/vim-startify'
-Plug 'airblade/vim-gitgutter'
-
-" " languages
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'neoclide/jsonc.vim'
-Plug 'yuezk/vim-js'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
-Plug 'jparise/vim-graphql'        " GraphQL syntax
-Plug 'othree/html5.vim'
-Plug 'othree/javascript-libraries-syntax.vim'           " highlight libraries
-Plug 'alexlafroscia/postcss-syntax.vim'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript', 'typescript'] }
-"
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" " other
-Plug 'wellle/targets.vim'                               " improve text objects API
-Plug 'machakann/vim-highlightedyank'                    " highlight yanked file
-Plug 'alvan/vim-closetag'                               " auto close html tags
-Plug 'AndrewRadev/tagalong.vim'                         " rename tags
-Plug 'sjl/gundo.vim'                                    " undo tree in vim
-Plug 'vim-scripts/ReplaceWithRegister'                  " replace word on copy buffer
-Plug 'tpope/vim-surround'                               " surround brackets
-Plug 'takac/vim-hardtime'                               " hard mode on vim
-Plug 'tomtom/tcomment_vim'                              " better commenting
-Plug 'kristijanhusak/vim-carbon-now-sh'                 " lit code Screenshots
-Plug 'tpope/vim-fugitive'                               " git support
-Plug 'farmergreg/vim-lastplace'                         " open files at the last edited place
-Plug 'romainl/vim-cool'                                 " disable hl until another search is performed
-Plug 'wellle/tmux-complete.vim'                         " complete words from a tmux panes
-Plug 'wincent/terminus'                                 " sensible defaults
-call plug#end()
-
+" lsp configs
+luafile ~/.config/nvim/config/lsp-config.lua
+luafile ~/.config/nvim/config/treesitter.lua
 
 " ==================== general config ======================== "
 if (has("termguicolors"))
@@ -128,7 +47,7 @@ set textwidth=0 " disable auto brset cursorlineeak long lines
 set expandtab " Преобразование Tab в пробелы
 set path=.,**
 set autoread
-set spell spelllang=ru_ru,en_us
+" set spell spelllang=ru_ru,en_us
 
 " for yats 
 set re=0
@@ -302,6 +221,7 @@ let g:vrc_output_buffer_name = '__VRC_OUTPUT.<filetype>'
 
 " Airline
 let g:airline_powerline_fonts = 0
+let g:airline#extensions#branch#enabled = 0
 let g:airline#themes#clean#palette = 1
 call airline#parts#define_raw('linenr', '%l')
 call airline#parts#define_accent('linenr', 'bold')
@@ -320,111 +240,13 @@ set updatetime=300
 " Library usedSettings
 let g:used_javascript_libs = 'react,ramda'
 
-" ========== nvim-coc settings ============= "
-let g:coc_node_path = $HOME . '/.nvm/versions/node/v14.17.0/bin/node'
-" привет мир
-" list of the extensions required
-let g:coc_global_extensions = [
-            \'coc-pairs',
-            \'coc-json',
-            \'coc-css',
-            \'coc-html',
-            \'coc-tsserver',
-            \'coc-yaml',
-            \'coc-lists',
-            \'coc-python',
-            \'coc-xml',
-            \'coc-cssmodules',
-            \'coc-prettier',
-            \'coc-eslint',
-            \'coc-stylelintplus',
-            \]
-
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-tab> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-nmap <silent> <leader>- <Plug>VinegarUp
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> ga <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-nmap <leader>cr :CocRestart<cr>;
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" Not jums on diagnostics icons
+set signcolumn=yes
 
 " lastplace
  let g:lastplace_ignore_buftype = "quickfix,nofile,help"
 
-" easymotion
-let g:EasyMotion_startofline = 0                        " keep cursor column when JK motion
-let g:EasyMotion_smartcase = 1                          " ignore case
+ nmap <silent> <leader>- <Plug>VinegarUp
 
 if !exists('##TextYankPost')
   map y <Plug>(highlightedyank)
@@ -705,9 +527,9 @@ au FocusLost * silent! wa
 
 command! MakeTs AsyncRun npx tsc --noEmit -p ./
 
-command! Prettier call CocAction('runCommand', 'prettier.formatFile')
+" command! Prettier call CocAction('runCommand', 'prettier.formatFile')
 
-hi SpellBad guifg=NONE cterm=undercurl
+" hi SpellBad guifg=NONE cterm=undercurl
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
 

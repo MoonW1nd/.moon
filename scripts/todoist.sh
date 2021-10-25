@@ -103,7 +103,7 @@ function todoist-add() {
     local TICKET_NAME=$(git symbolic-ref -q HEAD 2>/dev/null | cut -b 12- | perl -lne 'print $1 if /([A-Z]*-[0-9]*)/')
     local SELECTED_PROJECT="$(eval ${selct_projects_command})"
 
-    todoist add -P=$SELECTED_PROJECT "$1"
+    todoist add -P=$SELECTED_PROJECT $(vipe)
 }
 zle -N todoist-add
 
@@ -119,7 +119,7 @@ function todoist-add-task() {
     fi
 
     local SELECTED_PROJECT="$(eval ${selct_projects_command})"
-    todoist add -P=$SELECTED_PROJECT "$NAMESPACE$1" 
+    todoist add -P=$SELECTED_PROJECT $(echo $NAMESPACE$1 | vipe) 
 }
 zle -N todoist-add-task
 bindkey "^xtt" todoist-add-task
