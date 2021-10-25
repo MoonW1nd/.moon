@@ -432,6 +432,21 @@ nmap g* g*zzzv
 nmap g# g#zzzv
 nnoremap J mzJ`z
 
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
+omap <silent> iw <Plug>CamelCaseMotion_iw
+xmap <silent> iw <Plug>CamelCaseMotion_iw
+omap <silent> ib <Plug>CamelCaseMotion_ib
+xmap <silent> ib <Plug>CamelCaseMotion_ib
+omap <silent> ie <Plug>CamelCaseMotion_ie
+xmap <silent> ie <Plug>CamelCaseMotion_ie
+
 " Undo with breakpoints
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
@@ -472,19 +487,11 @@ nmap <leader>/ <Plug>(FerretLack)
 " carbon sh now
 vnoremap <F8> :CarbonNowSh<CR>
 
-" quick navigation
-map <Leader><Leader>l <Plug>(easymotion-lineforward)
-map <Leader><Leader>j <Plug>(easymotion-j)
-map <Leader><Leader>k <Plug>(easymotion-k)
-map <Leader><Leader>h <Plug>(easymotion-linebackward)
-
 " Creating splits with empty buffers in all directions
 nnoremap <Leader>hn :leftabove  vnew<CR>
 nnoremap <Leader>ln :rightbelow vnew<CR>
 nnoremap <Leader>kn :leftabove  new<CR>
 nnoremap <Leader>jn :rightbelow new<CR>
-
-nnoremap <Leader>cd :CocDiagnostics<CR>
 
 " `SPC l s` - save current session
 nnoremap <leader>ls :SSave<CR>

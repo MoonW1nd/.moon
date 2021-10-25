@@ -48,6 +48,7 @@ Plug('wincent/ferret')
 Plug('tpope/vim-repeat')
 Plug('rhysd/clever-f.vim')
 Plug('tpope/vim-unimpaired')
+Plug('bkad/CamelCaseMotion')                           -- Modify movement by w
 Plug('kshenoy/vim-signature')                            -- display marks
 
 -- -- visual
