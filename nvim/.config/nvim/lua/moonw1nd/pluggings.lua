@@ -15,6 +15,7 @@ vim.fn['plug#begin']('~/.config/nvim/plugged')
 Plug('vim-airline/vim-airline')                         -- airline status bar
 Plug('vim-airline/vim-airline-themes')                   -- airline themes
 Plug('ryanoasis/vim-devicons')                          -- pretty icons everywhere
+Plug('kyazdani42/nvim-web-devicons')
 Plug('gregsexton/MatchTag')                              -- highlight matching html tags
 Plug('preservim/nerdtree')                               -- nerdtree
 Plug('tiagofumo/vim-nerdtree-syntax-highlight')          -- nerdtree color file names
@@ -24,7 +25,6 @@ Plug('blueyed/vim-diminactive')                          -- dim inactive splits
 Plug('editorconfig/editorconfig-vim')                    -- consistent coding style
 
 -- ================= Functionalities ================= 
-
 -- Plug('neoclide/coc.nvim', {['branch'] = 'release'})         -- auto completion, Lang servers and stuff
 Plug('skywind3000/asyncrun.vim')                         -- async run commands
 Plug('moonw1nd/vim-rest-console')                        -- REST client
@@ -42,6 +42,11 @@ Plug('nvim-treesitter/playground')
 -- searc
 Plug('junegunn/fzf', { ['dir'] = '~/.fzf', ['do'] = './install --all' })
 Plug('junegunn/fzf.vim')                                -- fuzzy search integration
+Plug('nvim-lua/popup.nvim')
+Plug('nvim-lua/plenary.nvim')
+Plug('ThePrimeagen/refactoring.nvim')
+Plug('nvim-telescope/telescope.nvim')
+Plug('nvim-telescope/telescope-fzy-native.nvim')
 Plug('wincent/ferret')
 
 -- navigation
@@ -76,6 +81,7 @@ Plug('takac/vim-hardtime')                               -- hard mode on vim
 Plug('tomtom/tcomment_vim')                              -- better commenting
 Plug('kristijanhusak/vim-carbon-now-sh')                 -- lit code Screenshots
 Plug('tpope/vim-fugitive')                               -- git support
+Plug('ThePrimeagen/git-worktree.nvim')                   -- git work_tree support
 Plug('farmergreg/vim-lastplace')                         -- open files at the last edited place
 Plug('romainl/vim-cool')                                 -- disable hl until another search is performed
 -- Plug('wellle/tmux-complete.vim')                         -- complete words from a tmux panes

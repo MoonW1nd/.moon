@@ -7,11 +7,9 @@ let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 let g:vim_bootstrap_langs = "c,erlang,go"
 let g:vim_bootstrap_editor = "nvim"                 " Nvim or Vim
 
-luafile ~/.config/nvim/config/pluggings.lua
+lua require('moonw1nd')
 
-" lsp configs
-luafile ~/.config/nvim/config/lsp-config.lua
-luafile ~/.config/nvim/config/treesitter.lua
+source ~/.config/nvim/plugin/telescope.vim
 
 " ==================== general config ======================== "
 if (has("termguicolors"))
@@ -68,7 +66,6 @@ let g:airline_theme='onedark'
 
 
 highlight clear SignColumn                              " use number color for sign column color
-hi EasyMotionMoveHLDefault gui=NONE cterm=NONE term=NONE ctermfg=235 ctermbg=180 guifg=#282C34 guibg=#E5C07B
 
 " colors for git (especially the gutter)
 " fugitive diff highlight
@@ -133,6 +130,7 @@ call SetupCommandAlias("ut","GundoToggle")
 
 " Ferret
 let g:FerretHlsearch=1
+let g:FerretMap=0
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -324,26 +322,26 @@ if executable('rg')
   command! -bang -nargs=* Find call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 endif
 
-nmap <leader>f [fzf-p]
-xmap <leader>f [fzf-p]
+" nmap <leader>f [fzf-p]
+" xmap <leader>f [fzf-p]
 
 " user leader f to search for not ignored file paths
-nnoremap <silent> [fzf-p]p :GFiles<cr>
-nnoremap <silent> [fzf-p]P :GDf<cr>
-nnoremap <silent> [fzf-p]b :Buffers<cr>
-nnoremap <silent> [fzf-p]s :Snippets<cr>
-nnoremap <silent> [fzf-p]w :Windows<cr>
-nnoremap <silent> [fzf-p]h :History<cr>
-nnoremap <silent> [fzf-p]g :Rg<cr>
-nnoremap <silent> [fzf-p]a :Args<cr>
-nnoremap <silent> [fzf-p]f :GFiles?<cr>
-nnoremap <silent> [fzf-p]r :Files ~/.dev/api/<cr>
-
+" nnoremap <silent> [fzf-p]p :GFiles<cr>
+" nnoremap <silent> [fzf-p]P :GDf<cr>
+" nnoremap <silent> [fzf-p]b :Buffers<cr>
+" nnoremap <silent> [fzf-p]s :Snippets<cr>
+" nnoremap <silent> [fzf-p]w :Windows<cr>
+" nnoremap <silent> [fzf-p]h :History<cr>
+" nnoremap <silent> [fzf-p]g :Rg<cr>
+" nnoremap <silent> [fzf-p]a :Args<cr>
+" nnoremap <silent> [fzf-p]f :GFiles?<cr>
+" nnoremap <silent> [fzf-p]r :Files ~/.dev/api/<cr>
+"
 " buffer list with fuzzy search
 nmap <silent> gcb :TCommentBlock<cr>
 
-nnoremap <C-g> :Rga<Space>
-nnoremap <leader><C-g> :GRga<Space>
+" nnoremap <C-g> :Rga<Space>
+" nnoremap <leader><C-g> :GRga<Space>
 inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
 
 " fugitive
@@ -403,7 +401,7 @@ nmap <leader>gt :TestFile<CR>
 map ; <Plug>(clever-f-repeat-forward)
 map , <Plug>(clever-f-repeat-back)
 
-nmap <leader>r :so ~/.config/nvim/init.vim<CR>
+" nmap <leader>r :so ~/.config/nvim/init.vim<CR>
 nmap <leader>q :bd<CR>
 nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <silent> <leader>nf :call NERDTreeToggleAndFind()<CR>
@@ -511,6 +509,8 @@ augroup END
 
 command! Todo Rga @todo\s\[MoonW1nd]:
 
+command! CreateStyleFile e %:p:h/module.styles.css
+nnoremap <leader>mn :e %:p:h/
 " figitive
 call SetupCommandAlias("gs","vertical Git<CR>")
 call SetupCommandAlias("td",'Todo')
@@ -540,6 +540,7 @@ command! MakeTs AsyncRun npx tsc --noEmit -p ./
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
 
+autocmd BufWritePre *{js,jsx,ts,tsx} :EslintFixAll
 autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
