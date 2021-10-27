@@ -18,21 +18,26 @@ require("telescope").setup({
 
         mappings = {
             i = {
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
+                ["<esc>"] = actions.close,
                 ["<C-x>"] = false,
                 ["<C-q>"] = actions.send_to_qflist,
             },
         },
     },
     extensions = {
-        fzy_native = {
-            override_generic_sorter = false,
-            override_file_sorter = true,
-        },
+        fzf = {
+          fuzzy = true,
+          override_generic_sorter = false,
+          override_file_sorter = true,
+          case_mode = "smart_case",
+        }
     },
 })
 
 require("telescope").load_extension("git_worktree")
-require("telescope").load_extension("fzy_native")
+require('telescope').load_extension('fzf')
 
 local M = {}
 M.search_dotfiles = function()

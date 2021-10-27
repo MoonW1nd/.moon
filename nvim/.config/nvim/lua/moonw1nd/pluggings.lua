@@ -35,6 +35,9 @@ Plug('vim-test/vim-test')
 Plug('neovim/nvim-lspconfig')
 Plug('hrsh7th/cmp-nvim-lsp')
 Plug('hrsh7th/cmp-buffer')
+Plug('hrsh7th/cmp-cmdline')
+Plug('onsails/lspkind-nvim') -- icons for auto complete
+Plug('hrsh7th/cmp-path')
 Plug('hrsh7th/nvim-cmp')
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
 Plug('nvim-treesitter/playground')
@@ -46,7 +49,7 @@ Plug('nvim-lua/popup.nvim')
 Plug('nvim-lua/plenary.nvim')
 Plug('ThePrimeagen/refactoring.nvim')
 Plug('nvim-telescope/telescope.nvim')
-Plug('nvim-telescope/telescope-fzy-native.nvim')
+Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
 Plug('wincent/ferret')
 
 -- navigation
@@ -73,6 +76,7 @@ Plug('fatih/vim-go', { ['do'] = ':GoUpdateBinaries' })
 Plug('wellle/targets.vim')                               -- improve text objects API
 Plug('machakann/vim-highlightedyank')                    -- highlight yanked file
 Plug('alvan/vim-closetag')                               -- auto close html tags
+Plug('jiangmiao/auto-pairs')                             -- auto close pairs
 Plug('AndrewRadev/tagalong.vim')                         -- rename tags
 Plug('sjl/gundo.vim')                                    -- undo tree in vim
 Plug('vim-scripts/ReplaceWithRegister')                  -- replace word on copy buffer

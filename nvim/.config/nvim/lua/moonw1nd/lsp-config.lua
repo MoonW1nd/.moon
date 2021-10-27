@@ -1,5 +1,6 @@
 local cmp = require('cmp')
 local nvim_lsp = require('lspconfig')
+local lspkind = require('lspkind')
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -45,12 +46,17 @@ end
         -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
       end,
     },
+    formatting = {
+        format = lspkind.cmp_format({with_text = false, maxwidth = 50})
+    },
     mapping = {
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.close(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+      ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
@@ -62,6 +68,22 @@ end
       { name = 'buffer' },
     })
   })
+
+  --   cmp.setup.cmdline('/', {
+  --   sources = {
+  --     { name = 'buffer' }
+  --   }
+  -- })
+  --
+  -- -- Use cmdline & path source for ':'.
+  -- cmp.setup.cmdline(':', {
+  --   sources = cmp.config.sources({
+  --     { name = 'path' }
+  --   }, {
+  --     { name = 'cmdline' }
+  --   })
+  -- })
+
 
   -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
