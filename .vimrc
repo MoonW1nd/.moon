@@ -9,8 +9,6 @@ let g:vim_bootstrap_editor = "nvim"                 " Nvim or Vim
 
 lua require('moonw1nd')
 
-source ~/.config/nvim/plugin/telescope.vim
-
 " ==================== general config ======================== "
 if (has("termguicolors"))
   set termguicolors
@@ -430,21 +428,6 @@ nmap g* g*zzzv
 nmap g# g#zzzv
 nnoremap J mzJ`z
 
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-map <silent> ge <Plug>CamelCaseMotion_ge
-sunmap w
-sunmap b
-sunmap e
-sunmap ge
-omap <silent> iw <Plug>CamelCaseMotion_iw
-xmap <silent> iw <Plug>CamelCaseMotion_iw
-omap <silent> ib <Plug>CamelCaseMotion_ib
-xmap <silent> ib <Plug>CamelCaseMotion_ib
-omap <silent> ie <Plug>CamelCaseMotion_ie
-xmap <silent> ie <Plug>CamelCaseMotion_ie
-
 " Undo with breakpoints
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
@@ -540,8 +523,12 @@ command! MakeTs AsyncRun npx tsc --noEmit -p ./
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
 
-autocmd BufWritePre *{js,jsx,ts,tsx} :EslintFixAll
+autocmd BufWritePre *.{js,jsx,ts,tsx} :EslintFixAll
+autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
 autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+
+" Plugin settings
+source ~/.config/nvim/plugin/init.vim
