@@ -242,7 +242,9 @@ set signcolumn=yes
 " lastplace
  let g:lastplace_ignore_buftype = "quickfix,nofile,help"
 
- nmap <silent> <leader>- <Plug>VinegarUp
+let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
+
+nmap <silent> <leader>- <Plug>VinegarUp
 
 if !exists('##TextYankPost')
   map y <Plug>(highlightedyank)
