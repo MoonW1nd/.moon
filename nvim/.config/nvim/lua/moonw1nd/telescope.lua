@@ -9,6 +9,10 @@ local actions = require("telescope.actions")
 require("telescope").setup(
     {
         defaults = {
+            layout_strategy = "bottom_pane",
+            layout_config = {
+                bottom_pane = {height = 0.9, prompt_position = "bottom"},
+            },
             file_sorter = sorters.get_fzy_sorter,
             prompt_prefix = " λ ",
             color_devicons = true,
@@ -51,6 +55,10 @@ M.search_dotfiles = function()
             hidden = true,
         }
     )
+end
+
+M.git_status_file = function()
+
 end
 
 M.search_wiki = function()
