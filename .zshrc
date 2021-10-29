@@ -9,6 +9,7 @@ setopt appendhistory     #Append history to the history file (no overwriting)
 setopt sharehistory      #Share history across terminals
 setopt incappendhistory  #Immediately append to the history file, not just when a term is killed
 setopt histverify        #Edit a recalled history line before executing
+unsetopt nomatch # fix error with open urls
 
 # Append, clear, and read history after each command
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
@@ -26,19 +27,6 @@ export GO111MODULE=on
 
 export EDITOR='nvim'
 
-alias cat=ccat
-
-alias ya=~/.yatool/ya
-
-alias tvmknife='ya tool tvmknife'
-
-alias ot=open-current-ticket
-alias ob=open-current-branch
-alias pms="pomodoro start"
-alias pmf="pomodoro finish"
-alias pmts="termdown 25m && osascript -e 'display notification \"Time to break\" with title \"Pomodoro\" subtitle \"Finish\" sound name \"piece-of-cake-611\"'"
-
-alias ctags="`brew --prefix`/bin/ctags"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -154,6 +142,12 @@ alias -g Z='| fzf'
 alias vim=nvim
 alias td=todoist
 alias tdat=todoist-add-task
+alias cat=ccat
+alias ot=open-current-ticket
+alias ob=open-current-branch
+alias pms="pomodoro start"
+alias pmf="pomodoro finish"
+alias pmts="termdown 25m && osascript -e 'display notification \"Time to break\" with title \"Pomodoro\" subtitle \"Finish\" sound name \"piece-of-cake-611\"'"
 
 # plugins
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -229,3 +223,5 @@ export PATH="$PATH:$HOME/go/bin"
 # Set Spaceship ZSH as a prompt
 autoload -U promptinit; promptinit
 prompt spaceship
+
+alias luamake=/Users/moonw1nd/.config/nvim/lua-language-server/3rd/luamake/luamake
