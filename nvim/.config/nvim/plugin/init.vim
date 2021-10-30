@@ -5,5 +5,6 @@ function! Source(relativePath)
   exec 'source ' . fullPath
 endfunction
 
-call Source('telescope.vim')
-call Source('camelCaseMotion.vim')
+call Source('./telescope.vim')
+call Source('./camelCaseMotion.vim')
+call Source('./tComment.vim')
