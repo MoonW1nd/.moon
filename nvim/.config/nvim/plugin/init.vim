@@ -8,3 +8,4 @@ endfunction
 call Source('./telescope.vim')
 call Source('./camelCaseMotion.vim')
 call Source('./tComment.vim')
+call Source('./asyncRun.vim')

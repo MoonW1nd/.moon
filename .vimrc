@@ -259,14 +259,10 @@ let test#strategy = {
   \ 'suite':   'asyncrun',
 \}
 
-let g:test#javascript#jest#executable = 'BABEL_ENV=test npx jest --maxWorkers=50%'
+let g:test#javascript#jest#executable = 'BABEL_ENV=test npx jest --maxWorkers=50% --reporters ~/dotfiles/utils/jestVimReporter/index.js'
 
-" Set error format for quickfix
-" 1. Jest
-" 2. TypeScript
-let &efm=
-    \ '%.%#\ at\ %f:%l:%c,%.%#\ at\ %.%#(%f:%l:%c),' .
-    \ '%E\ %#%f\ %#(%l\\\,%c):\ error\ TS%n:\ %m,%C%m'
+nmap <leader>oq :copen<cr>
+nmap <leader>ol :lopen<cr>
 
 "" FZF
 " general
@@ -345,7 +341,6 @@ endif
 " nnoremap <silent> [fzf-p]r :Files ~/.dev/api/<cr>
 "
 " buffer list with fuzzy search
-nmap <silent> gcb :TCommentBlock<cr>
 
 " nnoremap <C-g> :Rga<Space>
 " nnoremap <leader><C-g> :GRga<Space>
@@ -526,8 +521,6 @@ augroup END
 
 " save on focus lost
 au FocusLost * silent! wa
-
-command! MakeTs AsyncRun npx tsc --noEmit -p ./
 
 " command! Prettier call CocAction('runCommand', 'prettier.formatFile')
 
