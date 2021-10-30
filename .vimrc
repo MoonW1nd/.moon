@@ -260,9 +260,13 @@ let test#strategy = {
 \}
 
 let g:test#javascript#jest#executable = 'BABEL_ENV=test npx jest --maxWorkers=50%'
+
+" Set error format for quickfix
+" 1. Jest
+" 2. TypeScript
 let &efm=
-    \ '%.%#\ at\ %f:%l:%c,%.%#\ at\ %.%#(%f:%l:%c),' . " Jest
-    \ '%E\ %#%f\ %#(%l\\\,%c):\ error\ TS%n:\ %m,%C%m' " TypeScript
+    \ '%.%#\ at\ %f:%l:%c,%.%#\ at\ %.%#(%f:%l:%c),' .
+    \ '%E\ %#%f\ %#(%l\\\,%c):\ error\ TS%n:\ %m,%C%m'
 
 "" FZF
 " general
