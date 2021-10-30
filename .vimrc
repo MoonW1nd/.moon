@@ -366,6 +366,9 @@ nnoremap <silent> [git-p]d :Gvdiff<cr>
 nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
 
+" fix open urls
+nmap <silent> gx :!open <cWORD><cr>
+
 " arslist
 nmap <leader>a [arg-p]
 xmap <leader>a [arg-p]
