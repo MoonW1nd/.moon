@@ -254,12 +254,15 @@ let g:highlightedyank_highlight_duration = 200
 
 " vim-test
 let test#strategy = {
-  \ 'nearest': 'neovim',
-  \ 'file':    'basic',
-  \ 'suite':   'basic',
+  \ 'nearest': 'asyncrun',
+  \ 'file':    'asyncrun',
+  \ 'suite':   'asyncrun',
 \}
 
 let g:test#javascript#jest#executable = 'BABEL_ENV=test npx jest --maxWorkers=50%'
+let &efm=
+    \ '%.%#\ at\ %f:%l:%c,%.%#\ at\ %.%#(%f:%l:%c),' . " Jest
+    \ '%E\ %#%f\ %#(%l\\\,%c):\ error\ TS%n:\ %m,%C%m' " TypeScript
 
 "" FZF
 " general
