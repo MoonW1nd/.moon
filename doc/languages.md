@@ -1,6 +1,11 @@
-<p style="font-size: 40px; font-weight: bold;">Programming languages</p>
+# Programming language
 
-## python && python3
+Programming languages installation & setup guide.
+
+- [Python](#python)
+- [Lua](#lua)
+
+## Python
 
 We need neovim python providers
 
@@ -10,7 +15,7 @@ pip3 install pynvim
 pip install pynvim
 ```
 
-## lua
+## Lua
 
 [Setup Neovim for Lua Development](https://www.chrisatmachine.com/Neovim/28-neovim-lua-development/)
 
@@ -24,7 +29,7 @@ sudo apt install ninja-build
 brew install ninja
 ```
 
-**Clone Lua Language Server Repo**
+**Clone [Lua Language Server](https://github.com/sumneko/lua-language-server) Repo**
 
 ```shell
 cd ~/.config/nvim
@@ -65,7 +70,7 @@ luarocks install --server=https://luarocks.org/dev luaformatter
 luarocks install luacheck
 ```
 
-**Install efm-language-server**
+**Install [efm-language-server](https://github.com/mattn/efm-langserver)**
 
 ```shell
 # Linux

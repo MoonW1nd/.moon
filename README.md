@@ -5,3 +5,4 @@
 - [Terminal](./doc/terminal.md)
 - [Command line utils](./doc/cl.md)
 - [Programming languages](./doc/languages.md)
+- [Vim tricks](./doc/vimTricks.md)

@@ -1,4 +1,4 @@
-## CL
+# Command line
 
 ### ripgrep
 
