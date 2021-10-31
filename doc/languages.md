@@ -1,6 +1,6 @@
-## Languages
+<p style="font-size: 40px; font-weight: bold;">Programming languages</p>
 
-### python && python3
+## python && python3
 
 We need neovim python providers
 
@@ -9,3 +9,69 @@ pip3 install pynvim
 
 pip install pynvim
 ```
+
+## lua
+
+[Setup Neovim for Lua Development](https://www.chrisatmachine.com/Neovim/28-neovim-lua-development/)
+
+**Install ninja**
+
+```shell
+# Linux
+sudo apt install ninja-build
+
+# MacOS
+brew install ninja
+```
+
+**Clone Lua Language Server Repo**
+
+```shell
+cd ~/.config/nvim
+git clone https://github.com/sumneko/lua-language-server
+cd lua-language-server
+git submodule update --init --recursive
+```
+
+**Build language Lua Server**
+
+```shell
+cd ./3rd/luamake
+
+# for MacOs
+ninja -f ninja/macos.ninja
+
+# for Linux
+ninja -f ninja/linux.ninja
+
+cd ../..
+./3rd/luamake/luamake rebuild
+```
+
+**Install package manager ([Luarocks](https://github.com/luarocks/luarocks))**
+
+```shell
+brew install luarocks
+```
+
+**Install Lua formatter ([luaformatter](https://github.com/Koihik/LuaFormatter))**
+
+```shell
+luarocks install --server=https://luarocks.org/dev luaformatter
+```
+
+**Install Lua linting ([luacheck](https://github.com/mpeterv/luacheck))**
+```shell
+luarocks install luacheck
+```
+
+**Install efm-language-server**
+
+```shell
+# Linux
+go get github.com/mattn/efm-langserver
+
+# MacOS
+brew install efm-langserver
+```
+
