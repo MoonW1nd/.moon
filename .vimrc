@@ -43,6 +43,8 @@ set textwidth=0 " disable auto brset cursorlineeak long lines
 set expandtab " Преобразование Tab в пробелы
 set path=.,**
 set autoread
+" for work in insert mod C-w, C-u, C-h, C-k
+set backspace=indent,eol,start
 " set spell spelllang=ru_ru,en_us
 
 " for yats 
