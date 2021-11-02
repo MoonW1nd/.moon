@@ -59,7 +59,16 @@ M.search_dotfiles = function()
     )
 end
 
-M.git_status_file = function()
+M.rg = function()
+    require("telescope.builtin").grep_string {
+        path_display = {"shorten"},
+        search = vim.fn.input("Rg  "),
+        only_sort_text = true,
+        full = true,
+        word_match = "-w",
+    }
+end
+
 M.project_files = function()
     local opts = {} -- define here if you want to define something
     local ok = pcall(require"telescope.builtin".git_files, opts)
