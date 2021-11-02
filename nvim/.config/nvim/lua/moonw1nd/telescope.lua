@@ -5,6 +5,7 @@ local previewers = require("telescope.previewers")
 local action_state = require("telescope.actions.state")
 local conf = require("telescope.config").values
 local actions = require("telescope.actions")
+local telescope_gh_actions = require("telescope._extensions.gh_actions")
 
 require("telescope").setup(
     {
@@ -46,6 +47,7 @@ require("telescope").setup(
 
 require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("fzf")
+require("telescope").load_extension("gh")
 
 local M = {}
 M.search_dotfiles = function()
@@ -78,7 +80,41 @@ M.project_files = function()
     end
 end
 
+M.gh_web_view = function(type)
+    return function(prompt_bufnr)
+        local selection = action_state.get_selected_entry(prompt_bufnr)
+        local tmp_table = vim.split(selection.value, "\t");
 
+        if vim.tbl_isempty(tmp_table) then
+            return
+        end
+
+        vim.api.nvim_command(
+            "silent !gh " .. type .. " view --web " .. tmp_table[1]
+        )
+        actions.close(prompt_bufnr)
+    end
+end
+
+local gh_pr_attach_mappings = function(_, map)
+    map("i", "<c-e>", telescope_gh_actions.gh_pr_v_toggle)
+    -- use mapping <c-m> crash mappings
+    map("i", "<c-c>", telescope_gh_actions.gh_pr_merge)
+    map("i", "<c-g>", telescope_gh_actions.gh_pr_checkout)
+    actions.select_default:replace(M.gh_web_view("pr"))
+    return true
+end
+
+M.pull_request = function()
+    require("telescope").extensions.gh.pull_request(
+        {attach_mappings = gh_pr_attach_mappings}
+    )
+end
+
+M.my_pull_request = function()
+    require("telescope").extensions.gh.pull_request(
+        {author = "moonw1nd", attach_mappings = gh_pr_attach_mappings}
+    )
 end
 
 M.search_wiki = function()

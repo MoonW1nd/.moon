@@ -10,5 +10,7 @@ nnoremap <leader>fh :lua require('telescope.builtin').help_tags()<CR>
 
 nnoremap <Leader>ra :lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_dropdown({}))<CR>
 
+nnoremap ghP :lua require('moonw1nd.telescope').pull_request()<CR>
+nnoremap ghp :lua require('moonw1nd.telescope').my_pull_request()<CR>
 nnoremap <leader>fd :lua require('moonw1nd.telescope').search_wiki()<CR>
 nnoremap <leader>vrc :lua require('moonw1nd.telescope').search_dotfiles()<CR>
