@@ -9,6 +9,7 @@ local actions = require("telescope.actions")
 require("telescope").setup(
     {
         defaults = {
+            preview = {timeout = 500, msg_bg_fillchar = ""},
             layout_strategy = "bottom_pane",
             layout_config = {
                 bottom_pane = {height = 0.9, prompt_position = "bottom"},
@@ -27,7 +28,8 @@ require("telescope").setup(
                     ["<C-k>"] = actions.move_selection_previous,
                     ["<esc>"] = actions.close,
                     ["<C-x>"] = false,
-                    ["<C-q>"] = actions.send_to_qflist,
+                    ["<C-q>"] = actions.send_selected_to_qflist +
+                        actions.open_qflist,
                 },
             },
         },
@@ -50,7 +52,7 @@ M.search_dotfiles = function()
     require("telescope.builtin").find_files(
         {
             prompt_title = "< Dotfiles >",
-            file_ignore_patterns = {".git"},
+            file_ignore_patterns = {".git", "node_modules"},
             cwd = vim.env.DOTFILES,
             hidden = true,
         }
