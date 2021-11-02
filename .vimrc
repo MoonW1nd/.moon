@@ -496,6 +496,11 @@ command! AffRSync AsyncRun -mode=3 /Users/moonw1nd/Documents/Develop/work/rsync.
 augroup Affiliate
     autocmd BufWritePost /Users/moonw1nd/Documents/Develop/work/affiliate/* :AffRSync
 augroup END
+command! OpenCurrentTicket !~/dotfiles/scripts/openCurrentTicket.sh
+
+command! OpenCurrentTicket silent !~/dotfiles/scripts/openCurrentTicket.sh
+command! OpenCurrentBranch silent !~/dotfiles/scripts/openCurrentBranch.sh
+
 
 command! Todo Rga @todo\s\[MoonW1nd]:
 
@@ -504,6 +509,8 @@ nnoremap <leader>mn :e %:p:h/
 " figitive
 call SetupCommandAlias("gs","vertical Git<CR>")
 call SetupCommandAlias("td",'Todo')
+call SetupCommandAlias("ot",'OpenCurrentTicket')
+call SetupCommandAlias("ob",'OpenCurrentBranch')
 call SetupCommandAlias("gcn","silent Git commit -n<CR>")
 call SetupCommandAlias("gpn","Git push --no-verify<CR>")
 call SetupCommandAlias("gmt","G mergetool")

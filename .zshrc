@@ -63,8 +63,8 @@ alias vim=nvim
 alias td=todoist
 alias tdat=todoist-add-task
 alias cat=ccat
-alias ot=open-current-ticket
-alias ob=open-current-branch
+alias ot=$HOME/dotfiles/scripts/openCurrentTicket.sh
+alias ob=$HOME/dotfiles/scripts/openCurrentBranch.sh
 alias pms="pomodoro start"
 alias pmf="pomodoro finish"
 alias pmts="termdown 25m && osascript -e 'display notification \"Time to break\" with title \"Pomodoro\" subtitle \"Finish\" sound name \"piece-of-cake-611\"'"
@@ -75,8 +75,6 @@ source $HOME/dotfiles/scripts/todoist.sh
 source $HOME/dotfiles/scripts/ff.sh
 source $HOME/dotfiles/scripts/fl.sh
 source $HOME/dotfiles/scripts/pomodoroWork.sh
-source $HOME/dotfiles/scripts/openCurrentTicket.sh
-source $HOME/dotfiles/scripts/openCurrentBranch.sh
 
 # command not found plugin
 if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi
