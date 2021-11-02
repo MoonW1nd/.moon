@@ -9,6 +9,8 @@ nnoremap <leader>fw :lua require('telescope.builtin').grep_string { search = vim
 nnoremap <leader>fb :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>vh :lua require('telescope.builtin').help_tags()<CR>
 nnoremap <leader>fg :lua require('telescope.builtin').git_status()<CR>
+nnoremap <Leader>ra :lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_dropdown({}))<CR>
+
 nnoremap <leader>fd :lua require('moonw1nd.telescope').search_wiki()<CR>
 nnoremap <leader>vrc :lua require('moonw1nd.telescope').search_dotfiles()<CR>
 " nnoremap <leader>fg :lua require('moonw1nd.telescope').git_branches()<CR>

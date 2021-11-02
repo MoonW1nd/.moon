@@ -1,5 +1,5 @@
 local cmp = require("cmp")
-local nvim_lsp = require("lspconfig")
+local lspConfig = require("lspconfig")
 local lspkind = require("lspkind")
 
 -- Use an on_attach function to only map the following keys
@@ -40,9 +40,6 @@ local on_attach = function(_, bufnr)
         "n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts
     )
     buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-    buf_set_keymap(
-        "n", "<space>ra", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts
-    )
     buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     buf_set_keymap(
         "n", "<space>e",
@@ -111,7 +108,7 @@ local settings = {
 for _, lsp in ipairs(servers) do
     local lspSettings = settings[lsp] and settings[lsp] or nil
 
-    nvim_lsp[lsp].setup {
+    lspConfig[lsp].setup {
         capabilities = capabilities,
         on_attach = on_attach,
         flags = {debounce_text_changes = 150},
@@ -139,7 +136,7 @@ else
     print("Unsupported system for sumneko")
 end
 
-require"lspconfig".sumneko_lua.setup {
+lspConfig.sumneko_lua.setup {
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
     capabilities = capabilities,
     oflags = {debounce_text_changes = 150},
@@ -167,7 +164,7 @@ require"lspconfig".sumneko_lua.setup {
     },
 }
 
-require"lspconfig".efm.setup {
+lspConfig.efm.setup {
     init_options = {documentFormatting = true},
     filetypes = {"lua"},
     settings = {
