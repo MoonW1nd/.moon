@@ -496,7 +496,6 @@ command! AffRSync AsyncRun -mode=3 /Users/moonw1nd/Documents/Develop/work/rsync.
 augroup Affiliate
     autocmd BufWritePost /Users/moonw1nd/Documents/Develop/work/affiliate/* :AffRSync
 augroup END
-command! OpenCurrentTicket !~/dotfiles/scripts/openCurrentTicket.sh
 
 command! OpenCurrentTicket silent !~/dotfiles/scripts/openCurrentTicket.sh
 command! OpenCurrentBranch silent !~/dotfiles/scripts/openCurrentBranch.sh
