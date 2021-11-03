@@ -113,7 +113,21 @@ end
 
 M.my_pull_request = function()
     require("telescope").extensions.gh.pull_request(
-        {author = "moonw1nd", attach_mappings = gh_pr_attach_mappings}
+        {author = "@me", attach_mappings = gh_pr_attach_mappings}
+    )
+end
+
+M.reviews_pull_request = function()
+    require("telescope").extensions.gh.pull_request(
+        {
+            search = "review-requested:@me",
+            attach_mappings = function(_, map)
+                map("i", "<c-e>", telescope_gh_actions.gh_pr_v_toggle)
+                map("i", "<c-g>", telescope_gh_actions.gh_pr_checkout)
+                actions.select_default:replace(M.gh_web_view("pr"))
+                return true
+            end,
+        }
     )
 end
 
