@@ -136,6 +136,12 @@ else
     print("Unsupported system for sumneko")
 end
 
+-- this is the ONLY correct way to setup your path
+local runtime_path = vim.split(package.path, ";")
+
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
 lspConfig.sumneko_lua.setup {
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
     capabilities = capabilities,
@@ -147,7 +153,7 @@ lspConfig.sumneko_lua.setup {
                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                 version = "LuaJIT",
                 -- Setup your lua path
-                path = vim.split(package.path, ";"),
+                path = runtime_path,
             },
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
@@ -156,10 +162,15 @@ lspConfig.sumneko_lua.setup {
             workspace = {
                 -- Make the server aware of Neovim runtime files
                 library = {
+                    [vim.fn.expand("$VIMRUNTIME")] = true,
                     [vim.fn.expand("$VIMRUNTIME/lua")] = true,
                     [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                    -- path to nvim plugins
+                    [vim.fn.expand("$HOME/.config/nvim/plugged/")] = true,
                 },
             },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {enable = false},
         },
     },
 }
