@@ -60,8 +60,10 @@ Plug("junegunn/fzf.vim") -- fuzzy search intergration
 Plug("nvim-lua/popup.nvim")
 Plug("nvim-lua/plenary.nvim")
 Plug("ThePrimeagen/refactoring.nvim")
-Plug("nvim-telescope/telescope-github.nvim")
 Plug("ThePrimeagen/harpoon")
+-- Plug("nvim-telescope/telescope-github.nvim")
+-- Preplace after marging
+Plug("MoonW1nd/telescope-github.nvim")
 Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-telescope/telescope-fzf-native.nvim", {["do"] = "make"})
 Plug("wincent/ferret")

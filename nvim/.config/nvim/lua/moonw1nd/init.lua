@@ -1,4 +1,4 @@
-require("moonw1nd.pluggings");
+require("moonw1nd.plugings");
 require("moonw1nd.lsp-config");
 require("moonw1nd.treesitter");
 require("moonw1nd.harpoon")
