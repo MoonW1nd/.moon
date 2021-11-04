@@ -16,6 +16,7 @@ require("telescope").setup(
                 bottom_pane = {height = 0.9, prompt_position = "bottom"},
             },
             file_sorter = sorters.get_fzy_sorter,
+            file_ignore_patterns = {".git", "node_modules"},
             prompt_prefix = " λ ",
             color_devicons = true,
 
@@ -52,22 +53,26 @@ require("telescope").load_extension("gh")
 local M = {}
 M.search_dotfiles = function()
     require("telescope.builtin").find_files(
-        {
-            prompt_title = "< Dotfiles >",
-            file_ignore_patterns = {".git", "node_modules"},
-            cwd = vim.env.DOTFILES,
-            hidden = true,
-        }
+        {prompt_title = "< Dotfiles >", cwd = vim.env.DOTFILES, hidden = true}
     )
 end
 
 M.rg = function()
     require("telescope.builtin").grep_string {
-        path_display = {"shorten"},
+        path_display = {"truncate"},
         search = vim.fn.input("Rg  "),
         only_sort_text = true,
         full = true,
-        word_match = "-w",
+        vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--hidden",
+        },
     }
 end
 
