@@ -1,6 +1,15 @@
-local cmp = require("cmp")
+require("moonw1nd.cmp")
+
 local lspConfig = require("lspconfig")
-local lspkind = require("lspkind")
+
+require"lsp_signature".setup(
+    {
+        handler_opts = {border = "none"},
+        verbose = false,
+        bind = true,
+        floating_window = false,
+    }
+)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -18,8 +27,6 @@ local on_attach = function(_, bufnr)
 
     -- Mappings.
     local opts = {noremap = true, silent = true}
-
-    vim.opt.completeopt = "menu,menuone,noselect"
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -55,38 +62,7 @@ local on_attach = function(_, bufnr)
         "n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts
     )
     -- buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
 end
-
-cmp.setup(
-    {
-        snippet = {
-            expand = function(args)
-                vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-            end,
-        },
-        formatting = {
-            format = lspkind.cmp_format({with_text = false, maxwidth = 50}),
-        },
-        mapping = {
-            ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-            ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            ["<C-Space>"] = cmp.mapping.complete(),
-            ["<C-e>"] = cmp.mapping.close(),
-            ["<CR>"] = cmp.mapping.confirm({select = true}),
-            ["<C-j>"] = cmp.mapping.select_next_item(
-                {behavior = cmp.SelectBehavior.Select}
-            ),
-            ["<C-k>"] = cmp.mapping.select_prev_item(
-                {behavior = cmp.SelectBehavior.Select}
-            ),
-        },
-        sources = cmp.config.sources(
-            {{name = "nvim_lsp"}, {name = "ultisnips"}},
-            {{name = "buffer"}, {name = "path"}, {name = "cmdline"}}
-        ),
-    }
-)
 
 -- Setup lspconfig.
 local capabilities = require("cmp_nvim_lsp").update_capabilities(

@@ -34,19 +34,29 @@ Plug("quangnguyen30192/cmp-nvim-ultisnips")
 Plug("vim-test/vim-test")
 
 -- Native LSP Support
-Plug("neovim/nvim-lspconfig")
-Plug("hrsh7th/cmp-nvim-lsp")
-Plug("hrsh7th/cmp-buffer")
-Plug("hrsh7th/cmp-cmdline")
 Plug("onsails/lspkind-nvim") -- icons for auto complete
-Plug("hrsh7th/cmp-path")
+Plug("neovim/nvim-lspconfig")
+Plug("ray-x/lsp_signature.nvim")
+Plug("hrsh7th/cmp-nvim-lsp")
+Plug("hrsh7th/cmp-nvim-lua") -- nvim-cmp source for neovim Lua API.
+Plug("hrsh7th/cmp-buffer") -- nvim-cmp source buffers
+Plug("hrsh7th/cmp-cmdline") -- completion for command line
+Plug("hrsh7th/cmp-path") -- patho completion
+Plug("hrsh7th/cmp-calc") -- math operations completion
+Plug("hrsh7th/cmp-emoji") -- emoji completion
+Plug("ray-x/cmp-treesitter")
 Plug("hrsh7th/nvim-cmp")
+
+-- Treesitter
 Plug("nvim-treesitter/nvim-treesitter", {["do"] = ":TSUpdate"})
 Plug("nvim-treesitter/playground")
 
--- searc
+-- Search
+-- @deprecated
 Plug("junegunn/fzf", {["dir"] = "~/.fzf", ["do"] = "./install --all"})
-Plug("junegunn/fzf.vim") -- fuzzy search integration
+-- @deprecated
+Plug("junegunn/fzf.vim") -- fuzzy search intergration
+
 Plug("nvim-lua/popup.nvim")
 Plug("nvim-lua/plenary.nvim")
 Plug("ThePrimeagen/refactoring.nvim")
