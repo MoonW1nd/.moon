@@ -36,6 +36,7 @@ Plug("vim-test/vim-test")
 -- Native LSP Support
 Plug("onsails/lspkind-nvim") -- icons for auto complete
 Plug("neovim/nvim-lspconfig")
+Plug("jose-elias-alvarez/nvim-lsp-ts-utils")
 Plug("ray-x/lsp_signature.nvim")
 Plug("hrsh7th/cmp-nvim-lsp")
 Plug("hrsh7th/cmp-nvim-lua") -- nvim-cmp source for neovim Lua API.

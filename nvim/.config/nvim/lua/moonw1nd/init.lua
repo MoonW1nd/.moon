@@ -1,5 +1,6 @@
 require("moonw1nd.plugings");
-require("moonw1nd.lsp-config");
+require("moonw1nd.lsp_signature");
+require("moonw1nd.lsp");
 require("moonw1nd.treesitter");
 require("moonw1nd.harpoon")
 require("moonw1nd.telescope");
