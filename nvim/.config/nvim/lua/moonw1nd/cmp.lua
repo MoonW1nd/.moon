@@ -28,8 +28,6 @@ cmp.setup(
                     zsh = "",
                     ultisnips = "",
                     spell = "暈",
-                    -- luasnip = "[Snp]",
-                    -- path = "[Pth]",
                     calc = "",
                     emoji = "ﮚ",
                 })[entry.source.name]
@@ -37,36 +35,29 @@ cmp.setup(
                 return vim_item
             end,
         },
-        experimental = {ghost_text = true},
         documentation = {
             border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"},
         },
         mapping = {
-            ["<C-d>"] = cmp.mapping.scroll_docs(-4),
             ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            ["<C-x><C-o>"] = cmp.mapping.complete(),
-            ["<C-e>"] = cmp.mapping.abort(),
+            ["<C-x><C-o>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
+            ["<C-e>"] = cmp.mapping(cmp.mapping.abort(), {"i", "c"}),
             ["<CR>"] = cmp.mapping.confirm({select = true}),
-            ["<Tab>"] = {
-                i = cmp.mapping.confirm({select = true}),
-                c = cmp.mapping.confirm({select = true}),
-            },
-            ["<C-j>"] = {
-                i = cmp.mapping.select_next_item(
+            ["<C-l>"] = cmp.mapping(
+                cmp.mapping.confirm(
+                    {select = false, behavior = cmp.ConfirmBehavior.Replace}
+                ), {"i", "c"}
+            ),
+            ["<C-j>"] = cmp.mapping(
+                cmp.mapping.select_next_item(
                     {behavior = cmp.SelectBehavior.Select}
-                ),
-                c = cmp.mapping.select_next_item(
+                ), {"i", "c"}
+            ),
+            ["<C-k>"] = cmp.mapping(
+                cmp.mapping.select_prev_item(
                     {behavior = cmp.SelectBehavior.Select}
-                ),
-            },
-            ["<C-k>"] = {
-                i = cmp.mapping.select_prev_item(
-                    {behavior = cmp.SelectBehavior.Select}
-                ),
-                c = cmp.mapping.select_prev_item(
-                    {behavior = cmp.SelectBehavior.Select}
-                ),
-            },
+                ), {"i", "c"}
+            ),
         },
         sources = cmp.config.sources(
             {
