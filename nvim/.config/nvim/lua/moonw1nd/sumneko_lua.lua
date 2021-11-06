@@ -1,6 +1,7 @@
-local nvim_lsp = require("lspconfig");
-local lsp_settings = require("moonw1nd.lsp.settings");
+local lspConfig = require("lspconfig")
+local lspSetting = require("moonw1nd.lsp.settings");
 
+-- Config for Lua
 local userName = vim.fn.expand("$USER")
 
 local sumneko_root_path = ""
@@ -26,11 +27,11 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-nvim_lsp.sumneko_lua.setup {
+lspConfig.sumneko_lua.setup {
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-    capabilities = lsp_settings.capabilities,
-    flags = {debounce_text_changes = 150},
-    on_attach = lsp_settings.on_attach,
+    capabilities = lspSetting.capabilities,
+    oflags = {debounce_text_changes = 150},
+    on_attach = lspSetting.set_keymap,
     settings = {
         Lua = {
             runtime = {
@@ -58,3 +59,4 @@ nvim_lsp.sumneko_lua.setup {
         },
     },
 }
+
