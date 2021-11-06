@@ -245,6 +245,7 @@ set signcolumn=yes
  let g:lastplace_ignore_buftype = "quickfix,nofile,help"
 
 let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
+let g:netrw_localrmdir='rm -r' " remove derictory from netrw
 
 nmap <silent> <leader>- <Plug>VinegarUp
 
@@ -260,6 +261,10 @@ let test#strategy = {
   \ 'file':    'asyncrun',
   \ 'suite':   'asyncrun',
 \}
+
+if !exists('g:test#javascript#jest#file_pattern')
+  let g:test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
+endif
 
 let g:test#javascript#jest#executable = 'BABEL_ENV=test npx jest --maxWorkers=50% --reporters ~/dotfiles/utils/jestVimReporter/index.js'
 
@@ -346,7 +351,9 @@ endif
 
 " nnoremap <C-g> :Rga<Space>
 " nnoremap <leader><C-g> :GRga<Space>
-inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
+
+inoremap <expr> <c-x><c-p> fzf#vim#complete#path('fd')
+inoremap <expr> <c-x><c-f> expand("%:t:r")
 
 " fugitive
 nmap <leader>g [git-p]
@@ -381,7 +388,7 @@ nnoremap <silent> [arg-p]f :Args<cr>
 
 " Markdown
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType markdown set spell
+" autocmd FileType markdown set spell
 autocmd FileType markdown map <silent> <leader>m :call TerminalPreviewMarkdown()<CR>
 
 " auto html tags closing, enable for markdown files as well
@@ -501,17 +508,27 @@ augroup END
 
 command! OpenCurrentTicket silent !~/dotfiles/scripts/openCurrentTicket.sh
 command! OpenCurrentBranch silent !~/dotfiles/scripts/openCurrentBranch.sh
+command! GhOpenCurrentBranch silent !gh pr view --web
 
+" nnoremap <leader>w :w<CR>:AffRSync<CR>
 
 command! Todo Rga @todo\s\[MoonW1nd]:
 
 command! CreateStyleFile e %:p:h/module.styles.css
+
+" Disable unneeded Ex mode bind that's easy to mistakenly hit
+nnoremap Q <NOP>
+
 nnoremap <leader>mn :e %:p:h/
+nmap <silent> <leader>ps :rs<CR>
+
 " figitive
 call SetupCommandAlias("gs","vertical Git<CR>")
 call SetupCommandAlias("td",'Todo')
+call SetupCommandAlias("rs",'AffRSync')
 call SetupCommandAlias("ot",'OpenCurrentTicket')
 call SetupCommandAlias("ob",'OpenCurrentBranch')
+call SetupCommandAlias("gob",'GhOpenCurrentBranch')
 call SetupCommandAlias("gcn","silent Git commit -n<CR>")
 call SetupCommandAlias("gpn","Git push --no-verify<CR>")
 call SetupCommandAlias("gmt","G mergetool")
@@ -536,7 +553,7 @@ au FocusLost * silent! wa
 
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
 
-autocmd BufWritePre *.{js,jsx,ts,tsx} :EslintFixAll
+autocmd BufWritePre *.{js,jsx,ts,tsx,cjs,mjs} :silent EslintFixAll
 autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
 autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart

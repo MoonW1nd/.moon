@@ -1,4 +1,4 @@
-require("moonw1nd.plugings");
+require("moonw1nd.plugins");
 require("moonw1nd.cmp");
 require("moonw1nd.lsp")
 require("moonw1nd.lsp_signature")

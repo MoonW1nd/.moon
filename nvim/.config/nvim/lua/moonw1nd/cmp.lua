@@ -44,9 +44,7 @@ cmp.setup(
             ["<C-e>"] = cmp.mapping(cmp.mapping.abort(), {"i", "c"}),
             ["<CR>"] = cmp.mapping.confirm({select = true}),
             ["<C-l>"] = cmp.mapping(
-                cmp.mapping.confirm(
-                    {select = false, behavior = cmp.ConfirmBehavior.Replace}
-                ), {"i", "c"}
+                cmp.mapping.confirm({select = false}), {"i", "c"}
             ),
             ["<C-j>"] = cmp.mapping(
                 cmp.mapping.select_next_item(
