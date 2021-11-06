@@ -10,6 +10,10 @@ snippet todo "do this later"
  */
 endsnippet
 
+snippet cld "console.log with desc"
+console.log('$1', ${1:logme});
+endsnippet
+
 snippet cl "console.log"
 console.log('$1', ${1:logme});
 endsnippet
@@ -38,10 +42,6 @@ snippet ed "export default"
 export default ${0:exported-entity};
 endsnippet
 
-snippet  "^import" "import statement" rbA
-import ${2:thing} from '${1:package}';
-endsnippet
-
 snippet ir "import React"
 import React from 'react';
 endsnippet
@@ -50,8 +50,23 @@ snippet is "import styles"
 import styles from './styles.module.css';
 endsnippet
 
+# Expand console.log
+snippet "([^\s]\w+)\.log" "console.log(postfix)" r
+console.log(`!p snip.rv = match.group(1)`)$0
+endsnippet
+
+snippet rget "create ramda geter"
+const get`!p snip.rv=t[1].capitalize()` = prop('$1');
+endsnippet
+
 snippet afn "create function"
-const ${1:name} = (${2:args}) => {$0
+const ${1:name} = (${2:args}) => {
+	${VISUAL}$0
 }
 endsnippet
 
+snippet if "if statement"
+if (${1: condition}) {
+	${VISUAL}$0
+}
+endsnippet
