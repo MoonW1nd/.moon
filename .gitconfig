@@ -1,0 +1,96 @@
+[alias]
+    # log commits
+    hist = log --color --pretty=format:\"%C(yellow)%h%C(reset) %s%C(bold red)%d%C(reset) %C(green)%ad%C(reset) %C(blue)[%an]%C(reset)\" --relative-date --decorate
+
+    # tree commits log
+    tree = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+    # my commit log
+    mlog = log --pretty=format:"%C(#e5c07b)%D%n%Creset%x09%C(#e06c75)%h%Creset\\ %B\\%x09%C(#98c379)%cd%Creset\\ %C(#7f848e)%gs%Creset" --date=short --author='Alexander Ivankov' -g
+
+    # get branch name
+    name = !git symbolic-ref -q HEAD | cut -b 12-
+
+    # get ticket name
+    tname = "!f() { git name | perl -lne 'print $1 if /([A-Z]*-[0-9]*)/'; }; f"
+
+    # commit with ticket name
+    tc = "!f() { git commit -m \"$(git tname): $@\"; }; f"
+
+    # stashing commit
+    stc = "!f() { git tc \"THIS IS STASH COMMIT - DON'T PUSH\" -n; }; f"
+
+    # stashing commit with all files
+    stca = "!f() { git add . && git stc; }; f"
+
+    # base commit
+    base = "!f() { git show --summary `git merge-base $(git name) master`; }; f"
+
+    # delete branches
+    fdb = !git branch | fzf-tmux -m --prompt='Delete branch λ ' | xargs git branch -D
+
+    # find branches
+    fbranch = !git branch | sort -r | grep -v release
+
+    # rebase to branch
+    fpr = !git pull -r origin $(git fbranch | fzf-tmux --prompt='Rebase branch λ ')
+
+    # checkout to branch
+    fco = "!f() { git checkout $(git fbranch | fzf-tmux --prompt='Checkout branch λ '); echo \"$(git tname): \" > ~/.gitmessage; }; f"
+
+    # previous branch
+    pb = !git checkout -
+
+    uc = reset --soft HEAD^
+
+    # clean repositori without needed files
+    cleanSafe = clean -xdff -e jsconfig.json -e .vscode -e ./dev
+
+    # first push
+    firstPush = !$(git push 2>&1 | sed -n 4p)
+
+    # force push current branch to origin
+    fpush = !git push origin $(git name) -f
+
+    feature = !git hide $@-feature && git fetch && git checkout -b feature/$@ && echo 'Creating new feature branch 'feature/$@ && : && git spop $@-feature 2>/dev/null
+
+    #Stashing
+    sshow = "!f() { git stash show stash^{/$@} -p; }; f" # Like sapply but shows it only
+    sshowid = "!f() { git stash show stash@{$@} -p; }; f"
+
+    sapply = "!f() { git stash apply stash^{/$@}; }; f" # Find stash with name like text
+    sapplyid = "!f() { git stash apply stash@{$@}; }; f" # Find stash with name like text
+
+    spop = "!f() { git stash pop stash@{$(git stashid $@)}; }; f" # Like sapply but pops it off
+    spopid = "!f() { git stash pop stash@{$@}; }; f" # Like sapply but pops it off
+
+    ssave = stash save # saves with name
+    stashid = "!f() { git stash list | grep $@ | head -n 4 | sed -n 's/stash@{\\(.*\\)}.*/\\1/p'; }; f" # only accepts single word, no quotations
+    hide = stash save --include-untracked # hides all files, including untracked files (faster than using --all)
+    btree = log --all --graph --decorate --oneline --simplify-by-decoration
+
+[mergetool "intellij"]
+    cmd = /Applications/WebStorm.app/Contents/MacOS/webstorm merge \
+    $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") \
+    $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") \
+    $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") \
+    $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED") \
+    && read -n 1 -s
+
+[merge]
+    tool = intellij
+
+[core]
+    pager = delta
+
+[commit]
+  template = ~/.gitmessage
+
+[delta]
+    plus-color = "#012800"
+    minus-color = "#340001"
+    syntax-theme = Monokai Extended
+    line-numbers = true
+
+[interactive]
+    diffFilter = delta --color-only
