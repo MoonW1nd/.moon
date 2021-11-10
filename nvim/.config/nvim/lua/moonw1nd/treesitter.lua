@@ -49,6 +49,14 @@ require"nvim-treesitter.configs".setup {
             node_decremental = "grm",
         },
     },
+    matchup = {enable = true}, -- find plugin
+    autopairs = {enable = true}, -- find plugin
+    rainbow = { -- find plugin
+        enable = true,
+        extended_mode = true, -- Highlight also non-parentheses delimiters
+        max_file_lines = 1000,
+    },
+    context_commentstring = {enable = true, enable_autocmd = false},
     playground = {
         enable = true,
         disable = {},
@@ -65,6 +73,40 @@ require"nvim-treesitter.configs".setup {
             update = "R",
             goto_node = "<cr>",
             show_help = "?",
+        },
+    },
+    textobjects = {
+        move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+                ["]m"] = "@function.outer",
+                ["]]"] = "@call.outer",
+            },
+            goto_next_end = {["]M"] = "@function.outer", ["]["] = "@call.outer"},
+            goto_previous_start = {
+                ["[m"] = "@function.outer",
+                ["[["] = "@call.outer",
+            },
+            goto_previous_end = {
+                ["[M"] = "@function.outer",
+                ["[]"] = "@call.outer",
+            },
+        },
+        select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@call.outer",
+                ["ic"] = "@call.inner",
+            },
+        },
+        swap = {
+            enable = true,
+            swap_next = {[",a"] = "@parameter.inner"},
+            swap_previous = {[",A"] = "@parameter.inner"},
         },
     },
 }
