@@ -6,6 +6,7 @@ local function get_kind(kind_item)
 end
 
 vim.opt.completeopt = "menuone,noselect"
+-- vim.opt.dictionary:append("/Users/moonw1nd/dotfiles/livecoding_dict")
 
 cmp.setup(
     {
@@ -23,6 +24,7 @@ cmp.setup(
                 vim_item.menu = ({
                     nvim_lsp = "ﲳ",
                     treesitter = "",
+                    dictionary = "﬜",
                     path = "ﱮ",
                     buffer = "﬘",
                     zsh = "",
@@ -64,6 +66,7 @@ cmp.setup(
                 {name = "treesitter"},
                 {name = "emoji"},
                 {name = "ultisnips"},
+                {name = "dictionary", keyword_length = 2},
                 {
                     name = "buffer",
                     opts = {

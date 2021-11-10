@@ -39,6 +39,7 @@ Plug("neovim/nvim-lspconfig")
 Plug("jose-elias-alvarez/nvim-lsp-ts-utils")
 Plug("ray-x/lsp_signature.nvim")
 Plug("hrsh7th/cmp-nvim-lsp")
+Plug("uga-rosa/cmp-dictionary")
 Plug("hrsh7th/cmp-nvim-lua") -- nvim-cmp source for neovim Lua API.
 Plug("hrsh7th/cmp-buffer") -- nvim-cmp source buffers
 Plug("hrsh7th/cmp-cmdline") -- completion for command line
