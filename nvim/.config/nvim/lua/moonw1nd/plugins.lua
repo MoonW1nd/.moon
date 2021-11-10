@@ -102,7 +102,8 @@ Plug("sjl/gundo.vim") -- undo tree in vim
 Plug("vim-scripts/ReplaceWithRegister") -- replace word on copy buffer
 Plug("tpope/vim-surround") -- surround brackets
 Plug("takac/vim-hardtime") -- hard mode on vim
-Plug("tomtom/tcomment_vim") -- better commenting
+Plug("JoosepAlviste/nvim-ts-context-commentstring")
+Plug("numToStr/Comment.nvim")
 Plug("kristijanhusak/vim-carbon-now-sh") -- lit code Screenshots
 Plug("tpope/vim-fugitive") -- git support
 Plug("ThePrimeagen/git-worktree.nvim") -- git work_tree support
