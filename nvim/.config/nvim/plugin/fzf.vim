@@ -1,5 +1,5 @@
 " FZF
-"
+" @see https://github.com/junegunn/fzf.vim
 
 " General
 set grepprg=rg\ --vimgrep
@@ -7,6 +7,19 @@ set grepprg=rg\ --vimgrep
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 let $FZF_DEFAULT_OPTS="--reverse --bind ctrl-a:select-all"
 let $FZF_PREVIEW_COMMAND="bat --style=numbers --map-syntax js:jsx --theme base16 --color=always {} || cat {} || tree -C {}"
+
+" Functions
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+function! s:build_location_list(lines)
+  call setloclist(0, map(copy(a:lines), '{ "filename": v:val }'))
+  lopen
+  ll
+endfunction
 
 " Settings
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
@@ -42,19 +55,6 @@ command! -bang Args call fzf#run(fzf#wrap('args',
 
 command! -bang GDf call fzf#run(fzf#wrap('args',
     \ fzf#vim#with_preview({'source': "git diff --name-only --diff-filter=d origin/master"}),<bang>0))
-
-" Functions
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-
-function! s:build_location_list(lines)
-  call setloclist(0, map(copy(a:lines), '{ "filename": v:val }'))
-  lopen
-  ll
-endfunction
 
 " Damp Mappings
 
