@@ -100,7 +100,7 @@ Plug("machakann/vim-highlightedyank") -- highlight yanked file
 Plug("alvan/vim-closetag") -- auto close html tags
 Plug("jiangmiao/auto-pairs") -- auto close pairs
 Plug("AndrewRadev/tagalong.vim") -- rename tags
-Plug("sjl/gundo.vim") -- undo tree in vim
+Plug("mbbill/undotree") -- undo tree in vim
 Plug("vim-scripts/ReplaceWithRegister") -- replace word on copy buffer
 Plug("tpope/vim-surround") -- surround brackets
 Plug("takac/vim-hardtime") -- hard mode on vim

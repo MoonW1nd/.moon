@@ -124,9 +124,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 " [ultisnips] If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" Gundo.vim
-let g:gundo_right = 1
-call SetupCommandAlias("ut","GundoToggle")
+" [undotree]
+call SetupCommandAlias("ut","UndotreeToggle")
 
 " Ferret
 let g:FerretHlsearch=1
