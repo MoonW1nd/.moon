@@ -113,9 +113,13 @@ z() {
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
+export GOROOT="/usr/local/Cellar/go/1.15.3/libexec"
 
 # Set Spaceship ZSH as a prompt
 autoload -U promptinit; promptinit
 prompt spaceship
 
 alias luamake=$HOME/.config/nvim/lua-language-server/3rd/luamake/luamake
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -s"$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"

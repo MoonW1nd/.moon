@@ -554,6 +554,8 @@ hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
 
 autocmd BufWritePre *.{js,jsx,ts,tsx,cjs,mjs} :silent EslintFixAll
 autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.go lua require("moonw1nd.lsp.go").goimports(1000)
 autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
