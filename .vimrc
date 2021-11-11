@@ -102,13 +102,6 @@ if exists('$TMUX')
     let &t_EI .= "\e[=2c"
  endif
 
-" creating aliace command function
-fun! SetupCommandAlias(from, to)
-  exec 'cnoreabbrev <expr> '.a:from
-        \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:from.'")'
-        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
-endfun
-
 " ======================== Plugin Configurations ======================== "
 " emmet
 imap ,, <C-y>,
@@ -522,21 +515,6 @@ nnoremap <leader>mn :e %:p:h/
 nmap <silent> <leader>ps :rs<CR>
 
 " figitive
-call SetupCommandAlias("gs","vertical Git<CR>")
-call SetupCommandAlias("td",'Todo')
-call SetupCommandAlias("rs",'AffRSync')
-call SetupCommandAlias("ot",'OpenCurrentTicket')
-call SetupCommandAlias("ob",'OpenCurrentBranch')
-call SetupCommandAlias("gob",'GhOpenCurrentBranch')
-call SetupCommandAlias("gcn","silent Git commit -n<CR>")
-call SetupCommandAlias("gpn","Git push --no-verify<CR>")
-call SetupCommandAlias("gmt","G mergetool")
-call SetupCommandAlias("gdt","G difftool")
-call SetupCommandAlias("gr","Rg")
-call SetupCommandAlias("gra","Rga")
-call SetupCommandAlias("dab","Dab")
-call SetupCommandAlias("cam","call ClearAllMarks()")
-
 augroup fugitiveSettings
     autocmd!
     autocmd FileType gitcommit setlocal nolist
@@ -560,6 +538,3 @@ autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
-
-" Plugin settings
-source ~/.config/nvim/plugin/init.vim
