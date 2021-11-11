@@ -74,17 +74,6 @@ hi DiffAdd gui=NONE guifg=NONE guibg=#19381C
 hi DiffChange ctermbg=237 guibg=#203C3D cterm=NONE gui=NONE guifg=NONE
 hi DiffText ctermbg=237 guibg=#26494A guifg=NONE
 
-" go syntax highlight
-let g:go_highlight_structs = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
 " performance tweaks
 " set nocursorline
 set nocursorcolumn
@@ -222,8 +211,6 @@ let g:airline_highlighting_cache = 1
 let g:airline#extensions#wordcount#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 
-" remove go definition by vim-go
-let g:go_def_mapping_enabled = 0
 
 set updatetime=300
 
