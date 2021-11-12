@@ -93,7 +93,7 @@ if exists('$TMUX')
 
 " ======================== Plugin Configurations ======================== "
 " emmet
-imap ,, <C-y>,
+let g:user_emmet_leader_key='<C-X>'
 
 " [terminus]
 let g:TerminusCursorShape=0
@@ -173,12 +173,6 @@ endfunction
 function! ClearAllMarks()
     execute ':delm! | delm A-Z0-9'
 endfunction
-
-" hard mode vim active
-let g:hardtime_default_on = 1
-let g:hardtime_ignore_buffer_patterns = ["NERD.*"]
-let g:hardtime_ignore_quickfix = 1
-let g:hardtime_maxcount = 2
 
 " Vim rest console 
 let g:vrc_curl_opts = {
@@ -282,6 +276,8 @@ nnoremap <silent> [arg-p]d :argd %<cr>
 nnoremap <silent> [arg-p]c :argd *.*<cr>
 " find files in arglist
 nnoremap <silent> [arg-p]f :Args<cr>
+nnoremap <leader>s :%smagic/
+
 
 " Markdown
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -316,8 +312,6 @@ map , <Plug>(clever-f-repeat-back)
 nmap <leader>q :bd<CR>
 nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <silent> <leader>nf :call NERDTreeToggleAndFind()<CR>
-nmap <leader>] :bnext<CR>
-nmap <leader>[ :bprevious<CR>
 
 " map for work with location list
 nmap ]l :lnext<CR>
@@ -353,19 +347,21 @@ inoremap ? ?<c-g>u
 
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
-nnoremap <leader>Y gg"+yG
+nnoremap <leader>Y "+yg_
+nnoremap Y yg_;
 
+" Disable unneeded Ex mode bind that's easy to mistakenly hit
+nnoremap Q <NOP>
+
+" Delete withoit changet register
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
-" noremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k';
-" noremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j';
+" Paste without changed register
+vnoremap <leader>p "_dP
 
 " Select all text
 noremap vA ggVG
-
-" Paste without changed "" register
-vnoremap <leader>p "_dP
 
 " Move line UP or Down alt-jk
 nnoremap ˚ :m .-2<CR>==
@@ -393,28 +389,16 @@ nnoremap <leader>ls :SSave<CR>
 " `SPC l l` - list sessions / switch to different project
 nnoremap <leader>lp :SClose<CR>
 
-nnoremap Y yg_;
-
 " ======================== Autocommands ====================== "
 " affiliate sync-rsync
 command! AffRSync AsyncRun -mode=3 /Users/moonw1nd/Documents/Develop/work/rsync.sh
- 
-augroup Affiliate
-    autocmd BufWritePost /Users/moonw1nd/Documents/Develop/work/affiliate/* :AffRSync
-augroup END
 
 command! OpenCurrentTicket silent !~/dotfiles/scripts/openCurrentTicket.sh
 command! OpenCurrentBranch silent !~/dotfiles/scripts/openCurrentBranch.sh
 command! GhOpenCurrentBranch silent !gh pr view --web
-
-" nnoremap <leader>w :w<CR>:AffRSync<CR>
-
 command! Todo Rga @todo\s\[MoonW1nd]:
-
-command! CreateStyleFile e %:p:h/module.styles.css
-
-" Disable unneeded Ex mode bind that's easy to mistakenly hit
-nnoremap Q <NOP>
+command! CreateStyleFile e %:p:h/styles.module.css
+command! -nargs=1 RunTestAA :AsyncRun npm run test -- --maxWorkers=50\% --reporters ~/dotfiles/utils/jestVimReporter/index.js --testNamePattern='candidate' <q-args>
 
 nnoremap <leader>mn :e %:p:h/
 nmap <silent> <leader>ps :rs<CR>
