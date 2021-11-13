@@ -55,3 +55,16 @@ More about search and replace: [https://vim.fandom.com/wiki/Search_and_replace](
 ```vim
 %s//replaceText/g
 ```
+
+<a id="search-and-command-history"></a>
+## Show search and command history
+
+```vim
+q: " command history
+q? " search backward history
+q/ " search forward history
+
+<C-f> " command history in ex command
+```
+
+[ripgrep regex syntax](https://docs.rs/regex/1.5.4/regex/#syntax)
