@@ -52,22 +52,34 @@
     # force push current branch to origin
     fpush = !git push origin $(git name) -f
 
-    feature = !git hide $@-feature && git fetch && git checkout -b feature/$@ && echo 'Creating new feature branch 'feature/$@ && : && git spop $@-feature 2>/dev/null
+    # create branch
+    cb = !git hide $@-STASH_FILES && git fetch && git checkout -b $@ && echo 'Creating new feature branch '$@ && : && git spop $@-STASH_FILES 2>/dev/null
 
     #Stashing
-    sshow = "!f() { git stash show stash^{/$@} -p; }; f" # Like sapply but shows it only
+    # Like sapply but shows it only
+    sshow = "!f() { git stash show stash^{/$@} -p; }; f"
     sshowid = "!f() { git stash show stash@{$@} -p; }; f"
 
-    sapply = "!f() { git stash apply stash^{/$@}; }; f" # Find stash with name like text
-    sapplyid = "!f() { git stash apply stash@{$@}; }; f" # Find stash with name like text
+    # Find stash with name like text
+    sapply = "!f() { git stash apply stash^{/$@}; }; f"
 
-    spop = "!f() { git stash pop stash@{$(git stashid $@)}; }; f" # Like sapply but pops it off
-    spopid = "!f() { git stash pop stash@{$@}; }; f" # Like sapply but pops it off
+    # Find stash with name like text
+    sapplyid = "!f() { git stash apply stash@{$@}; }; f"
 
-    ssave = stash save # saves with name
-    stashid = "!f() { git stash list | grep $@ | head -n 4 | sed -n 's/stash@{\\(.*\\)}.*/\\1/p'; }; f" # only accepts single word, no quotations
-    hide = stash save --include-untracked # hides all files, including untracked files (faster than using --all)
-    btree = log --all --graph --decorate --oneline --simplify-by-decoration
+    # Like sapply but pops it off
+    spop = "!f() { git stash pop stash@{$(git stashid $@)}; }; f"
+
+    # Like sapply but pops it off
+    spopid = "!f() { git stash pop stash@{$@}; }; f"
+
+    # saves with name
+    ssave = stash save
+
+    # only accepts single word, no quotations
+    stashid = "!f() { git stash list | grep $@ | head -n 4 | sed -n 's/stash@{\\(.*\\)}.*/\\1/p'; }; f"
+
+    # hides all files, including untracked files (faster than using --all)
+    hide = stash save --include-untracked
 
 [mergetool "intellij"]
     cmd = /Applications/WebStorm.app/Contents/MacOS/webstorm merge \
@@ -80,9 +92,6 @@
 [merge]
     tool = intellij
 
-[core]
-    pager = delta
-
 [commit]
   template = ~/.gitmessage
 
@@ -91,6 +100,12 @@
     minus-color = "#340001"
     syntax-theme = Monokai Extended
     line-numbers = true
+
+[pager]
+    diff = delta
+    show = delta
+    log = delta
+    reflog = delta
 
 [interactive]
     diffFilter = delta --color-only
