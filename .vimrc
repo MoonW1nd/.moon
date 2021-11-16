@@ -417,7 +417,7 @@ au FocusLost * silent! wa
 
 " hi SpellBad guifg=NONE cterm=undercurl
 
-hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
+hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white
 
 autocmd BufWritePre *.{js,jsx,ts,tsx,cjs,mjs} :silent EslintFixAll
 autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
