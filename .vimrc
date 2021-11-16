@@ -396,6 +396,8 @@ command! AffRSync AsyncRun -mode=3 /Users/moonw1nd/Documents/Develop/work/rsync.
 command! OpenCurrentTicket silent !~/dotfiles/scripts/openCurrentTicket.sh
 command! OpenCurrentBranch silent !~/dotfiles/scripts/openCurrentBranch.sh
 command! GhOpenCurrentBranch silent !gh pr view --web
+command! GhOpenFile silent !gh browse %
+
 command! Todo Rga @todo\s\[MoonW1nd]:
 command! CreateStyleFile e %:p:h/styles.module.css
 command! -nargs=1 RunTestAA :AsyncRun npm run test -- --maxWorkers=50\% --reporters ~/dotfiles/utils/jestVimReporter/index.js --testNamePattern='candidate' <q-args>
