@@ -69,6 +69,7 @@ Plug("ThePrimeagen/harpoon")
 Plug("MoonW1nd/telescope-github.nvim")
 Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-telescope/telescope-fzf-native.nvim", {["do"] = "make"})
+Plug("nvim-telescope/telescope-live-grep-raw.nvim")
 Plug("wincent/ferret")
 
 -- navigation

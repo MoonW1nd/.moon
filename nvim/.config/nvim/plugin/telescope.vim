@@ -7,6 +7,7 @@ nnoremap <leader>fs :lua require('telescope.builtin').git_status()<CR>
 nnoremap <leader>fb :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>fw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
 nnoremap <leader>fh :lua require('telescope.builtin').help_tags()<CR>
+nnoremap <leader>fl :lua require("telescope").extensions.live_grep_raw.live_grep_raw()<CR>
 
 nnoremap <Leader>ra :lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_dropdown({}))<CR>
 
