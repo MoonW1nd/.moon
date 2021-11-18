@@ -33,9 +33,13 @@ set splitbelow                                          " open horizontal split 
 set emoji                                               " enable emojis
 set undofile                                            " enable persistent undo
 set undodir=~/.nvim/tmp                                 " undo temp file directory
-set nofoldenable                                        " disable folding
+" set nofoldenable                                        " disable folding
 set scrolloff=999                                       " always keep cursor at the middle of screen
 set noswapfile                                          " disable creating of *.swp file
+
+" Nvim treesitter folding method
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
 set cursorline " highlight cursorline
 set nowrap " Не переносить строки
