@@ -1,92 +1,147 @@
-set nocompatible              " be improved, required
-filetype off                  " required
-" ============= Vim-Plug ============== "
+" 
+" Required settings for correct work
+"
+set nocompatible
+filetype off
 
+
+"
+" Vim Plugin manager
+"
 let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 
-let g:vim_bootstrap_langs = "c,erlang,go"
-let g:vim_bootstrap_editor = "nvim"                 " Nvim or Vim
-
+" load lua configs and plugins
 lua require('moonw1nd')
 
-" ==================== general config ======================== "
-if (has("termguicolors"))
-  set termguicolors
-endif
-set mouse=                                              " disable mouse
 
-" ===================== Other Configurations ===================== "
-
+"
+" Editor behoviour settings
+"
 let mapleader=" "
-filetype plugin indent on                               " enable indentations
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent            " tab key actions
-set incsearch ignorecase smartcase hlsearch             " highlight text while searching
-set list listchars=tab:→\ ,space:·,nbsp:␣,trail:•,precedes:«,extends:»   " use tab to navigate in list mode
-set fillchars+=vert:\▏                                  " requires a patched nerd font (try FiraCode)
-set wrap breakindent                                    " wrap long lines to the width set by tw
-set encoding=utf-8                                      " text encoding
-set number                                              " enable numbers on the left
-set autowriteall
-set relativenumber                                      " current line is 0
-set splitright                                          " open vertical split to the right
-set splitbelow                                          " open horizontal split to the bottom
-set emoji                                               " enable emojis
-set undofile                                            " enable persistent undo
-set undodir=~/.nvim/tmp                                 " undo temp file directory
-" set nofoldenable                                        " disable folding
-set scrolloff=999                                       " always keep cursor at the middle of screen
-set noswapfile                                          " disable creating of *.swp file
 
-" Nvim treesitter folding method
+" disable mouse
+set mouse=
+
+" enable indentations
+filetype plugin indent on
+
+" tab key actions
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
+
+" highlight text while searching
+set incsearch ignorecase smartcase hlsearch
+
+" use tab to navigate in list mode
+set list listchars=tab:→\ ,space:·,nbsp:␣,trail:•,precedes:«,extends:»
+
+" requires a patched nerd font (try FiraCode)
+set fillchars+=vert:\▏
+
+" wrap long lines to the width set by tw
+set wrap breakindent
+
+" text encoding
+set encoding=utf-8
+
+" enable numbers on the left
+set number
+
+" current line is 0
+set relativenumber
+
+" open vertical split to the right
+set splitright
+
+" open horizontal split to the bottom
+set splitbelow
+
+" enable emojis
+set emoji
+
+" enable persistent undo
+set undofile
+
+" undo temp file directory
+set undodir=~/.nvim/tmp
+
+" disable creating of *.swp file
+set noswapfile
+
+" off spell cheeck
+set nospell
+
+" folding settings
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
-set cursorline " highlight cursorline
-set nowrap " Не переносить строки
+" highlight cursorline
+set cursorline
+
+" set nocursorline
+set nocursorcolumn
+
+" no wrap lines
+set nowrap
 set textwidth=0 " disable auto brset cursorlineeak long lines
-set expandtab " Преобразование Tab в пробелы
+
+" tab -> space
+set expandtab
+
+" file path resolving settings
 set path=.,**
+
 set autoread
+set autowriteall
+
 " for work in insert mod C-w, C-u, C-h, C-k
 set backspace=indent,eol,start
-" set spell spelllang=ru_ru,en_us
 
-" for yats 
+" for yats @todo remove?
 set re=0
 
-" Python Virtual Environment
-let g:python_host_prog =  expand('/usr/bin/python')
-let g:python3_host_prog = expand('/Library/Frameworks/Python.framework/Versions/3.7/bin/python3')
+" Not jums on diagnostics icons
+set signcolumn=yes
 
 
-" Coloring
-" set background=light
-" colorscheme one
-" let g:airline_theme='pencil'
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+
+
+"
+" Perfomance tweaks
+"
+set scrolljump=5
+set lazyredraw
+let g:airline_highlighting_cache=1
+set ttyfast
+set updatetime=300
+
+
+"
+" Theme settings
+"
+" === Dark Theme ===
 set background=dark
 colorscheme onedark
 let g:airline_theme='onedark'
+
+" === Light theme ===
+" set background=light
+" let g:airline_theme='pencil'
 " let g:pencil_higher_contrast_ui = 1
 
+" use number color for sign column color
+highlight clear signcolumn
 
-highlight clear SignColumn                              " use number color for sign column color
-
-" colors for git (especially the gutter)
-" fugitive diff highlight
+" === fugitive diff highlight ===
 hi DiffDelete gui=NONE guifg=#6E0004 guibg=#6E0004
 hi DiffAdd gui=NONE guifg=NONE guibg=#19381C
 hi DiffChange ctermbg=237 guibg=#203C3D cterm=NONE gui=NONE guifg=NONE
 hi DiffText ctermbg=237 guibg=#26494A guifg=NONE
 
-" performance tweaks
-" set nocursorline
-set nocursorcolumn
-set scrolljump=5
-set lazyredraw
-let g:airline_highlighting_cache=1
-set ttyfast
-
-" tmux cursor shape
+" === Tmux cursor shape ===
 if exists('$TMUX')
     let &t_SI .= "\ePtmux;\e\e[=1c\e\\"
     let &t_EI .= "\ePtmux;\e\e[=2c\e\\"
@@ -95,14 +150,90 @@ if exists('$TMUX')
     let &t_EI .= "\e[=2c"
  endif
 
-" ======================== Plugin Configurations ======================== "
+
+"
+" Keybindings
+"
+" === Always keep cursor at the middle of screen ===
+set scrolloff=999
+nmap n nzzzv
+nmap N Nzzzv
+nmap * *zzzv
+nmap # #zzzv
+nmap g* g*zzzv
+nmap g# g#zzzv
+nnoremap J mzJ`z
+
+
+" === Undo with breakpoints ===
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap : :<c-g>u
+inoremap ; ;<c-g>u
+inoremap ] ]<c-g>u
+inoremap [ [<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+
+" === Move line UP or Down alt-jk ===
+nnoremap ˚ :m .-2<CR>==
+nnoremap ∆ :m .+1<CR>==
+inoremap ∆ <Esc>:m .+1<CR>==gi
+inoremap ˚ <Esc>:m .-2<CR>==gi
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
+
+" Disable unneeded Ex mode bind that's easy to mistakenly hit
+nnoremap Q <NOP>
+
+" Fix open urls
+nmap <silent> gx :!open <cWORD><cr>
+
+" Consistent behoviour Y (copy to end line)
+nnoremap Y yg_;
+
+" Easy copy to shared register
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+yg_
+
+" Delete withoit change register
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" Paste without changed register
+vnoremap <leader>p "_dP
+
+" Select all text
+noremap vA ggVG
+
+" Create new file in current folder
+nnoremap <leader>mn :e %:p:h/
+
+" Open quickfix and location list
+nmap <leader>oq :copen<cr>
+nmap <leader>ol :lopen<cr>
+
+" Start substitution path @todo delete? Not usefull
+inoremap <expr> <c-x><c-p> fzf#vim#complete#path('fd')
+
+" Past current file name
+inoremap <expr> <c-x><c-f> expand("%:t:r")
+
+" Very magic substitution mode
+nnoremap <leader>s :%smagic/
+
+"
+" Plugin Configurations 
+"
 " emmet
 let g:user_emmet_leader_key='<C-X>'
 
 " [terminus]
 let g:TerminusCursorShape=0
 
-" [ultisnips] trigger configuration. 
+" [ultisnips] trigger configuration.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-h>"
@@ -178,7 +309,7 @@ function! ClearAllMarks()
     execute ':delm! | delm A-Z0-9'
 endfunction
 
-" Vim rest console 
+" Vim rest console
 let g:vrc_curl_opts = {
   \ '--connect-timeout': 10,
   \ '--max-time': 60,
@@ -206,20 +337,16 @@ let g:airline_highlighting_cache = 1
 let g:airline#extensions#wordcount#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 
-
-set updatetime=300
-
 " Library usedSettings
 let g:used_javascript_libs = 'react,ramda'
 
-" Not jums on diagnostics icons
-set signcolumn=yes
-
 " lastplace
- let g:lastplace_ignore_buftype = "quickfix,nofile,help"
+let g:lastplace_ignore_buftype = "quickfix,nofile,help"
 
+" netrw
 let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
-let g:netrw_localrmdir='rm -r' " remove derictory from netrw
+" remove derictory from netrw
+let g:netrw_localrmdir='rm -r'
 
 nmap <silent> <leader>- <Plug>VinegarUp
 
@@ -242,14 +369,6 @@ endif
 
 let g:test#javascript#jest#executable = 'BABEL_ENV=test npx jest --maxWorkers=50% --reporters ~/dotfiles/utils/jestVimReporter/index.js'
 
-nmap <leader>oq :copen<cr>
-nmap <leader>ol :lopen<cr>
-
-command! Dab %bd|e#|bd#
-
-inoremap <expr> <c-x><c-p> fzf#vim#complete#path('fd')
-inoremap <expr> <c-x><c-f> expand("%:t:r")
-
 " fugitive
 nmap <leader>g [git-p]
 xmap <leader>g [git-p]
@@ -265,8 +384,6 @@ nnoremap <silent> [git-p]d :Gvdiff<cr>
 nnoremap gdh :diffget //2<CR>
 nnoremap gdl :diffget //3<CR>
 
-" fix open urls
-nmap <silent> gx :!open <cWORD><cr>
 
 " arslist
 nmap <leader>a [arg-p]
@@ -324,56 +441,10 @@ nmap [l :lprev<CR>
 " Copy current file path to clipboard
 nnoremap <leader>% :call CopyCurrentFilePath()<CR>
 
-function! CopyCurrentFilePath() " {{{
+function! CopyCurrentFilePath()
   let @+ = expand('%')
   echo @+
 endfunction
-" }}}
-
-" Keep search results at the center of screen
-nmap n nzzzv
-nmap N Nzzzv
-nmap * *zzzv
-nmap # #zzzv
-nmap g* g*zzzv
-nmap g# g#zzzv
-nnoremap J mzJ`z
-
-" Undo with breakpoints
-inoremap , ,<c-g>u
-inoremap . .<c-g>u
-inoremap : :<c-g>u
-inoremap ; ;<c-g>u
-inoremap ] ]<c-g>u
-inoremap [ [<c-g>u
-inoremap ! !<c-g>u
-inoremap ? ?<c-g>u
-
-nnoremap <leader>y "+y
-vnoremap <leader>y "+y
-nnoremap <leader>Y "+yg_
-nnoremap Y yg_;
-
-" Disable unneeded Ex mode bind that's easy to mistakenly hit
-nnoremap Q <NOP>
-
-" Delete withoit changet register
-nnoremap <leader>d "_d
-vnoremap <leader>d "_d
-
-" Paste without changed register
-vnoremap <leader>p "_dP
-
-" Select all text
-noremap vA ggVG
-
-" Move line UP or Down alt-jk
-nnoremap ˚ :m .-2<CR>==
-nnoremap ∆ :m .+1<CR>==
-inoremap ∆ <Esc>:m .+1<CR>==gi
-inoremap ˚ <Esc>:m .-2<CR>==gi
-vnoremap ∆ :m '>+1<CR>gv=gv
-vnoremap ˚ :m '<-2<CR>gv=gv
 
 " for project wide search
 nmap <leader>/ <Plug>(FerretLack)
@@ -381,17 +452,13 @@ nmap <leader>/ <Plug>(FerretLack)
 " carbon sh now
 vnoremap <F8> :CarbonNowSh<CR>
 
-" Creating splits with empty buffers in all directions
-nnoremap <Leader>hn :leftabove  vnew<CR>
-nnoremap <Leader>ln :rightbelow vnew<CR>
-nnoremap <Leader>kn :leftabove  new<CR>
-nnoremap <Leader>jn :rightbelow new<CR>
-
 " `SPC l s` - save current session
 nnoremap <leader>ls :SSave<CR>
 
 " `SPC l l` - list sessions / switch to different project
 nnoremap <leader>lp :SClose<CR>
+
+nmap <silent> <leader>ps :rs<CR>
 
 " ======================== Autocommands ====================== "
 " affiliate sync-rsync
@@ -402,12 +469,12 @@ command! OpenCurrentBranch silent !~/dotfiles/scripts/openCurrentBranch.sh
 command! GhOpenCurrentBranch silent !gh pr view --web
 command! GhOpenFile silent !gh browse %
 
+" Delete all buffers
+command! Dab %bd|e#|bd#
+
 command! Todo Rga @todo\s\[MoonW1nd]:
 command! CreateStyleFile e %:p:h/styles.module.css
 command! -nargs=1 RunTestAA :AsyncRun npm run test -- --maxWorkers=50\% --reporters ~/dotfiles/utils/jestVimReporter/index.js --testNamePattern='candidate' <q-args>
-
-nnoremap <leader>mn :e %:p:h/
-nmap <silent> <leader>ps :rs<CR>
 
 " figitive
 augroup fugitiveSettings
@@ -416,15 +483,9 @@ augroup fugitiveSettings
     autocmd BufReadPost fugitive://* setlocal bufhidden=delete
 augroup END
 
-" save on focus lost
-au FocusLost * silent! wa
-
-" command! Prettier call CocAction('runCommand', 'prettier.formatFile')
-
-" hi SpellBad guifg=NONE cterm=undercurl
-
 hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white
 
+autocmd FocusLost * silent! wa
 autocmd BufWritePre *.{js,jsx,ts,tsx,cjs,mjs} :silent EslintFixAll
 autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
@@ -433,3 +494,13 @@ autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+
+
+"
+" @todo WTF?
+" Artefacts
+"
+" let g:vim_bootstrap_langs = "c,erlang,go"
+" let g:vim_bootstrap_editor = "nvim"
+" hi SpellBad guifg=NONE cterm=undercurl
+
