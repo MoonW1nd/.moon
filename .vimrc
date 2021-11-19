@@ -337,19 +337,6 @@ endif
 
 let g:highlightedyank_highlight_duration = 200
 
-" vim-test
-let test#strategy = {
-  \ 'nearest': 'asyncrun',
-  \ 'file':    'asyncrun',
-  \ 'suite':   'asyncrun',
-\}
-
-if !exists('g:test#javascript#jest#file_pattern')
-  let g:test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts|tsx)$'
-endif
-
-let g:test#javascript#jest#executable = 'BABEL_ENV=test npx jest --maxWorkers=50% --reporters ~/dotfiles/utils/jestVimReporter/index.js'
-
 " arslist
 nmap <leader>a [arg-p]
 xmap <leader>a [arg-p]
@@ -388,7 +375,6 @@ function! TerminalPreviewMarkdown()
 endfu
 
 " ======================== Custom Mappings ====================== "
-nmap <leader>gt :TestFile<CR>
 
 " clever-f.vim support native vim binding for repeat search
 map ; <Plug>(clever-f-repeat-forward)
