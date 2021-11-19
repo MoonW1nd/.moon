@@ -1,3 +1,7 @@
+" Plugin settings
+" vimscript ./nvim/.config/nvim/plugin/
+" lua ./nvim/.config/nvim/lua/moonw1nd/
+
 " 
 " Required settings for correct work
 "
@@ -107,7 +111,11 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+" === netrw ===
+let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
 
+" remove derictory from netrw
+let g:netrw_localrmdir='rm -r'
 
 "
 " Perfomance tweaks
@@ -135,6 +143,7 @@ let g:airline_theme='onedark'
 " use number color for sign column color
 highlight clear signcolumn
 
+highlight CursorLine cterm=NONE ctermbg=darkred ctermfg=white
 
 " === Tmux cursor shape ===
 if exists('$TMUX')
@@ -251,7 +260,7 @@ let g:startify_custom_header = [
   \ '   ',
   \ ]
 
-" tagalong
+" Tagalong rename tags Plugin
 let g:tagalong_filetypes = ['html', 'xml', 'jsx', 'eruby', 'ejs', 'eco', 'php', 'htmldjango', 'javascriptreact', 'typescriptreact', 'typescript', 'javascript']
 
 function! ClearAllMarks()
@@ -291,11 +300,6 @@ let g:used_javascript_libs = 'react,ramda'
 
 " lastplace
 let g:lastplace_ignore_buftype = "quickfix,nofile,help"
-
-" netrw
-let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
-" remove derictory from netrw
-let g:netrw_localrmdir='rm -r'
 
 nmap <silent> <leader>- <Plug>VinegarUp
 
@@ -393,8 +397,6 @@ command! Todo Rga @todo\s\[MoonW1nd]:
 command! CreateStyleFile e %:p:h/styles.module.css
 command! -nargs=1 RunTestAA :AsyncRun npm run test -- --maxWorkers=50\% --reporters ~/dotfiles/utils/jestVimReporter/index.js --testNamePattern='candidate' <q-args>
 
-
-hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white
 
 autocmd FocusLost * silent! wa
 autocmd BufWritePre *.{js,jsx,ts,tsx,cjs,mjs} :silent EslintFixAll
