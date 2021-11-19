@@ -254,38 +254,6 @@ let g:startify_custom_header = [
 " tagalong
 let g:tagalong_filetypes = ['html', 'xml', 'jsx', 'eruby', 'ejs', 'eco', 'php', 'htmldjango', 'javascriptreact', 'typescriptreact', 'typescript', 'javascript']
 
-" Nerd Tree
-let g:NERDTreeHijackNetrw = 0
-let g:NERDTreeCascadeOpenSingleChildDir = 1
-let NERDTreeShowBookmarks=1
-let g:NERDTreeAutoDeleteBuffer = 1
-let NERDTreeChDirMode=2
-let NERDTreeQuitOnOpen=1
-let NERDTreeShowHidden=1
-let NERDTreeKeepTreeInNewTab=0
-" Disable display of the 'Bookmarks' label and 'Press ? for help' text
-let NERDTreeMinimalUI=1
-" Use arrows instead of + ~ chars when displaying directories
-let NERDTreeDirArrows=1
-let NERDTreeBookmarksFile= $HOME . '/.vim/.NERDTreeBookmarks'
-
-" enable line numbers
-let NERDTreeShowLineNumbers=1
-" make sure relative line numbers are used
-autocmd FileType nerdtree setlocal relativenumber
-
-" Opening position NERDTree
-let g:NERDTreeWinPos = "right"
-let g:NERDTreeWinSize = 60
-
-function! NERDTreeToggleAndFind()
-    if (exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1)
-        execute ':NERDTreeClose'
-    else
-        execute ':NERDTreeFind'
-    endif
-endfunction
-
 function! ClearAllMarks()
     execute ':delm! | delm A-Z0-9'
 endfunction
@@ -382,8 +350,6 @@ map , <Plug>(clever-f-repeat-back)
 
 " nmap <leader>r :so ~/.config/nvim/init.vim<CR>
 nmap <leader>q :bd<CR>
-nnoremap <leader>nt :NERDTreeToggle<CR>
-nnoremap <silent> <leader>nf :call NERDTreeToggleAndFind()<CR>
 
 " map for work with location list
 nmap ]l :lnext<CR>
