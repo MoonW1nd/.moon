@@ -135,11 +135,6 @@ let g:airline_theme='onedark'
 " use number color for sign column color
 highlight clear signcolumn
 
-" === fugitive diff highlight ===
-hi DiffDelete gui=NONE guifg=#6E0004 guibg=#6E0004
-hi DiffAdd gui=NONE guifg=NONE guibg=#19381C
-hi DiffChange ctermbg=237 guibg=#203C3D cterm=NONE gui=NONE guifg=NONE
-hi DiffText ctermbg=237 guibg=#26494A guifg=NONE
 
 " === Tmux cursor shape ===
 if exists('$TMUX')
@@ -366,22 +361,6 @@ endif
 
 let g:test#javascript#jest#executable = 'BABEL_ENV=test npx jest --maxWorkers=50% --reporters ~/dotfiles/utils/jestVimReporter/index.js'
 
-" fugitive
-nmap <leader>g [git-p]
-xmap <leader>g [git-p]
-
-nnoremap <silent> [git-p]p :Git push<cr>
-nnoremap <silent> [git-p]P :Git push --no-verify<cr>
-nnoremap <silent> [git-p]c :Git commit<cr>
-nnoremap <silent> [git-p]C :Git commit -n<cr>
-nnoremap <silent> [git-p]s :vertical Git<cr>
-nnoremap <silent> [git-p]d :Gvdiff<cr>
-
-" Fugitive Conflict Resolution
-nnoremap gdh :diffget //2<CR>
-nnoremap gdl :diffget //3<CR>
-
-
 " arslist
 nmap <leader>a [arg-p]
 xmap <leader>a [arg-p]
@@ -473,12 +452,6 @@ command! Todo Rga @todo\s\[MoonW1nd]:
 command! CreateStyleFile e %:p:h/styles.module.css
 command! -nargs=1 RunTestAA :AsyncRun npm run test -- --maxWorkers=50\% --reporters ~/dotfiles/utils/jestVimReporter/index.js --testNamePattern='candidate' <q-args>
 
-" figitive
-augroup fugitiveSettings
-    autocmd!
-    autocmd FileType gitcommit setlocal nolist
-    autocmd BufReadPost fugitive://* setlocal bufhidden=delete
-augroup END
 
 hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white
 
