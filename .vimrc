@@ -225,20 +225,9 @@ nnoremap <leader>s :%smagic/
 " [terminus]
 let g:TerminusCursorShape=0
 
-" [ultisnips] trigger configuration.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-l>"
-let g:UltiSnipsJumpBackwardTrigger="<c-h>"
-
-" [ultisnips] If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
 " Ferret
 let g:FerretHlsearch=1
 let g:FerretMap=0
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
 " vim-startify
 " 'Most Recent Files' number
