@@ -227,9 +227,6 @@ nnoremap <leader>s :%smagic/
 "
 " Plugin Configurations 
 "
-" emmet
-let g:user_emmet_leader_key='<C-X>'
-
 " [terminus]
 let g:TerminusCursorShape=0
 
