@@ -18,10 +18,8 @@ Plug("vim-airline/vim-airline-themes") -- airline themes
 Plug("ryanoasis/vim-devicons") -- pretty icons everywhere
 Plug("kyazdani42/nvim-web-devicons")
 Plug("gregsexton/MatchTag") -- highlight matching html tags
-Plug("preservim/nerdtree") -- nerdtree
-Plug("tiagofumo/vim-nerdtree-syntax-highlight") -- nerdtree color file names
-Plug("Xuyuanp/nerdtree-git-plugin") -- git-nerdtree
-Plug("tpope/vim-vinegar") -- navigation tree from the current file
+Plug("justinmk/vim-dirvish") -- files explorer
+Plug("antonk52/dirvish-fs.vim") -- work with files
 Plug("blueyed/vim-diminactive") -- dim inactive splits
 Plug("editorconfig/editorconfig-vim") -- consistent coding style
 
