@@ -18,5 +18,8 @@ endfunction
 
 unmap -
 nmap <silent><leader>- <Plug>(dirvish_up)
+nmap <silent><leader>_ :Dirvish<CR>
+nmap <silent><leader>v- <Plug>(dirvish_split_up)
+nmap <silent><leader>v_ :execute 'vs \| Dirvish'<CR>
 
 autocmd FileType dirvish call DivrishMappings()
