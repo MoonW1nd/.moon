@@ -9,17 +9,22 @@ require("moonw1nd.refactoring");
 require("moonw1nd.comment");
 require("moonw1nd.env")
 
--- luacheck: globals P R RELOAD
-P = function(v)
-    print(vim.inspect(v))
-    return v
-end
-
-if pcall(require, "plenary") then
-    RELOAD = require("plenary.reload").reload_module
-
-    R = function(name)
-        RELOAD(name)
-        return require(name)
+function _G.ReloadConfig()
+    for name, _ in pairs(package.loaded) do
+        if name:match("^moonw1nd") or name:match("lsp") then
+            package.loaded[name] = nil
+        end
     end
+
+    vim.api.nvim_command("so $MYVIMRC")
+    dofile(vim.fn.expand("$HOME/.config/nvim/lua/moonw1nd/init.lua"))
+
+    print("Vim config reloaded!")
 end
+
+vim.api.nvim_set_keymap(
+    "n", "<localleader>r", "<Cmd>lua ReloadConfig()<CR>",
+    {silent = true, noremap = true}
+)
+
+vim.cmd("command! ReloadConfig lua ReloadConfig()")
