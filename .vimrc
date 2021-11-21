@@ -22,6 +22,7 @@ lua require('moonw1nd')
 " Editor behoviour settings
 "
 let mapleader=" "
+let maplocalleader="\\"
 
 " disable mouse
 set mouse=
@@ -30,7 +31,7 @@ set mouse=
 filetype plugin indent on
 
 " tab key actions
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
+set tabstop=4 softtabstop=4 shiftwidth=4 shiftround expandtab smarttab autoindent
 
 " highlight text while searching
 set incsearch ignorecase smartcase hlsearch
@@ -75,8 +76,10 @@ set noswapfile
 set nospell
 
 " folding settings
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
+set foldmethod=indent
+set foldlevel=99
+" use wider line for folding
+" set fillchars+=fold:⏤
 
 " highlight cursorline
 set cursorline
@@ -94,8 +97,12 @@ set expandtab
 " file path resolving settings
 set path=.,**
 
+" detect filechanges outside of the editor
 set autoread
 set autowriteall
+
+" never ring the bell for any reason
+set belloff=all
 
 " for work in insert mod C-w, C-u, C-h, C-k
 set backspace=indent,eol,start
@@ -209,6 +216,14 @@ vnoremap <leader>d "_d
 " Paste without changed register
 vnoremap <leader>p "_dP
 
+" paste under current indentation level
+nnoremap p ]p
+nnoremap P ]P
+
+" indentation shifts keep selection(`=` should still be preferred)
+vnoremap < <gv
+vnoremap > >gv
+
 " Select all text
 noremap vA ggVG
 
@@ -300,8 +315,6 @@ let g:used_javascript_libs = 'react,ramda'
 
 " lastplace
 let g:lastplace_ignore_buftype = "quickfix,nofile,help"
-
-nmap <silent> <leader>- <Plug>VinegarUp
 
 if !exists('##TextYankPost')
   map y <Plug>(highlightedyank)
@@ -408,6 +421,18 @@ autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 
+function! MyFoldText()
+    let l:start_arrow = '⏤⏤⏤⏤► '
+    let l:lines='[' . (v:foldend - v:foldstart + 1) . ' lines]'
+    let l:first_line=substitute(getline(v:foldstart), '\v *', '', '')
+    return l:start_arrow . l:lines . ': ' . l:first_line . ' '
+endfunction
+
+" Custom display for text when folding
+set foldtext=MyFoldText() 
+
+" toggle folding
+nmap <leader>= za
 
 "
 " @todo WTF?
