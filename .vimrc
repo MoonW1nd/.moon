@@ -413,6 +413,7 @@ command! -nargs=1 RunTestAA :AsyncRun npm run test -- --maxWorkers=50\% --report
 
 autocmd FocusLost * silent! wa
 autocmd BufWritePre *.{js,jsx,ts,tsx,cjs,mjs} :silent EslintFixAll
+autocmd BufWritePre *.{css} :silent lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua require("moonw1nd.lsp.go").goimports(1000)
