@@ -77,9 +77,9 @@ set nospell
 
 " folding settings
 set foldmethod=indent
-set foldlevel=99
+set foldlevel=0
 " use wider line for folding
-" set fillchars+=fold:⏤
+set fillchars+=fold:-
 
 " highlight cursorline
 set cursorline
@@ -149,8 +149,6 @@ let g:airline_theme='onedark'
 
 " use number color for sign column color
 highlight clear signcolumn
-
-highlight CursorLine cterm=NONE ctermbg=darkred ctermfg=white
 
 " === Tmux cursor shape ===
 if exists('$TMUX')
@@ -292,10 +290,10 @@ let g:vrc_curl_opts = {
 " let g:vrc_show_command = 1
 let g:vrc_auto_format_response_enabled = 1
 let g:vrc_output_buffer_name = '__VRC_OUTPUT.<filetype>'
-    let g:vrc_auto_format_response_patterns = {
-      \ 'json': 'jq .',
-      \ 'xml': 'xmllint --format -',
-    \}
+let g:vrc_auto_format_response_patterns = {
+    \ 'json': 'jq .',
+    \ 'xml': 'xmllint --format -',
+\}
 
 " Airline
 let g:airline_powerline_fonts = 0
@@ -423,7 +421,7 @@ autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 
 function! MyFoldText()
-    let l:start_arrow = '⏤⏤⏤⏤► '
+    let l:start_arrow = '----► '
     let l:lines='[' . (v:foldend - v:foldstart + 1) . ' lines]'
     let l:first_line=substitute(getline(v:foldstart), '\v *', '', '')
     return l:start_arrow . l:lines . ': ' . l:first_line . ' '
@@ -442,4 +440,3 @@ nmap <leader>= za
 " let g:vim_bootstrap_langs = "c,erlang,go"
 " let g:vim_bootstrap_editor = "nvim"
 " hi SpellBad guifg=NONE cterm=undercurl
-
