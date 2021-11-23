@@ -3,6 +3,7 @@ vnoremap <leader>rr :lua require('moonw1nd.telescope').refactors()<CR>
 
 nnoremap <C-g> :lua require('moonw1nd.telescope').rg()<CR>
 nnoremap <Leader>fp :lua require('moonw1nd.telescope').project_files()<CR>
+nnoremap <Leader>f- :Telescope<CR>
 nnoremap <leader>fs :lua require('telescope.builtin').git_status()<CR>
 nnoremap <leader>fb :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>fw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
