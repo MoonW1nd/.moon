@@ -1,0 +1,5 @@
+xargs
+cat
+rg
+fzf
+git
