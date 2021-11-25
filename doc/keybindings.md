@@ -34,3 +34,10 @@
 - `<C-f>` - paste current file name
 - `<C-l>` - completion by entire line
 - `<C-o>` - run completion by lsp
+
+### Telescop
+```
+<C-x> go to file selection as a split
+<C-v> go to file selection as a vsplit
+<C-t> go to a file in a new tab
+```

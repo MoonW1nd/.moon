@@ -68,3 +68,21 @@ q/ " search forward history
 ```
 
 [ripgrep regex syntax](https://docs.rs/regex/1.5.4/regex/#syntax)
+
+## How do I set options specific to the current buffer?
+
+You can set Vim options which are specific to a buffer using the "setlocal" command. For example,
+
+```
+:setlocal textwidth=70
+```
+
+This will set the 'textwidth' option to 70 only for the current buffer. All other buffers will have the default or the previous 'textwidth' value.
+
+## How do I define mappings specific to the current buffer?
+
+You can define mappings specific to the current buffer by using the keyword `<buffer>` in the map command. For example,
+
+```
+:map <buffer> ,w /[.,;]<CR>
+```
