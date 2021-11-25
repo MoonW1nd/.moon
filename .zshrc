@@ -71,6 +71,7 @@ alias pmts="termdown 25m && osascript -e 'display notification \"Time to break\"
 
 # load scripts
 source $HOME/dotfiles/scripts/minimalVimrc.sh
+source $HOME/dotfiles/scripts/vssh.sh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/dotfiles/scripts/todoist.sh
 source $HOME/dotfiles/scripts/ff.sh
