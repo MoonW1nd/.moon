@@ -70,6 +70,7 @@ alias pmf="pomodoro finish"
 alias pmts="termdown 25m && osascript -e 'display notification \"Time to break\" with title \"Pomodoro\" subtitle \"Finish\" sound name \"piece-of-cake-611\"'"
 
 # load scripts
+source $HOME/dotfiles/scripts/minimalVimrc.sh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/dotfiles/scripts/todoist.sh
 source $HOME/dotfiles/scripts/ff.sh
