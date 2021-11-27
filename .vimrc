@@ -77,7 +77,7 @@ set nospell
 
 " folding settings
 set foldmethod=indent
-set foldlevel=0
+set foldlevel=99
 " use wider line for folding
 set fillchars+=fold:-
 
