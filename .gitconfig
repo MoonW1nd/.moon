@@ -41,6 +41,9 @@
     # previous branch
     pb = !git checkout -
 
+    # checkout on master
+    com = !git checkout master
+
     uc = reset --soft HEAD^
 
     # clean repositori without needed files
