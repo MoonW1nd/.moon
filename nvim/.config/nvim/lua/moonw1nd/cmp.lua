@@ -69,7 +69,7 @@ cmp.setup(
                 {name = "dictionary", keyword_length = 2},
                 {
                     name = "buffer",
-                    opts = {
+                    options = {
                         get_bufnrs = function()
                             return vim.api.nvim_list_bufs()
                         end,
