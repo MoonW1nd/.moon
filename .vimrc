@@ -113,6 +113,8 @@ set re=0
 " Not jums on diagnostics icons
 set signcolumn=yes
 
+" set shell for run commands (zsh - slow)
+set shell=bash
 
 if (has("termguicolors"))
   set termguicolors
