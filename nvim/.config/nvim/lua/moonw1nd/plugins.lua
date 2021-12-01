@@ -30,6 +30,7 @@ Plug("moonw1nd/vim-rest-console") -- REST client
 Plug("SirVer/ultisnips") -- snippets
 Plug("quangnguyen30192/cmp-nvim-ultisnips")
 Plug("vim-test/vim-test")
+Plug("preservim/vimux") -- run command from vim in tmux pannel
 
 -- Native LSP Support
 Plug("onsails/lspkind-nvim") -- icons for auto complete
@@ -63,7 +64,7 @@ Plug("nvim-lua/plenary.nvim")
 Plug("ThePrimeagen/refactoring.nvim")
 Plug("ThePrimeagen/harpoon")
 -- Plug("nvim-telescope/telescope-github.nvim")
--- Preplace after marging
+-- Replace after merging
 Plug("MoonW1nd/telescope-github.nvim")
 Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-telescope/telescope-fzf-native.nvim", {["do"] = "make"})
