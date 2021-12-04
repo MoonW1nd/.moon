@@ -76,6 +76,59 @@ M.rg = function()
     }
 end
 
+-- Work action pluggin {{{
+local COMAND_ACTION_DESCRIPTION = {
+    ["RELOAD_SERVER"] = "Reload server",
+    ["RESTART_SERVER"] = "Restart server",
+    ["RESTART_WEBPACK"] = "Restart webpack",
+}
+
+local execute_working_command = function(prompt_bufnr)
+    local selection = action_state.get_selected_entry()
+
+    actions.close(prompt_bufnr)
+
+    local tmp_table = vim.split(selection.value, "\t");
+
+    if vim.tbl_isempty(tmp_table) then
+        return
+    end
+
+    local command_action = tmp_table[1]
+
+    if command_action == COMAND_ACTION_DESCRIPTION.RELOAD_SERVER then
+        vim.api.nvim_command("ReloadServer")
+    elseif command_action == COMAND_ACTION_DESCRIPTION.RESTART_SERVER then
+        vim.api.nvim_command("RebuildServer")
+    elseif command_action == COMAND_ACTION_DESCRIPTION.RESTART_WEBPACK then
+        vim.api.nvim_command("ReloadWebpack")
+    end
+end
+
+M.work_scripts = function()
+    local command_actions = {
+        COMAND_ACTION_DESCRIPTION.RELOAD_SERVER,
+        COMAND_ACTION_DESCRIPTION.RESTART_SERVER,
+        COMAND_ACTION_DESCRIPTION.RESTART_WEBPACK,
+    }
+
+    local dropdownTheme = require("telescope.themes").get_dropdown();
+
+    local opts = {
+        prompt_title = "Actions",
+        finder = finders.new_table(command_actions),
+        sorter = conf.generic_sorter(),
+        attach_mappings = function(_, _)
+            actions.select_default:replace(execute_working_command)
+            return true
+        end,
+    }
+
+    local picker = pickers.new(dropdownTheme, opts)
+    picker:find()
+end
+-- }}}
+
 M.project_files = function()
     local opts = {} -- define here if you want to define something
     local ok = pcall(require"telescope.builtin".git_files, opts)
@@ -85,6 +138,7 @@ M.project_files = function()
     end
 end
 
+-- Переписаный модуль для preview github так как lua os.execute не работал
 M.gh_web_view = function(type)
     return function(prompt_bufnr)
         local selection = action_state.get_selected_entry(prompt_bufnr)
@@ -101,6 +155,7 @@ M.gh_web_view = function(type)
     end
 end
 
+-- Mapping for telescope github
 local gh_pr_attach_mappings = function(_, map)
     map("i", "<c-e>", telescope_gh_actions.gh_pr_v_toggle)
     -- use mapping <c-m> crash mappings
