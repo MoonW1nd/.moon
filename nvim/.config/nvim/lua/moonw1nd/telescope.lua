@@ -16,7 +16,7 @@ require("telescope").setup(
                 bottom_pane = {height = 0.9, prompt_position = "bottom"},
             },
             file_sorter = sorters.get_fzy_sorter,
-            file_ignore_patterns = {".git", "node_modules"},
+            file_ignore_patterns = {".git", "node_modules", "package-lock.json"},
             prompt_prefix = " λ ",
             color_devicons = true,
 
@@ -78,9 +78,10 @@ end
 
 -- Work action pluggin {{{
 local COMAND_ACTION_DESCRIPTION = {
-    ["RELOAD_SERVER"] = "Reload server",
+    ["REBILD_SERVER"] = "Rebuild server",
     ["RESTART_SERVER"] = "Restart server",
     ["RESTART_WEBPACK"] = "Restart webpack",
+    ["MAKE_TS"] = "Run check typescript",
 }
 
 local execute_working_command = function(prompt_bufnr)
@@ -96,20 +97,23 @@ local execute_working_command = function(prompt_bufnr)
 
     local command_action = tmp_table[1]
 
-    if command_action == COMAND_ACTION_DESCRIPTION.RELOAD_SERVER then
-        vim.api.nvim_command("ReloadServer")
+    if command_action == COMAND_ACTION_DESCRIPTION.REBILD_SERVER then
+        vim.api.nvim_command("RebildServer")
     elseif command_action == COMAND_ACTION_DESCRIPTION.RESTART_SERVER then
-        vim.api.nvim_command("RebuildServer")
+        vim.api.nvim_command("ReloadServer")
     elseif command_action == COMAND_ACTION_DESCRIPTION.RESTART_WEBPACK then
         vim.api.nvim_command("ReloadWebpack")
+    elseif command_action == COMAND_ACTION_DESCRIPTION.MAKE_TS then
+        vim.api.nvim_command("MakeTs")
     end
 end
 
 M.work_scripts = function()
     local command_actions = {
-        COMAND_ACTION_DESCRIPTION.RELOAD_SERVER,
         COMAND_ACTION_DESCRIPTION.RESTART_SERVER,
         COMAND_ACTION_DESCRIPTION.RESTART_WEBPACK,
+        COMAND_ACTION_DESCRIPTION.REBILD_SERVER,
+        COMAND_ACTION_DESCRIPTION.MAKE_TS,
     }
 
     local dropdownTheme = require("telescope.themes").get_dropdown();
@@ -237,6 +241,12 @@ M.git_branches = function()
             end,
         }
     )
+end
+
+M.my_fd = function(opts)
+    opts = opts or {}
+    opts.cwd = vim.fn.systemlist("git rev-parse --show-toplevel")[1]
+    require"telescope.builtin".find_files(opts)
 end
 
 return M
