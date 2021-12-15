@@ -31,7 +31,7 @@ set mouse=
 filetype plugin indent on
 
 " tab key actions
-set tabstop=4 softtabstop=4 shiftwidth=4 shiftround expandtab smarttab autoindent
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 
 " highlight text while searching
 set incsearch ignorecase smartcase hlsearch
