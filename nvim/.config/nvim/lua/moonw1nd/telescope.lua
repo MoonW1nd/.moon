@@ -81,7 +81,9 @@ local COMAND_ACTION_DESCRIPTION = {
     ["REBILD_SERVER"] = "Rebuild server",
     ["RESTART_SERVER"] = "Restart server",
     ["RESTART_WEBPACK"] = "Restart webpack",
-    ["MAKE_TS"] = "Run check typescript",
+    ["MAKE_TS"] = "Run check types TS [MakeTs]",
+    ["MAKE_ESLINT"] = "Run check code style [MakeEslint]",
+    ["MAKE_ESLINT_FILE"] = "Run check code style [MakeEslintFile]",
 }
 
 local execute_working_command = function(prompt_bufnr)
@@ -105,6 +107,10 @@ local execute_working_command = function(prompt_bufnr)
         vim.api.nvim_command("ReloadWebpack")
     elseif command_action == COMAND_ACTION_DESCRIPTION.MAKE_TS then
         vim.api.nvim_command("MakeTs")
+    elseif command_action == COMAND_ACTION_DESCRIPTION.MAKE_ESLINT then
+        vim.api.nvim_command("MakeEslint")
+    elseif command_action == COMAND_ACTION_DESCRIPTION.MAKE_ESLINT_FILE then
+        vim.api.nvim_command("MakeEslintFile")
     end
 end
 
@@ -114,6 +120,8 @@ M.work_scripts = function()
         COMAND_ACTION_DESCRIPTION.RESTART_WEBPACK,
         COMAND_ACTION_DESCRIPTION.REBILD_SERVER,
         COMAND_ACTION_DESCRIPTION.MAKE_TS,
+        COMAND_ACTION_DESCRIPTION.MAKE_ESLINT,
+        COMAND_ACTION_DESCRIPTION.MAKE_ESLINT_FILE,
     }
 
     local dropdownTheme = require("telescope.themes").get_dropdown();
