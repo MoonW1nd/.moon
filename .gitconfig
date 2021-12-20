@@ -29,6 +29,9 @@
     # delete branches
     fdb = !git branch | fzf-tmux -m --prompt='Delete branch λ ' | xargs git branch -D
 
+    # delete merged branches
+    dmb = !git branch --merged | egrep -v '(^\\*|master|dev)' | xargs git branch -d
+
     # find branches
     fbranch = !git branch | sort -r | grep -v release
 
