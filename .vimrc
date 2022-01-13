@@ -230,6 +230,11 @@ noremap vA ggVG
 " Create new file in current folder
 nnoremap <leader>mn :e %:p:h/
 
+" Open style file
+nnoremap <leader>os :e %:p:h/styles.module.css<cr>
+" Open index file
+nnoremap <leader>oi :e %:p:h/index.*<cr>
+
 " Open quickfix and location list
 nmap <leader>oq :copen<cr>
 nmap <leader>ol :lopen<cr>
