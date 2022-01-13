@@ -407,6 +407,10 @@ command! OpenCurrentTicket silent !~/dotfiles/scripts/openCurrentTicket.sh
 command! OpenCurrentBranch silent !~/dotfiles/scripts/openCurrentBranch.sh
 command! GhOpenCurrentBranch silent !gh pr view --web
 command! GhOpenFile silent !gh browse %
+command! RebuildServer silent !ssh $REMOTE_DEV_SERVER -t 'tmux send-keys -t 0 C-c;tmux send-keys "make clean && git checkout . && git pull -r origin master" C-m;tmux send-keys "nvm use 12 && make && make hmr-server" C-m'
+command! ReloadServer silent !ssh $REMOTE_DEV_SERVER -t 'tmux send-keys -t 0 C-c; tmux send-keys "make hmr-server" C-m'
+command! ReloadWebpack !tmux send-keys -t "[affiliate]:1.0" C-c "make hmr-client" C-m
+command! SyncAndReloadServer AsyncRun -mode=3 /Users/moonw1nd/Documents/Develop/work/rsync.sh && ssh $REMOTE_DEV_SERVER -t 'tmux send-keys -t 0 C-c; tmux send-keys "make hmr-server" C-m'
 
 " Delete all buffers
 command! Dab %bd|e#|bd#
