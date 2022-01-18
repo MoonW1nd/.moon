@@ -8,13 +8,12 @@ set rtp=~/dotfiles/.vimrc
 set tabstop=4 softtabstop=4 shiftwidth=4 shiftround expandtab smarttab autoindent
 set incsearch ignorecase smartcase hlsearch
 set fillchars+=vert:\▏
-set wrap breakindent
+set wrap
 set encoding=utf-8
 set number
 set relativenumber
 set splitright
 set splitbelow
-set emoji
 set noswapfile
 set nospell
 set foldmethod=indent
@@ -28,10 +27,9 @@ set expandtab
 set path=.,**
 set autoread
 set autowriteall
-set belloff=all
+set noerrorbells
 set backspace=indent,eol,start
 set re=0
-set signcolumn=yes
 set scrolljump=5
 set lazyredraw
 set ttyfast
