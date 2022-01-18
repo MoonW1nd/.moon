@@ -24,7 +24,7 @@ cmp.setup(
                 vim_item.menu = ({
                     nvim_lsp = "ﲳ",
                     treesitter = "",
-                    dictionary = "﬜",
+                    -- dictionary = "﬜",
                     path = "ﱮ",
                     buffer = "﬘",
                     zsh = "",
@@ -66,7 +66,7 @@ cmp.setup(
                 {name = "treesitter"},
                 {name = "emoji"},
                 {name = "ultisnips"},
-                {name = "dictionary", keyword_length = 2},
+                -- {name = "dictionary", keyword_length = 2},
                 {
                     name = "buffer",
                     options = {

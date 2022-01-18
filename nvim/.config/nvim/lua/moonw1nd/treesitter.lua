@@ -51,6 +51,7 @@ require"nvim-treesitter.configs".setup {
     },
     matchup = {enable = true}, -- find plugin
     autopairs = {enable = true}, -- find plugin
+    autotag = {enable = true},
     rainbow = { -- find plugin
         enable = true,
         extended_mode = true, -- Highlight also non-parentheses delimiters

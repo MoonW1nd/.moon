@@ -347,9 +347,6 @@ autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
 " autocmd FileType markdown set spell
 autocmd FileType markdown map <silent> <leader>m :call TerminalPreviewMarkdown()<CR>
 
-" auto html tags closing, enable for markdown files as well
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.md, *.js, *.tsx'
-
 " ================== Custom Functions ===================== "
 
 " Trim Whitespaces

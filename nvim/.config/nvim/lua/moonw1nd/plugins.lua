@@ -38,7 +38,7 @@ Plug("neovim/nvim-lspconfig")
 Plug("jose-elias-alvarez/nvim-lsp-ts-utils")
 Plug("ray-x/lsp_signature.nvim")
 Plug("hrsh7th/cmp-nvim-lsp")
-Plug("uga-rosa/cmp-dictionary")
+-- Plug("uga-rosa/cmp-dictionary")
 Plug("hrsh7th/cmp-nvim-lua") -- nvim-cmp source for neovim Lua API.
 Plug("hrsh7th/cmp-buffer") -- nvim-cmp source buffers
 Plug("hrsh7th/cmp-cmdline") -- completion for command line
@@ -51,6 +51,7 @@ Plug("hrsh7th/nvim-cmp")
 -- Treesitter
 Plug("nvim-treesitter/nvim-treesitter", {["do"] = ":TSUpdate"})
 Plug("nvim-treesitter/nvim-treesitter-textobjects")
+Plug("windwp/nvim-ts-autotag")
 Plug("nvim-treesitter/playground")
 
 -- Search
@@ -64,7 +65,7 @@ Plug("nvim-lua/plenary.nvim")
 Plug("ThePrimeagen/refactoring.nvim")
 Plug("ThePrimeagen/harpoon")
 -- Plug("nvim-telescope/telescope-github.nvim")
--- Replace after merging
+-- replace after merging
 Plug("MoonW1nd/telescope-github.nvim")
 Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-telescope/telescope-fzf-native.nvim", {["do"] = "make"})
@@ -97,7 +98,6 @@ Plug("fatih/vim-go", {["do"] = ":GoUpdateBinaries"})
 -- -- other
 Plug("wellle/targets.vim") -- improve text objects API
 Plug("machakann/vim-highlightedyank") -- highlight yanked file
-Plug("alvan/vim-closetag") -- auto close html tags
 Plug("jiangmiao/auto-pairs") -- auto close pairs
 Plug("AndrewRadev/tagalong.vim") -- rename tags
 Plug("mbbill/undotree") -- undo tree in vim
