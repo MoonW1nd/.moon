@@ -30,7 +30,9 @@ Plug("moonw1nd/vim-rest-console") -- REST client
 Plug("SirVer/ultisnips") -- snippets
 Plug("quangnguyen30192/cmp-nvim-ultisnips")
 Plug("vim-test/vim-test")
+-- @todo: check usefull next plugin
 Plug("preservim/vimux") -- run command from vim in tmux pannel
+Plug("andymass/vim-matchup") -- extended match %
 
 -- Native LSP Support
 Plug("onsails/lspkind-nvim") -- icons for auto complete
