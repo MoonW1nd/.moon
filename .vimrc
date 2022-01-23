@@ -396,6 +396,38 @@ nnoremap <leader>lp :SClose<CR>
 
 nmap <silent> <leader>ps :rs<CR>
 
+" Modify behaviour wortk * and # for selected text
+" Search for selected text.
+" http://vim.wikia.com/wiki/VimTip171
+xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@?<CR><CR>
+
+let s:save_cpo = &cpo | set cpo&vim
+if !exists('g:VeryLiteral')
+  let g:VeryLiteral = 0
+endif
+
+function! s:VSetSearch(cmd)
+  let old_reg = getreg('"')
+  let old_regtype = getregtype('"')
+  normal! gvy
+  if @@ =~? '^[0-9a-z,_]*$' || @@ =~? '^[0-9a-z ,_]*$' && g:VeryLiteral
+    let @/ = @@
+  else
+    let pat = escape(@@, a:cmd.'\')
+    if g:VeryLiteral
+      let pat = substitute(pat, '\n', '\\n', 'g')
+    else
+      let pat = substitute(pat, '^\_s\+', '\\s\\+', '')
+      let pat = substitute(pat, '\_s\+$', '\\s\\*', '')
+      let pat = substitute(pat, '\_s\+', '\\_s\\+', 'g')
+    endif
+    let @/ = '\V'.pat
+  endif
+  normal! gV
+  call setreg('"', old_reg, old_regtype)
+endfunction
+
 " ======================== Autocommands ====================== "
 " affiliate sync-rsync
 command! AffRSync AsyncRun -mode=3 /Users/moonw1nd/Documents/Develop/work/rsync.sh
