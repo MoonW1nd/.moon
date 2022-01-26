@@ -248,6 +248,10 @@ inoremap <expr> <c-x><c-f> expand("%:t:r")
 " Very magic substitution mode
 nnoremap <leader>s :%smagic/
 
+" More usefull & command
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
+
 "
 " Plugin Configurations 
 "
