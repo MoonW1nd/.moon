@@ -90,6 +90,11 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
 
+# bash ctrl-u behaviour
+# @see https://stackoverflow.com/questions/4405200/can-i-make-control-u-behavior-be-the-same-for-zsh-as-it-is-for-bash
+bindkey '^U' backward-kill-line
+bindkey '^Y' yank
+
 # fzf settings
 export FZF_DEFAULT_OPTS="--border --height 40% --reverse --history=$HOME/.fzf_history --ansi"
 export FZF_COMPLETION_OPTS="--preview '(bat --map-syntax js:jsx --theme base16 --color=always {} || cat {} || tree -C {}) 2> /dev/null | head -200'"

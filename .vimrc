@@ -250,6 +250,7 @@ nnoremap <leader>s :%smagic/
 
 " More usefull & command
 nnoremap & :&&<CR>
+
 xnoremap & :&&<CR>
 
 "
@@ -296,7 +297,6 @@ let g:vrc_curl_opts = {
   \ '--connect-timeout': 10,
   \ '--max-time': 60,
 \}
-
 " let g:vrc_split_request_body = 1
 " let g:vrc_show_command = 1
 let g:vrc_auto_format_response_enabled = 1
@@ -331,23 +331,22 @@ endif
 
 let g:highlightedyank_highlight_duration = 200
 
-" arslist
-nmap <leader>a [arg-p]
-xmap <leader>a [arg-p]
-
-" add current file to arglist
-nnoremap <silent> [arg-p]a :arga %<cr>
-" delete current file from arglist
-nnoremap <silent> [arg-p]d :argd %<cr>
-" clear all arglist
-nnoremap <silent> [arg-p]c :argd *.*<cr>
-" find files in arglist
-nnoremap <silent> [arg-p]f :Args<cr>
-nnoremap <leader>s :%smagic/
-
+ " " arslist
+" nmap <leader>a [arg-p]
+" xmap <leader>a [arg-p]
+"
+" " add current file to arglist
+" nnoremap <silent> [arg-p]a :arga %<cr>
+" " delete current file from arglist
+" nnoremap <silent> [arg-p]d :argd %<cr>
+" " clear all arglist
+" nnoremap <silent> [arg-p]c :argd *.*<cr>
+" " find files in arglist
+" nnoremap <silent> [arg-p]f :Args<cr>
 
 " Markdown
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType markdown setlocal foldlevel=99
 " autocmd FileType markdown set spell
 autocmd FileType markdown map <silent> <leader>m :call TerminalPreviewMarkdown()<CR>
 

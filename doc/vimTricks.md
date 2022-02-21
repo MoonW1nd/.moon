@@ -81,8 +81,14 @@ This will set the 'textwidth' option to 70 only for the current buffer. All othe
 
 ## How do I define mappings specific to the current buffer?
 
-You can define mappings specific to the current buffer by using the keyword `<buffer>` in the map command. For example,
+You can define mappings specific to the current buffer by using the keyword "<buffer>" in the map command. For example,
 
 ```
 :map <buffer> ,w /[.,;]<CR>
 ```
+
+## How to replace a character by a newline in Vim?
+
+Use `\r` instead of `\n`.
+
+> Info by [StackOverflow](https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim/71334)

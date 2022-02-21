@@ -4,6 +4,7 @@ Programming languages installation & setup guide.
 
 - [Python](#python)
 - [Lua](#lua)
+- [Vim LSP](#vim-lsp)
 
 ## Python
 
@@ -80,3 +81,10 @@ go get github.com/mattn/efm-langserver
 brew install efm-langserver
 ```
 
+## Vim LSP
+
+### cssmodules-language-server
+
+```shell
+npm install --global cssmodules-language-server
+```

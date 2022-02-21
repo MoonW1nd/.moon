@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
+
 selected=`cat ~/dotfiles/.tmux-cht-languages ~/dotfiles/.tmux-cht-command | fzf --prompt="λ "`
+
 if [[ -z $selected ]]; then
     exit 0
 fi
@@ -14,4 +16,3 @@ if grep -qs "$selected" ~/dotfiles/.tmux-cht-languages; then
 else
     tmux neww bash -c "echo \"curl cht.sh/$selected~$query\" & curl cht.sh/$selected~$query & while [ : ]; do sleep 1; done"
 fi
-

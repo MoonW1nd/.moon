@@ -1,0 +1,50 @@
+snippet jsetup "Jest - Sets up jest test file"
+import $1 from './$1';
+describe('$1', () => {
+	test('$2', () => {
+		$3
+	});
+});
+endsnippet
+
+snippet desc "Jest - describe(name, fn)"
+describe('$1', () => {
+	${VISUAL}$0
+});
+endsnippet
+
+snippet test "Jest - test(name, fn)"
+test('$1', () => {
+	$2
+});
+endsnippet
+
+snippet it "Jest - alias for test()"
+it('$1', () => {
+	$2
+});
+endsnippet
+
+snippet aftera "Jest - afterAll(fn)"
+afterAll(() => {
+	$1
+});
+endsnippet
+
+snippet aftere "Jest - afterEach(fn)"
+afterEach(() => {
+	$1
+});
+endsnippet
+
+snippet beforea "Jest - beforeAll(fn)"
+beforeAll(() => {
+	$1
+});
+endsnippet
+
+snippet beforee "Jest - beforeEach(fn)"
+beforeEach(() => {
+	$1
+});
+endsnippet

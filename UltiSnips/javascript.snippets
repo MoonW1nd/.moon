@@ -6,16 +6,30 @@ endsnippet
 
 snippet todo "do this later"
 /**
- * TODO [MoonW1nd]: $1
+ * @todo [MoonW1nd]: $1
  */
 endsnippet
 
-snippet cld "console.log with desc"
-console.log('$1', ${1:logme});
+snippet cl "console.log"
+console.log(${VISUAL}$1);
 endsnippet
 
-snippet cl "console.log"
-console.log('$1', ${1:logme});
+snippet cld "console.log with desc"
+// eslint-disable-next-line prettier/prettier
+console.log(
+	'\n\n>>>>>>\n\n$1:\n',
+	${1:logme},
+	'\n\n<<<<<<\n\n'
+);
+endsnippet
+
+snippet clo "console.log object"
+// eslint-disable-next-line prettier/prettier
+console.log(
+	'\n\n>>>>>>\n\n$1:\n',
+	JSON.stringify(${1:logme}, null, 2),
+	'\n\n<<<<<<\n\n'
+);
 endsnippet
 
 snippet iif "ignore the whole file"
@@ -54,9 +68,27 @@ snippet icn "import classnames"
 import cn from 'classnames';
 endsnippet
 
+# Expand styles
+snippet "([\w]+)\.st" "style (postfix)" r
+styles.`!p snip.rv = match.group(1)`$0
+endsnippet
+
 # Expand console.log
-snippet "([^\s]\w+)\.log" "console.log(postfix)" r
+snippet "([\w\.]+)\.log" "console.log(postfix)" r
 console.log(`!p snip.rv = match.group(1)`)$0
+endsnippet
+
+# Expand cn
+snippet "([\w\.]+)\.cn" "cn (postfix)" r
+cn(`!p snip.rv = match.group(1)`)$0
+endsnippet
+
+snippet cN "className"
+className$0
+endsnippet
+
+snippet oC "onClick"
+onClick$0
 endsnippet
 
 snippet rget "create ramda geter"
@@ -73,4 +105,26 @@ snippet if "if statement"
 if (${1: condition}) {
 	${VISUAL}$0
 }
+endsnippet
+
+snippet s "styles."
+styles.$0
+endsnippet
+
+snippet cn "cn wrapper"
+cn(${VISUAL}$0)
+endsnippet
+
+snippet rc "React component"
+import React from 'react';
+
+type Props = {
+	className?: string;
+}
+
+const ${1:name} = ({className}: Props): JSX.Element => (
+	${2: code}
+)
+
+export default $1;
 endsnippet

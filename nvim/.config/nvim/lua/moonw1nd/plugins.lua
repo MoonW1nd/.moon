@@ -62,6 +62,7 @@ Plug("junegunn/fzf", {["dir"] = "~/.fzf", ["do"] = "./install --all"})
 -- @deprecated
 Plug("junegunn/fzf.vim") -- fuzzy search intergration
 
+Plug("tpope/vim-abolish") -- some commands for help replace and search
 Plug("nvim-lua/popup.nvim")
 Plug("nvim-lua/plenary.nvim")
 Plug("ThePrimeagen/refactoring.nvim")
