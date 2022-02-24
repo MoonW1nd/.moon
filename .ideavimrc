@@ -1,0 +1,26 @@
+set visualbell
+set noerrorbells
+let mapleader = " "
+
+set relativenumber                                      " current line is 0
+
+" Remap navigation commands to center view on cursor using zz
+nnoremap <C-U> 11kzz
+nnoremap <C-D> 11jzz
+nnoremap j jzz
+nnoremap k kzz
+nnoremap # #zz
+nnoremap * *zz
+nnoremap n nzz
+nnoremap N Nzz
+
+map <leader>a :action $SelectAll<CR>
+map <leader>c :action $Copy<CR>
+map <leader>v :action $Paste<CR>
+map <leader>x :action $Cut<CR>
+map <leader>fp :action GotoFile<CR>
+map <leader>- :action ShowNavBar<CR>
+map <leader>ot :action ActivateTerminalToolWindow<CR>
+map \r <Action>(ReformatCode)
+
+set ideajoin
