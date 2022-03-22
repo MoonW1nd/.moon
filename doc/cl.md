@@ -57,7 +57,7 @@ brew install git-delta
 [github](https://github.com/stedolan/jq)
 Json formater, useful with curl
 ```shell
-brew install j1
+brew install jq
 ```
 
 ### Tmux plugin manager

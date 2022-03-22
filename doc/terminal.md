@@ -68,3 +68,10 @@ npm install -g spaceship-prompt
 ### zsh-completions
 
 [github](https://github.com/zsh-users/zsh-completions)
+
+# Troubleshoting
+
+### fix M1 pro access to folders
+```
+codesign --force --deep --sign - /Applications/Alacritty.app
+```

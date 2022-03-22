@@ -49,6 +49,7 @@ require("telescope").setup(
 require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("gh")
+require("telescope").load_extension("harpoon")
 
 local M = {}
 M.search_dotfiles = function()
@@ -78,12 +79,20 @@ end
 
 -- Work action pluggin {{{
 local COMAND_ACTION_DESCRIPTION = {
-    ["REBILD_SERVER"] = "Rebuild server",
+    ["SYNC_AND_RESTART_SERVER"] = "Sync and restart server",
     ["RESTART_SERVER"] = "Restart server",
+    ["REBILD_SERVER"] = "Rebuild server",
     ["RESTART_WEBPACK"] = "Restart webpack",
     ["MAKE_TS"] = "Run check types TS [MakeTs]",
     ["MAKE_ESLINT"] = "Run check code style [MakeEslint]",
     ["MAKE_ESLINT_FILE"] = "Run check code style [MakeEslintFile]",
+    ["STANDUP"] = "Open zoom standup [Affiliate]",
+    ["TECH_MEETING"] = "Open zoom tech meeting [Affiliate]",
+
+    -- Not implemented
+    ["CREATE_PR"] = "Create PR [Git]",
+    ["RESTART_MULTITESTING"] = "Restart multitesting [Git]",
+    ["UPDATE_PR"] = "Update PR [Git]",
 }
 
 local execute_working_command = function(prompt_bufnr)
@@ -103,6 +112,8 @@ local execute_working_command = function(prompt_bufnr)
         vim.api.nvim_command("RebildServer")
     elseif command_action == COMAND_ACTION_DESCRIPTION.RESTART_SERVER then
         vim.api.nvim_command("ReloadServer")
+    elseif command_action == COMAND_ACTION_DESCRIPTION.SYNC_AND_RESTART_SERVER then
+        vim.api.nvim_command("SyncAndReloadServer")
     elseif command_action == COMAND_ACTION_DESCRIPTION.RESTART_WEBPACK then
         vim.api.nvim_command("ReloadWebpack")
     elseif command_action == COMAND_ACTION_DESCRIPTION.MAKE_TS then
@@ -111,17 +122,24 @@ local execute_working_command = function(prompt_bufnr)
         vim.api.nvim_command("MakeEslint")
     elseif command_action == COMAND_ACTION_DESCRIPTION.MAKE_ESLINT_FILE then
         vim.api.nvim_command("MakeEslintFile")
+    elseif command_action == COMAND_ACTION_DESCRIPTION.STANDUP then
+        vim.api.nvim_command("Standup")
+    elseif command_action == COMAND_ACTION_DESCRIPTION.TECH_MEETING then
+        vim.api.nvim_command("TechMeeting")
     end
 end
 
 M.work_scripts = function()
     local command_actions = {
         COMAND_ACTION_DESCRIPTION.RESTART_SERVER,
+        COMAND_ACTION_DESCRIPTION.SYNC_AND_RESTART_SERVER,
         COMAND_ACTION_DESCRIPTION.RESTART_WEBPACK,
         COMAND_ACTION_DESCRIPTION.REBILD_SERVER,
         COMAND_ACTION_DESCRIPTION.MAKE_TS,
         COMAND_ACTION_DESCRIPTION.MAKE_ESLINT,
         COMAND_ACTION_DESCRIPTION.MAKE_ESLINT_FILE,
+        COMAND_ACTION_DESCRIPTION.STANDUP,
+        COMAND_ACTION_DESCRIPTION.TECH_MEETING,
     }
 
     local dropdownTheme = require("telescope.themes").get_dropdown();
@@ -258,3 +276,4 @@ M.my_fd = function(opts)
 end
 
 return M
+

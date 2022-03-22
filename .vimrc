@@ -230,10 +230,6 @@ noremap vA ggVG
 " Create new file in current folder
 nnoremap <leader>mn :e %:p:h/
 
-" Open style file
-nnoremap <leader>os :e %:p:h/styles.module.css<cr>
-" Open index file
-nnoremap <leader>oi :e %:p:h/index.*<cr>
 
 " Open quickfix and location list
 nmap <leader>oq :copen<cr>
@@ -258,6 +254,9 @@ xnoremap & :&&<CR>
 "
 " [terminus]
 let g:TerminusCursorShape=0
+
+"UltiSnip
+let g:UltiSnipsSnippetDirectories = [$HOME."/dotfiles/UltiSnips", $HOME."/dotfiles/.work/UltiSnips"]
 
 " Ferret
 let g:FerretHlsearch=1
@@ -433,7 +432,7 @@ endfunction
 
 " ======================== Autocommands ====================== "
 " affiliate sync-rsync
-command! AffRSync AsyncRun -mode=3 /Users/moonw1nd/Documents/Develop/work/rsync.sh
+command! AffRSync AsyncRun -mode=3 ~/dotfiles/scripts/rsync.sh
 
 command! OpenCurrentTicket silent !~/dotfiles/scripts/openCurrentTicket.sh
 command! OpenCurrentBranch silent !~/dotfiles/scripts/openCurrentBranch.sh
@@ -442,7 +441,9 @@ command! GhOpenFile silent !gh browse %
 command! RebuildServer silent !ssh $REMOTE_DEV_SERVER -t 'tmux send-keys -t 0 C-c;tmux send-keys "make clean && git checkout . && git pull -r origin master" C-m;tmux send-keys "nvm use 12 && make && make hmr-server" C-m'
 command! ReloadServer silent !ssh $REMOTE_DEV_SERVER -t 'tmux send-keys -t 0 C-c; tmux send-keys "make hmr-server" C-m'
 command! ReloadWebpack !tmux send-keys -t "[affiliate]:1.0" C-c "make hmr-client" C-m
-command! SyncAndReloadServer AsyncRun -mode=3 /Users/moonw1nd/Documents/Develop/work/rsync.sh && ssh $REMOTE_DEV_SERVER -t 'tmux send-keys -t 0 C-c; tmux send-keys "make hmr-server" C-m'
+command! SyncAndReloadServer AsyncRun -mode=3 /Users/moonw1nd/dotfiles/scripts/rsync.sh && ssh $REMOTE_DEV_SERVER -t 'tmux send-keys -t 0 C-c; tmux send-keys "make hmr-server" C-m'
+command! GhPrFixed !gh pr comment --body "/fixed"
+command! GhPrStart !gh pr comment --body "/start"
 
 " Delete all buffers
 command! Dab %bd|e#|bd#
@@ -455,9 +456,11 @@ command! -nargs=1 RunTestAA :AsyncRun npm run test -- --maxWorkers=50\% --report
 autocmd FocusLost * silent! wa
 autocmd BufWritePre *.{js,jsx,ts,tsx,cjs,mjs} :silent EslintFixAll
 autocmd BufWritePre *.{css} :silent lua vim.lsp.buf.formatting()
-autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
-autocmd BufWritePre *.go lua require("moonw1nd.lsp.go").goimports(1000)
+" autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
+autocmd BufWritePre *.lua lua require("moonw1nd.lsp.efm").efm_priority_document_format()
+
+" autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+" autocmd BufWritePre *.go lua require("moonw1nd.lsp.go").goimports(1000)
 autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
@@ -476,6 +479,8 @@ set foldtext=MyFoldText()
 " toggle folding
 nmap <leader>= za
 
+" off dwm mapings
+let g:dwm_map_keys=0
 "
 " @todo WTF?
 " Artefacts

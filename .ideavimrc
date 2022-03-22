@@ -2,6 +2,7 @@ set visualbell
 set noerrorbells
 let mapleader = " "
 
+set number                                      " current line is 0
 set relativenumber                                      " current line is 0
 
 " Remap navigation commands to center view on cursor using zz

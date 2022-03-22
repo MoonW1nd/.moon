@@ -1,0 +1,86 @@
+{
+  "title": "Moons keybindings",
+  "rules": [
+    {
+      "description": "L_CTRL + [ to ESC",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "open_bracket",
+            "modifiers": {
+              "mandatory": [
+                "left_control"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "escape"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "manipulators": [
+        {
+          "description": "Change right command to option+shift.",
+          "from": {
+            "key_code": "right_command",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_option",
+              "modifiers": ["left_shift"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "manipulators": [
+        {
+          "description": "Change right option to left_command + left_control + left_option + left_shift",
+          "from": {
+            "key_code": "right_option",
+            "modifiers": {
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_command",
+              "modifiers": ["left_control", "left_option", "left_shift"]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+        "manipulators": [
+            {
+                "description": "Alfred shift + j, k navigation",
+                "from": {
+                  "key_code": "j",
+                  "modifiers": {
+                    "optional": ["right_control"]
+                  }
+                },
+                "to": [
+                  {
+                    "key_code": "arrow_down",
+                    "modifiers": ["any"]
+                  }
+                ],
+                "type": "basic"
+            }
+        ]
+    }
+  ]
+}

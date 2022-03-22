@@ -20,6 +20,10 @@ Plug("kyazdani42/nvim-web-devicons")
 Plug("gregsexton/MatchTag") -- highlight matching html tags
 Plug("justinmk/vim-dirvish") -- files explorer
 Plug("antonk52/dirvish-fs.vim") -- work with files
+Plug("tpope/vim-projectionist") -- file association in projects
+Plug("fsharpasharp/vim-dirvinist") -- open files by pattern
+Plug("vifm/vifm.vim") -- work with files
+Plug("spolu/dwm.vim") -- tail manager for vim
 Plug("blueyed/vim-diminactive") -- dim inactive splits
 Plug("editorconfig/editorconfig-vim") -- consistent coding style
 
