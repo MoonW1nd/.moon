@@ -74,6 +74,7 @@ alias ot=$HOME/dotfiles/scripts/openCurrentTicket.sh
 alias ob=$HOME/dotfiles/scripts/openCurrentBranch.sh
 alias .cpr=$HOME/dotfiles/scripts/createPRwithDescription.sh
 alias .rmt=$HOME/dotfiles/scripts/restartMT.sh
+alias vcs=$HOME/dotfiles/scripts/vcs.sh
 alias pms="pomodoro start"
 alias pmf="pomodoro finish"
 alias pmts="termdown 25m && osascript -e 'display notification \"Time to break\" with title \"Pomodoro\" subtitle \"Finish\" sound name \"piece-of-cake-611\"'"
