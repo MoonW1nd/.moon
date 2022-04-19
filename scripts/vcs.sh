@@ -31,6 +31,17 @@ if [ "$1" = "checkout" ] || [ $1 = "co" ]; then
         $command checkout $($command branch -r | fzf)
     elif [ "$command" = "arc" ] && [ -z "$2" ]; then
         $command checkout $($command branch --list | fzf)
+    elif [ "$command" = "arc" ] && [ "$2" == "-bt" ]; then
+        ticketInfo=$(moontool info -o | fzf)
+        
+        if [ -z "$ticketInfo" ]; then
+            echo "Not selected Tikcet"
+            exit 1
+        fi
+
+        text="# Set branch name for Tracker ticket.\n# $ticketInfo.\n$(echo $ticketInfo | sed 's/ \{1,\}/_/g' | cut -d '_' -f 2)"
+
+        $command checkout -b $(echo $text | vipe | grep -e "^\w\+")
     else
         shift
         $command checkout $@
@@ -44,16 +55,22 @@ elif [ "$1" = "fpr" ]; then
     else
         $command fpr
     fi
-elif [ "$1" = "branch" ] && [ "$2" = "rename" ]; then
-    if [ -z "$3" ]; then
-        echo "[WARN] Need set new name to branch"
-        exit 1
-    fi
+elif [ "$1" = "branch" ] || [ "$1" = "br" ]; then
+    if [ "$2" = "-m" ]; then
+        if [ -z "$3" ]; then
+            echo "[WARN] Need set new name to branch"
+            exit 1
+        fi
 
-    if [ "$command" = "arc" ]; then
-        $command branch -m $3
-    else
-        $command branch -m $(get_branch_name) $3
+        if [ "$command" = "arc" ]; then
+            $command branch -m $3
+        else
+            $command branch -m $(get_branch_name) $3
+        fi
+    elif [ "$2" = "-d" ] || [ "$2" = "-D" ]; then
+        if [ -z "$3" ]; then
+            $command branch $2 $($command branch --list | fzf --multi | xargs)
+        fi
     fi
 elif [ "$1" = "tc" ]; then
     if [ -z "$2" ]; then
@@ -62,7 +79,7 @@ elif [ "$1" = "tc" ]; then
     fi
 
     shift
-    $command commit -m \"$(get_ticket_name): $@\"
+    $command commit -m "$(get_ticket_name): $@"
 elif [ "$1" = "hist" ]; then
     if [ "$command" = "arc" ]; then
         # TODO add support for git show PR links and commits link
