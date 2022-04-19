@@ -186,6 +186,12 @@ inoremap [ [<c-g>u
 inoremap ! !<c-g>u
 inoremap ? ?<c-g>u
 
+" === Move between windows ===
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 
 " === Move line UP or Down alt-jk ===
 nnoremap ˚ :m .-2<CR>==
