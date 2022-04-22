@@ -439,6 +439,7 @@ endfunction
 " ======================== Autocommands ====================== "
 " affiliate sync-rsync
 command! AffRSync AsyncRun -mode=3 ~/dotfiles/scripts/rsync.sh
+" command! AffRSync AsyncRun ~/dotfiles/scripts/rsync.sh
 
 command! OpenCurrentTicket silent !~/dotfiles/scripts/openCurrentTicket.sh
 command! OpenCurrentBranch silent !~/dotfiles/scripts/openCurrentBranch.sh
@@ -485,9 +486,27 @@ set foldtext=MyFoldText()
 " toggle folding
 nmap <leader>= za
 
-" off dwm mapings
-let g:dwm_map_keys=0
+nmap <silent> ]c :call NextHunkCycle()<CR>
+nmap <silent> [c :call PrevHunkCycle()<CR>
 "
+function! NextHunkCycle()
+  let line = line('.')
+  silent! execute "normal \<plug>(signify-next-hunk)"
+  if line('.') == line
+    normal! 1G
+    silent! execute "normal \<plug>(signify-next-hunk)"
+  endif
+endfunction
+
+function! PrevHunkCycle()
+  let line = line('.')
+  silent! execute "normal \<plug>(signify-prev-hunk)"
+  if line('.') == line
+    normal! G
+    silent! execute "normal \<plug>(signify-prev-hunk)"
+  endif
+endfunction
+
 " @todo WTF?
 " Artefacts
 "

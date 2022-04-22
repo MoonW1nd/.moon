@@ -6,7 +6,7 @@ require("moonw1nd.treesitter");
 require("moonw1nd.harpoon")
 require("moonw1nd.telescope");
 -- Errors on new version need update
--- require("moonw1nd.refactoring");
+require("moonw1nd.refactoring");
 require("moonw1nd.comment");
 require("moonw1nd.env")
 

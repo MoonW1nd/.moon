@@ -1,4 +1,5 @@
-clear
+fpath+=~/.zfunc
+# clear
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # For share history before tmux pane
@@ -36,11 +37,12 @@ plugins=(
     copybuffer
     aliases
     history
-    vi-mode
     zsh-autosuggestions
     urltools
     web-search
-    zsh-completions
+    vi-mode
+    # zsh-completions
+    # zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -56,6 +58,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Pure theme
 ZSH_THEME=""
+# ZSH_THEME="spaceship"
 DEFAULT_USER=`whoami`
 
 # Load keys and access tokens
@@ -72,12 +75,15 @@ alias tdat=todoist-add-task
 alias cat=ccat
 alias ot=$HOME/dotfiles/scripts/openCurrentTicket.sh
 alias ob=$HOME/dotfiles/scripts/openCurrentBranch.sh
+alias opr=$HOME/dotfiles/scripts/openPr.sh
 alias .cpr=$HOME/dotfiles/scripts/createPRwithDescription.sh
 alias .rmt=$HOME/dotfiles/scripts/restartMT.sh
 alias vcs=$HOME/dotfiles/scripts/vcs.sh
 alias pms="pomodoro start"
 alias pmf="pomodoro finish"
 alias pmts="termdown 25m && osascript -e 'display notification \"Time to break\" with title \"Pomodoro\" subtitle \"Finish\" sound name \"piece-of-cake-611\"'"
+alias lsrv="live-server --port=1991"
+alias ya='$HOME/Documents/develop/work/arcadia/ya'
 
 # dir manipulation
 alias ..='cd ..'
@@ -98,7 +104,8 @@ alias :q='exit'
 # load scripts
 source $HOME/dotfiles/scripts/minimalVimrc.sh
 source $HOME/dotfiles/scripts/vssh.sh
-source $HOME/dotfiles/scripts/todoist.sh
+# source $HOME/dotfiles/scripts/todoist.sh
+source $HOME/dotfiles/scripts/tracker.sh
 source $HOME/dotfiles/scripts/ff.sh
 source $HOME/dotfiles/scripts/fl.sh
 source $HOME/dotfiles/scripts/pomodoroWork.sh
@@ -136,7 +143,7 @@ bindkey "^Q" push-line-or-edit
 bindkey "^v" edit-command-line
 
 # fzf settings
-export FZF_DEFAULT_OPTS="--border --height 40% --reverse --history=$HOME/.fzf_history --ansi"
+export FZF_DEFAULT_OPTS="--border --prompt=\"λ \" --height 40% --reverse --history=$HOME/.fzf_history --ansi"
 export FZF_COMPLETION_OPTS="--preview '(bat --map-syntax js:jsx --theme base16 --color=always {} || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_CTRL_T_OPTS="$FZF_COMPLETION_OPTS"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!node_modules/*"'
@@ -183,7 +190,14 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
+
+# zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+source ~/dotfiles/scripts/prompt.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # [[ -s"$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
 neofetch
+# fpath=($fpath "/Users/moonw1nd/.zfunctions")
+# autoload -U promptinit; promptinit
+# prompt spaceship

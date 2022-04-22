@@ -23,7 +23,8 @@ Plug("antonk52/dirvish-fs.vim") -- work with files
 Plug("tpope/vim-projectionist") -- file association in projects
 Plug("fsharpasharp/vim-dirvinist") -- open files by pattern
 Plug("vifm/vifm.vim") -- work with files
-Plug("spolu/dwm.vim") -- tail manager for vim
+-- Fork and reimplement for my stile
+-- Plug("spolu/dwm.vim") -- tail manager for vim
 Plug("blueyed/vim-diminactive") -- dim inactive splits
 Plug("editorconfig/editorconfig-vim") -- consistent coding style
 
@@ -90,7 +91,9 @@ Plug("kshenoy/vim-signature") -- display marks
 Plug("joshdick/onedark.vim") -- dark theme
 Plug("preservim/vim-colors-pencil") -- light theme
 Plug("mhinz/vim-startify")
-Plug("airblade/vim-gitgutter")
+
+-- TODO: переписать на работу с arc
+-- Plug("airblade/vim-gitgutter") -- In arc use Signify
 
 -- -- languages
 Plug("godlygeek/tabular")
@@ -108,7 +111,8 @@ Plug("machakann/vim-highlightedyank") -- highlight yanked file
 Plug("jiangmiao/auto-pairs") -- auto close pairs
 Plug("AndrewRadev/tagalong.vim") -- rename tags
 Plug("mbbill/undotree") -- undo tree in vim
-Plug("vim-scripts/ReplaceWithRegister") -- replace word on copy buffer
+-- Not usefull ?
+-- Plug("vim-scripts/ReplaceWithRegister") -- replace word on copy buffer
 Plug("tpope/vim-surround") -- surround brackets
 Plug("takac/vim-hardtime") -- hard mode on vim
 Plug("JoosepAlviste/nvim-ts-context-commentstring")

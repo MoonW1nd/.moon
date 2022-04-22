@@ -19,13 +19,16 @@ fi
 
 echo "Ticket: $ticket"
 
-title=`st-cli issue $ticket -p summary`
+title=`moontool issue $ticket -p summary`
 echo "Title: $title"
 
-body=`st-cli issue $ticket -p description`
+body=`moontool issue $ticket -p description`
 echo "Description:\n$body"
 
-echo -e "## Какую задачу решаем\n$body\n### Комментарии разработчика\n—\n" > ~/.moon/vcs/__pr_body_msg
+branch_name=$(arc info | grep -o -Ee "branch: .*" | cut -d ' ' -f 2)
+
+# TODO: adapt byt git
+echo -e "$title\n\n## Какую задачу решаем\n$body\n### Комментарии разработчика\n—\n" | vipe > $HOME/.moon/vcs/__pr_body_msg
 
 isArcEnv=
 ticket_name=
@@ -40,7 +43,7 @@ else
 fi
 
 if [ $isArcEnv == true ]; then
-    arc pr create --push -F ~/.moon/vcs/__pr_body_msg
+    arc pr create --push --message="$(cat $HOME/.moon/vcs/__pr_body_msg)" --no-commits
 else
     gh pr create -a @me --body="$(cat ~/.moon/vcs/__pr_body_msg)" --title="$title"
 fi

@@ -48,6 +48,18 @@ if [ "$1" = "checkout" ] || [ $1 = "co" ]; then
     fi
 elif [ "$1" = "uc" ]; then
     $command reset --soft HEAD^
+elif [ "$1" = "rm" ]; then
+    selectedFiles=$($command status -s | fzf --multi |xargs -I '{}' bash -c 'echo {} | cut -d " " -f 2' | xargs)
+
+    rm -ir $selectedFiles
+elif [ "$1" = "add" ]; then
+    if [ -z "$2" ]; then 
+        selectedFiles=$($command status -s | grep -e "^[^A]" | fzf --multi --preview="echo {} | cut -d ' ' -f 3 | xargs -I '[]' arc diff --git '[]' | delta" | xargs -I '{}' bash -c 'echo {} | cut -d " " -f 2' | xargs)
+
+        $command add $selectedFiles
+    else
+        $command $@
+    fi
 elif [ "$1" = "fpr" ]; then
     if [ "$command" = "arc" ]; then
         # TODO add support not setted

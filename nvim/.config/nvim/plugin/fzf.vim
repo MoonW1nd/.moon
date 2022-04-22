@@ -42,7 +42,7 @@ command! -bang -nargs=* Rg
 
 command! -bang -nargs=* Rga
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --glob="!node_modules" --glob="!app" --glob="!freeze" --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview({'options': '--delimiter :'}), <bang>0)
 
 command! -bang -nargs=* GRga
@@ -73,5 +73,5 @@ command! -bang GDf call fzf#run(fzf#wrap('args',
 " nnoremap <silent> [fzf-p]f :GFiles?<cr>
 " nnoremap <silent> [fzf-p]r :Files ~/.dev/api/<cr>
 
-" nnoremap <C-g> :Rga<Space>
+nnoremap <C-g> :Rga<Space>
 " nnoremap <leader><C-g> :GRga<Space>
