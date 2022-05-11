@@ -2,7 +2,7 @@
 
 command=
 
-cd $HOME/Documents/develop/work/arcadia/
+cd $ARCADIA_PATH
 
 if [ ! -z "$(arc info 2>/dev/null)" ]; then
     command=arc

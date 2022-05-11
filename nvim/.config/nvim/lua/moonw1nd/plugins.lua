@@ -75,6 +75,8 @@ Plug("ThePrimeagen/harpoon")
 -- Plug("nvim-telescope/telescope-github.nvim")
 -- replace after merging
 Plug("MoonW1nd/telescope-github.nvim")
+-- Hack for my plugin
+Plug("~/Documents/develop/lua/telescope-arc.nvim")
 Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-telescope/telescope-fzf-native.nvim", {["do"] = "make"})
 Plug("nvim-telescope/telescope-live-grep-raw.nvim")

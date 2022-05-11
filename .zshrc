@@ -73,7 +73,8 @@ alias vim=nvim
 alias td=todoist
 alias tdat=todoist-add-task
 alias cat=ccat
-alias ot=$HOME/dotfiles/scripts/openCurrentTicket.sh
+alias oct=$HOME/dotfiles/scripts/openCurrentTicket.sh
+alias ot=$HOME/dotfiles/scripts/openTicket.sh
 alias ob=$HOME/dotfiles/scripts/openCurrentBranch.sh
 alias opr=$HOME/dotfiles/scripts/openPr.sh
 alias .cpr=$HOME/dotfiles/scripts/createPRwithDescription.sh
@@ -84,6 +85,7 @@ alias pmf="pomodoro finish"
 alias pmts="termdown 25m && osascript -e 'display notification \"Time to break\" with title \"Pomodoro\" subtitle \"Finish\" sound name \"piece-of-cake-611\"'"
 alias lsrv="live-server --port=1991"
 alias ya='$HOME/Documents/develop/work/arcadia/ya'
+alias vssh='$HOME/dotfiles/scripts/vssh.sh'
 
 # dir manipulation
 alias ..='cd ..'
@@ -103,7 +105,6 @@ alias :q='exit'
 
 # load scripts
 source $HOME/dotfiles/scripts/minimalVimrc.sh
-source $HOME/dotfiles/scripts/vssh.sh
 # source $HOME/dotfiles/scripts/todoist.sh
 source $HOME/dotfiles/scripts/tracker.sh
 source $HOME/dotfiles/scripts/ff.sh
@@ -176,8 +177,9 @@ export PATH="$PATH:$HOME/dotfiles/vifm/vifmimg/vifmimg"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
 export GOPATH=$HOME/go
-export GOROOT="/opt/homebrew/Cellar/go/1.17.6/libexec/"
+export GOROOT="/opt/homebrew/Cellar/go/1.18.1/libexec/"
 export PATH=$PATH:$GOPATH/bin
+export MOON_VIM_PLUGIN_PATH="$HOME/.vim/pack/vendor/start/"
 
 # Fort correct work vifm
 export LC_ALL=en_US.UTF-8  

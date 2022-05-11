@@ -5,6 +5,15 @@
 - [How do I insert the current visual selection phrase into the command-line?](#insert-visual-selection)
 - [Replace last search text](#replace-last-search)
 
+<a id="install-vim-plugins-manually"></a>
+## [Install Vim Plugins Munually](https://opensource.com/article/20/2/how-install-vim-plugins)
+
+```bash
+mkdir -p ~/.vim/pack/vendor/start
+cp plugin/path ~/.vim/pack/vendor/start
+
+```
+
 <a id="keybindings"></a>
 ## Keybindings
 

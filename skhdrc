@@ -76,13 +76,17 @@
 # A REFERENCE ONLY, WHEN MAKING YOUR OWN CONFIGURATION..          #
 # ############################################################### #
 
-# focus/open browser
-# cmd + ctrl - f: open -a Firefox\ Developer\ Edition
-cmd + ctrl - h: open -a Chromium
+# Work with brew
+# brew services start skhd
+# brew services stop skhd
  
+# focus/open browser
 cmd + ctrl - y: open -a Yandex
-
 cmd + ctrl - s: open -a Safari
+# cmd + ctrl - y: open -a Firefox\ Developer\ Edition
+# cmd + ctrl - h: open -a Chromium
+
+
 
 # focus/open terminal
 cmd + ctrl - j: open -a Alacritty
@@ -93,4 +97,3 @@ cmd + ctrl - n: open -a Notion
 
 # focus/open massager
 cmd + ctrl - m: open -a Telegram
-

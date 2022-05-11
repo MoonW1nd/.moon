@@ -1,7 +1,13 @@
-vssh (){
-    if [[ $@ ]]; then
-        ssh `printf "%q\n" "$@"` -t "export VIMINIT='$MINIMAL_VIMINIT' &&  bash"
+if [[ $@ ]]; then
+    if [ "$1" = "-t" ]; then
+        command=$2
+        shift
+        shift
+        ssh $@ -t "export VIMINIT='$MINIMAL_VIMINIT' && bash -c '$command'"
     else
-        echo "Provide remote user@host";
+        ssh $@ -t "export VIMINIT='$MINIMAL_VIMINIT' && bash"
     fi
-}
+
+else
+    echo "Provide remote user@host";
+fi

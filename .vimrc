@@ -2,7 +2,7 @@
 " vimscript ./nvim/.config/nvim/plugin/
 " lua ./nvim/.config/nvim/lua/moonw1nd/
 
-" 
+"
 " Required settings for correct work
 "
 set nocompatible
@@ -256,7 +256,7 @@ nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 
 "
-" Plugin Configurations 
+" Plugin Configurations
 "
 " [terminus]
 let g:TerminusCursorShape=0
@@ -443,6 +443,7 @@ command! AffRSync AsyncRun -mode=3 ~/dotfiles/scripts/rsync.sh
 
 command! OpenCurrentTicket silent !~/dotfiles/scripts/openCurrentTicket.sh
 command! OpenCurrentBranch silent !~/dotfiles/scripts/openCurrentBranch.sh
+command! ArcOpenFile silent !~/dotfiles/scripts/arcOpenFile.sh %
 command! GhOpenCurrentBranch silent !gh pr view --web
 command! GhOpenFile silent !gh browse %
 command! RebuildServer silent !ssh $REMOTE_DEV_SERVER -t 'tmux send-keys -t 0 C-c;tmux send-keys "make clean && git checkout . && git pull -r origin master" C-m;tmux send-keys "nvm use 12 && make && make hmr-server" C-m'
@@ -461,10 +462,11 @@ command! -nargs=1 RunTestAA :AsyncRun npm run test -- --maxWorkers=50\% --report
 
 
 autocmd FocusLost * silent! wa
+autocmd BufWritePre * silent! call TrimWhitespace()
 autocmd BufWritePre *.{js,jsx,ts,tsx,cjs,mjs} :silent EslintFixAll
 autocmd BufWritePre *.{css} :silent lua vim.lsp.buf.formatting()
 " autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.lua lua require("moonw1nd.lsp.efm").efm_priority_document_format()
+" autocmd BufWritePre *.lua lua require("moonw1nd.lsp.efm").efm_priority_document_format()
 
 " autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 " autocmd BufWritePre *.go lua require("moonw1nd.lsp.go").goimports(1000)
@@ -481,7 +483,7 @@ function! MyFoldText()
 endfunction
 
 " Custom display for text when folding
-set foldtext=MyFoldText() 
+set foldtext=MyFoldText()
 
 " toggle folding
 nmap <leader>= za
@@ -491,7 +493,9 @@ nmap <silent> [c :call PrevHunkCycle()<CR>
 "
 function! NextHunkCycle()
   let line = line('.')
+
   silent! execute "normal \<plug>(signify-next-hunk)"
+
   if line('.') == line
     normal! 1G
     silent! execute "normal \<plug>(signify-next-hunk)"
@@ -506,6 +510,79 @@ function! PrevHunkCycle()
     silent! execute "normal \<plug>(signify-prev-hunk)"
   endif
 endfunction
+
+function! ShowPRComments(...)
+    let prNumberOutput = system('arc pr st -s | cut -d " " -f 1')
+    let prNumber = split(prNumberOutput, '\n')[0]
+
+    let flist = system('moontool review-comments ' . prNumber)
+    let flist = split(flist, '\n')
+
+    " Create the dictionnaries used to populate the quickfix list
+    let list = [{'text': 'Commets for PR https://a.yandex-team.ru/review/' . prNumber . '/details'}]
+
+    let inTread = 0
+    let nextName = 0
+
+    for f in flist
+        if inTread == 0 && f != ""
+            let inTread = 1
+            let pathData = split(f, ':')
+
+            if len(pathData) == 2 && pathData[1] =~# '^\d\+$'
+                call add(list, {'text': ''})
+                let dic = {'filename': pathData[0], "lnum": pathData[1]}
+                call add(list, dic)
+            endif
+
+            let nextName = 1
+        elseif nextName == 1
+            let unifiedData = system("echo -e '" . f . "' | sed -e 's/^> //'")
+            let nameData = split(unifiedData, ' ')
+
+            if f =~# '^> '
+                call add(list, {'text': ''})
+                let dic = { 'text': ' | ' . nameData[0] . ' ' . nameData[1] }
+                call add(list, dic)
+            else
+                let dic = { 'text': nameData[0] . ' ' . nameData[1] }
+                call add(list, dic)
+            endif
+
+            let nextName = 0
+        elseif f =~# '^>>>>$'
+            let inTread = 0
+        elseif f =~# '^----$'
+            let nextName = 1
+        else
+            if f =~# '^> '
+                let unifiedData = system("echo -e '" . f . "' | sed -e 's/^> //'")
+
+                let dic = {'text': ' | ' . unifiedData}
+                call add(list, dic)
+            else
+                let dic = {'text': f}
+                call add(list, dic)
+            endif
+            " call add(list, {'text': '----------'})
+        endif
+        "
+        " let data = split(f, ':')
+        "
+        " if len(data) == 2 && data[1] =~# '^\d\+$'
+        "     let dic = {'filename': data[0], "lnum": data[1]}
+        "     call add(list, dic)
+        " endif
+        "
+    endfor
+
+    " Populate the qf list
+    call setqflist(list)
+
+    " copen
+endfunction
+
+command! Sprc call ShowPRComments()
 
 " @todo WTF?
 " Artefacts

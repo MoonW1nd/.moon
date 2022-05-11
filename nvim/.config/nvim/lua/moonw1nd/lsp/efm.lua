@@ -13,10 +13,10 @@ nvim_lsp.efm.setup {
                     lintStdin = true,
                     lintFormats = {"%f:%l:%c: %m"},
                 },
-                {
-                    formatCommand = "lua-format -i --config='/Users/moonw1nd/dotfiles/.lua-format'",
-                    formatStdin = true,
-                },
+                -- {
+                --     formatCommand = "lua-format -i --config='/Users/moonw1nd/dotfiles/.lua-format'",
+                --     formatStdin = true,
+                -- },
             },
         },
     },
@@ -25,6 +25,7 @@ nvim_lsp.efm.setup {
 local M = {}
 
 local efm_priority_document_format
+
 function M.efm_priority_document_format()
     if not efm_priority_document_format then
         local clients = vim.lsp.buf_get_clients(0)

@@ -10,6 +10,11 @@ snippet todo "do this later"
  */
 endsnippet
 
+snippet tsi "TS ignore"
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+endsnippet
+
 snippet cl "console.log"
 console.log(${VISUAL}$1);
 endsnippet
@@ -127,6 +132,10 @@ const ${1:name} = ({className}: Props): JSX.Element => (
 )
 
 export default $1;
+endsnippet
+
+snippet ma "metrica Action"
+export const METRIKA_$1 = "METRIKA_$1";
 endsnippet
 
 snippet ma "metrica Action"

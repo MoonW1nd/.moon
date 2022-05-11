@@ -35,7 +35,7 @@ if [ "$1" = "checkout" ] || [ $1 = "co" ]; then
         ticketInfo=$(moontool info -o | fzf)
         
         if [ -z "$ticketInfo" ]; then
-            echo "Not selected Tikcet"
+            echo "Not selected Ticket"
             exit 1
         fi
 
@@ -48,8 +48,20 @@ if [ "$1" = "checkout" ] || [ $1 = "co" ]; then
     fi
 elif [ "$1" = "uc" ]; then
     $command reset --soft HEAD^
+elif [ "$1" = "diff" ]; then
+    if [ "$command" = "arc" ]; then
+        shift
+        $command  diff --git $@ | delta
+    else
+        $command $@
+    fi
 elif [ "$1" = "rm" ]; then
     selectedFiles=$($command status -s | fzf --multi |xargs -I '{}' bash -c 'echo {} | cut -d " " -f 2' | xargs)
+
+    if [ -z $selectedFiles ]; then
+        echo "[WARN] Not selected files to remove."
+        exit 1
+    fi
 
     rm -ir $selectedFiles
 elif [ "$1" = "add" ]; then
@@ -66,6 +78,16 @@ elif [ "$1" = "fpr" ]; then
         $command pull -r $($command branch --list | fzf)
     else
         $command fpr
+    fi
+# WIP commit
+elif [ "$1" = "wip" ]; then
+        $command commit -m "WIP: DON\'T PUSH" --no-verify
+# Open comments
+elif [ $1 == "pr" ] && [ $2 == "comments" ]; then
+    if [ "$command" = "arc" ]; then
+        $HOME/dotfiles/scripts/showPrComments.sh
+    else
+        echo [WARN] show pr comments not implemented.
     fi
 elif [ "$1" = "branch" ] || [ "$1" = "br" ]; then
     if [ "$2" = "-m" ]; then
@@ -104,5 +126,5 @@ elif [ "$1" = "hist" ]; then
         $command log --color --pretty=format:"%C(yellow)%h%C(reset) %s%C(bold red)%d%C(reset) %C(green)%ad%C(reset) %C(blue)[%an]%C(reset)" --relative-date --decorate
     fi
 else
-    $command $@
+    $command "$@"
 fi
