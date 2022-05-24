@@ -51,7 +51,7 @@ M.reviews_pull_request = function()
             attach_mappings = function(_, map)
                 map("i", "<c-e>", telescope_gh_actions.gh_pr_v_toggle)
                 map("i", "<c-g>", telescope_gh_actions.gh_pr_checkout)
-                actions.select_default:replace(M.gh_web_view("pr"))
+                actions.select_default:replace(gh_web_view("pr"))
                 return true
             end,
         }

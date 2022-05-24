@@ -17,7 +17,6 @@ let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 " load lua configs and plugins
 lua require('moonw1nd')
 
-
 "
 " Editor behoviour settings
 "
@@ -241,6 +240,8 @@ nnoremap <leader>mn :e %:p:h/
 nmap <leader>oq :copen<cr>
 nmap <leader>ol :lopen<cr>
 
+nmap <localleader>s :VCS<cr>
+
 " Start substitution path @todo delete? Not usefull
 inoremap <expr> <c-x><c-p> fzf#vim#complete#path('fd')
 
@@ -384,10 +385,20 @@ nmap [l :lprev<CR>
 
 " Copy current file path to clipboard
 nnoremap <leader>% :call CopyCurrentFilePath()<CR>
+nnoremap <leader>cp :call CopyLinkToCurrentFilePath()<CR>
 
 function! CopyCurrentFilePath()
   let @+ = expand('%')
   echo @+
+endfunction
+
+function! CopyLinkToCurrentFilePath()
+    let absolute_path = $PWD . '/' . expand('%')
+    let cursor_pos = getpos(".")
+    let cursor_line = cursor_pos[1]
+
+    let @+ = '{@ ' . absolute_path . " +" . cursor_line . '}'
+    echo @+
 endfunction
 
 " for project wide search
@@ -453,6 +464,8 @@ command! SyncAndReloadServer AsyncRun -mode=3 /Users/moonw1nd/dotfiles/scripts/r
 command! GhPrFixed !gh pr comment --body "/fixed"
 command! GhPrStart !gh pr comment --body "/start"
 
+command! VCS lua require("moonw1nd.vcs").command()
+
 " Delete all buffers
 command! Dab %bd|e#|bd#
 
@@ -474,6 +487,8 @@ autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
 autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+
+autocmd Filetype norg setlocal ts=2 sw=2 et rnu
 
 function! MyFoldText()
     let l:start_arrow = '----► '

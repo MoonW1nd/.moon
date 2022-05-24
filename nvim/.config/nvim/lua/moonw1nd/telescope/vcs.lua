@@ -108,7 +108,16 @@ M.updated_files = function()
     local ok
 
     if helpers.is_arc_env() then
-        ok = pcall(require("telescope").extensions.arc.status, opts)
+        local statusOptions = {
+            preview_cmd = {
+                staged = "arc diff --git --cached %s | delta --pager='less -SR'",
+                unstaged = "arc diff --git %s | delta --pager='less -SR'",
+                untracked = "bat --pager='less -SR' -pn %s",
+            },
+            expand_dir = true,
+        }
+
+        ok = pcall(require("telescope").extensions.arc.status, statusOptions)
     else
         ok = pcall(require("telescope.builtin").git_status, opts)
     end
@@ -124,10 +133,9 @@ M.pull_request = function()
     local ok
 
     if helpers.is_arc_env() then
-        ok = true
-        utils.notify("builtin.vcs.pull_request.", {
-            msg = "Not implemented for arc",
-            level = "WARN",
+        ok = pcall(require"telescope".extensions.arc.pr_list, {
+            flags = {"--subscriber", "moonw1nd", "--status", "open"},
+            prompt_title = "Arc PR list"
         })
     else
         ok = pcall(require"moonw1nd.telescope.gh".pull_request, opts)
@@ -147,10 +155,9 @@ M.my_pull_request = function()
     local ok
 
     if helpers.is_arc_env() then
-        ok = true
-        utils.notify("builtin.vcs.my_pull_request.", {
-            msg = "Not implemented for arc",
-            level = "WARN",
+        ok = pcall(require"telescope".extensions.arc.pr_list, {
+            flags = {"-o"},
+            prompt_title = "Arc my PR list"
         })
     else
         ok = pcall(require"moonw1nd.telescope.gh".my_pull_request, opts)
@@ -170,10 +177,9 @@ M.reviews_pull_request = function()
     local ok
 
     if helpers.is_arc_env() then
-        ok = true
-        utils.notify("builtin.vcs.reviews_pull_request", {
-            msg = "Not implemented for arc",
-            level = "WARN",
+        ok = pcall(require"telescope".extensions.arc.pr_list, {
+            flags = {"-i", "--shipper", "!moonw1nd"},
+            prompt_title = "Arc PR need review"
         })
     else
         ok = pcall(require"moonw1nd.telescope.gh".reviews_pull_request, opts)

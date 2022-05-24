@@ -79,13 +79,14 @@
 # Work with brew
 # brew services start skhd
 # brew services stop skhd
- 
+
 # focus/open browser
 cmd + ctrl - y: open -a Yandex
 cmd + ctrl - s: open -a Safari
 # cmd + ctrl - y: open -a Firefox\ Developer\ Edition
 # cmd + ctrl - h: open -a Chromium
 
+cmd + ctrl - m: open -a Yandex\ Music\ Unofficial
 
 
 # focus/open terminal
@@ -96,4 +97,4 @@ cmd + ctrl - i: open -a iTerm
 cmd + ctrl - n: open -a Notion
 
 # focus/open massager
-cmd + ctrl - m: open -a Telegram
+cmd + ctrl - t: open -a Telegram

@@ -27,7 +27,7 @@ $(brew --prefix)/opt/fzf/install
 brew install the_silver_searcher
 ```
 
-### bat 
+### bat
 
 [github](https://github.com/sharkdp/bat)
 
@@ -107,3 +107,8 @@ brew install moreutils
 ```
 brew install tmuxinator
 ```
+
+### locate
+Утилитка для поиска файлов на файловой системе
+
+### cdu

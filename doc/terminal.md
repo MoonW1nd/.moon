@@ -16,7 +16,7 @@ brew cask install alacritty
 npm install --global pure-prompt
 ```
 
-### spacehsip prompt 
+### spacehsip prompt
 
 [github](https://github.com/denysdovhan/spaceship-prompt)
 

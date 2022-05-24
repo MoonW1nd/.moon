@@ -1,6 +1,6 @@
-nnoremap <leader>oh :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>oh :Telescope harpoon marks<CR>
 nnoremap <leader>oc :lua require("harpoon.cmd-ui").toggle_quick_menu()<CR>
-nnoremap <leader>ot :lua require("harpoon.term").gotoTerminal(1)<CR> 
+nnoremap <leader>ot :lua require("harpoon.term").gotoTerminal(1)<CR>
 
 nnoremap <leader>ah :lua require("harpoon.mark").add_file()<CR>
 nnoremap ]h :lua require("harpoon.ui").nav_next()<CR>

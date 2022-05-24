@@ -3,12 +3,16 @@ require("moonw1nd.cmp");
 require("moonw1nd.lsp")
 require("moonw1nd.lsp_signature")
 require("moonw1nd.treesitter");
+require("moonw1nd.orgmode")
+require("moonw1nd.dial")
 require("moonw1nd.harpoon")
 require("moonw1nd.telescope");
 -- Errors on new version need update
 require("moonw1nd.refactoring");
 require("moonw1nd.comment");
 require("moonw1nd.env")
+require("moonw1nd.vcs")
+
 
 function _G.ReloadConfig()
     for name, _ in pairs(package.loaded) do

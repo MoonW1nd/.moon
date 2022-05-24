@@ -25,6 +25,8 @@ cmp.setup(
                     nvim_lsp = "ﲳ",
                     treesitter = "",
                     -- dictionary = "﬜",
+                    orgmode = "﬜",
+                    neorg = "﬜",
                     path = "ﱮ",
                     buffer = "﬘",
                     zsh = "",
@@ -61,6 +63,8 @@ cmp.setup(
         },
         sources = cmp.config.sources(
             {
+                {name = 'orgmode'},
+                {name = 'neorg'},
                 {name = "nvim_lsp"},
                 {name = "calc"},
                 {name = "treesitter"},

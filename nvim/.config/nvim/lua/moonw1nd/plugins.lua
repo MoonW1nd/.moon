@@ -35,9 +35,18 @@ Plug("moonw1nd/vim-rest-console") -- REST client
 Plug("SirVer/ultisnips") -- snippets
 Plug("quangnguyen30192/cmp-nvim-ultisnips")
 Plug("vim-test/vim-test")
+
 -- @todo: check usefull next plugin
 Plug("preservim/vimux") -- run command from vim in tmux pannel
 Plug("andymass/vim-matchup") -- extended match %
+
+Plug("nvim-orgmode/orgmode")
+Plug("nvim-neorg/neorg")
+Plug("nvim-neorg/neorg-telescope")
+Plug("dhruvasagar/vim-table-mode") -- usefull table editing
+Plug("monaqa/dial.nvim") -- more usefull increment and decriment functions
+Plug("MunifTanjim/nui.nvim")
+
 
 -- Native LSP Support
 Plug("onsails/lspkind-nvim") -- icons for auto complete
@@ -100,10 +109,7 @@ Plug("mhinz/vim-startify")
 -- -- languages
 Plug("godlygeek/tabular")
 Plug("plasticboy/vim-markdown")
-Plug(
-    "iamcco/markdown-preview.nvim",
-    {["do"] = "cd app & npm install", ["for"] = {"markdown", "mdx"}}
-)
+Plug("iamcco/markdown-preview.nvim")
 Plug("mattn/emmet-vim", {["for"] = {"html", "css", "javascript", "typescript"}})
 Plug("fatih/vim-go", {["do"] = ":GoUpdateBinaries"})
 

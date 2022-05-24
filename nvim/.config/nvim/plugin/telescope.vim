@@ -18,8 +18,8 @@ nnoremap gi :silent Telescope lsp_implementations<CR>
 nnoremap <Leader>ra :lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_dropdown({}))<CR>
 
 " Need rewrite
-nnoremap ghP :lua require('moonw1nd.telescope').vcs.pull_request()<CR>
-nnoremap ghp :lua require('moonw1nd.telescope').vcs.my_pull_request()<CR>
-nnoremap ghr :lua require('moonw1nd.telescope').vcs.reviews_pull_request()<CR>
+nnoremap <localleader>oP :lua require('moonw1nd.telescope').vcs.pull_request()<CR>
+nnoremap <localleader>op :lua require('moonw1nd.telescope').vcs.my_pull_request()<CR>
+nnoremap <localleader>or :lua require('moonw1nd.telescope').vcs.reviews_pull_request()<CR>
 nnoremap <leader>fd :lua require('moonw1nd.telescope').search_wiki()<CR>
 nnoremap <leader>vrc :lua require('moonw1nd.telescope').search_dotfiles()<CR>

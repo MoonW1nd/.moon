@@ -53,7 +53,8 @@ lspConfig.sumneko_lua.setup {
                     -- path to nvim plugins
                     [vim.fn.expand("$HOME/.config/nvim/plugged/")] = true,
                     -- path to my nvim plugins in arc
-                    [vim.fn.expand("$HOME/Documents/develop/work/arcadia/junk/moonw1nd/lua/")] = true,
+                    [vim.fn.expand("$HOME/Documents/develop/lua/")] = true,
+                    -- [vim.fn.expand("$HOME/Documents/develop/work/arcadia/junk/moonw1nd/lua/")] = true,
                 },
             },
             -- Do not send telemetry data containing a randomized but unique identifier

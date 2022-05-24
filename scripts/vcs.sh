@@ -33,7 +33,7 @@ if [ "$1" = "checkout" ] || [ $1 = "co" ]; then
         $command checkout $($command branch --list | fzf)
     elif [ "$command" = "arc" ] && [ "$2" == "-bt" ]; then
         ticketInfo=$(moontool info -o | fzf)
-        
+
         if [ -z "$ticketInfo" ]; then
             echo "Not selected Ticket"
             exit 1
@@ -65,7 +65,7 @@ elif [ "$1" = "rm" ]; then
 
     rm -ir $selectedFiles
 elif [ "$1" = "add" ]; then
-    if [ -z "$2" ]; then 
+    if [ -z "$2" ]; then
         selectedFiles=$($command status -s | grep -e "^[^A]" | fzf --multi --preview="echo {} | cut -d ' ' -f 3 | xargs -I '[]' arc diff --git '[]' | delta" | xargs -I '{}' bash -c 'echo {} | cut -d " " -f 2' | xargs)
 
         $command add $selectedFiles
@@ -81,7 +81,7 @@ elif [ "$1" = "fpr" ]; then
     fi
 # WIP commit
 elif [ "$1" = "wip" ]; then
-        $command commit -m "WIP: DON\'T PUSH" --no-verify
+        $command commit -m "WIP: DON'T PUSH" --no-verify
 # Open comments
 elif [ $1 == "pr" ] && [ $2 == "comments" ]; then
     if [ "$command" = "arc" ]; then
