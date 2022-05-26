@@ -7,7 +7,7 @@ nnoremap <Leader>f- :Telescope<CR>
 nnoremap <leader>fs :lua require("moonw1nd.telescope").vcs.updated_files()<CR>
 nnoremap <leader>fb :lua require('telescope.builtin').buffers()<CR>
 nnoremap <leader>fw :lua require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }<CR>
-nnoremap <leader>fh :lua require('telescope.builtin').help_tags()<CR>
+nnoremap <leader>fh :Telescope harpoon marks<CR>
 nnoremap <leader>fl :lua require("telescope").extensions.live_grep_raw.live_grep_raw()<CR>
 nnoremap <leader>fa :lua require("moonw1nd.telescope").work_scripts()<CR>
 

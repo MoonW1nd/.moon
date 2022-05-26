@@ -488,6 +488,10 @@ autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
 autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 
+" change lang on leave insert mode
+autocmd! * <buffer>
+autocmd InsertLeave <buffer> :silent! !xkbswitch -s 0
+
 autocmd Filetype norg setlocal ts=2 sw=2 et rnu
 
 function! MyFoldText()
