@@ -1,6 +1,7 @@
 rsync -rlptzv \
     --delete \
     --progress \
+    --timeout=30 \
     --exclude=.svn \
     --exclude=.enb \
     --exclude=.git \
