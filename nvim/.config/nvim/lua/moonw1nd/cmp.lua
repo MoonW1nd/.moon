@@ -25,7 +25,6 @@ cmp.setup(
                     nvim_lsp = "ﲳ",
                     treesitter = "",
                     -- dictionary = "﬜",
-                    orgmode = "﬜",
                     neorg = "﬜",
                     path = "ﱮ",
                     buffer = "﬘",
@@ -39,17 +38,17 @@ cmp.setup(
                 return vim_item
             end,
         },
-        documentation = {
-            border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"},
+        window = {
+            documentation = {
+                border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"},
+            },
         },
+
         mapping = {
+            ['<C-b>'] = cmp.mapping.scroll_docs(-4),
             ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            ["<C-x><C-o>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
             ["<C-e>"] = cmp.mapping(cmp.mapping.abort(), {"i", "c"}),
             ["<CR>"] = cmp.mapping.confirm({select = true}),
-            ["<C-l>"] = cmp.mapping(
-                cmp.mapping.confirm({select = false}), {"i", "c"}
-            ),
             ["<C-j>"] = cmp.mapping(
                 cmp.mapping.select_next_item(
                     {behavior = cmp.SelectBehavior.Select}
@@ -60,30 +59,66 @@ cmp.setup(
                     {behavior = cmp.SelectBehavior.Select}
                 ), {"i", "c"}
             ),
+            ["<C-l>"] = cmp.mapping(
+                cmp.mapping.confirm({select = false}), {"i", "c"}
+            ),
+
+            -- Trigger completion with default source
+            ["<C-x><C-o>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
+
+            -- Trigger completion only snippets
+            ["<C-t>"] = cmp.mapping.complete({
+                config = {
+                    sources = {
+                        { name = "ultisnips" }
+                    }
+                }
+            }, {"i", "c"}),
+
+            -- Trigger completion only LSP
+            ["<C-p>"] = cmp.mapping.complete({
+                config = {
+                    sources = {
+                        { name = "nvim_lsp" }
+                    }
+                }
+            }, {"i", "c"}),
+
+            -- Trigger completion only buffers
+            ["<C-n>"] = cmp.mapping.complete({
+                config = {
+                    sources = {
+                        {
+                            name = "buffer",
+                            options = {
+                                get_bufnrs = function()
+                                    return vim.api.nvim_list_bufs()
+                                end,
+                            },
+                        },
+                    }
+                }
+            }, {"i", "c"}),
         },
         sources = cmp.config.sources(
             {
-                {name = 'orgmode'},
-                {name = 'neorg'},
+                -- {name = "dictionary", keyword_length = 2},
                 {name = "nvim_lsp"},
                 {name = "calc"},
-                {name = "treesitter"},
                 {name = "emoji"},
-                {name = "ultisnips"},
-                -- {name = "dictionary", keyword_length = 2},
-                {
-                    name = "buffer",
-                    options = {
-                        get_bufnrs = function()
-                            return vim.api.nvim_list_bufs()
-                        end,
-                    },
-                },
                 {name = "path"},
             }
         ),
     }
 )
+
+cmp.setup.filetype('norg', {
+    sources = cmp.config.sources({
+        { name = 'neorg' },
+    }, {
+        { name = 'buffer' },
+    })
+})
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(
