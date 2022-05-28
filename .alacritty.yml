@@ -101,7 +101,7 @@ scrolling:
 font:
   # Normal (roman) font face
   normal:
-    family: FiraCode Nerd Font
+    family: FiraCode Nerd Font Mono
     # Font family
     #
     # Default:
@@ -116,7 +116,7 @@ font:
   # Bold font face
   bold:
     # Font family
-    family: FiraCode Nerd Font
+    family: FiraCode Nerd Font Mono
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
