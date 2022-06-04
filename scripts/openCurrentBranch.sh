@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Open current branch in web.
+
 isArcEnv=
 
 if [ ! -z "$(arc info 2>/dev/null)" ]; then

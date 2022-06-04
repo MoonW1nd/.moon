@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# Connect to host with ssh provide minimal vim config.
+
 if [[ $@ ]]; then
     if [ "$1" = "-t" ]; then
         command=$2

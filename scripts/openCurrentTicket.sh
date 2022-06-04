@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Script for open issue ticket by parse branch name.
+
 isArcEnv=
 ticket_name=
 

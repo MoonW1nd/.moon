@@ -109,7 +109,6 @@ source $HOME/dotfiles/scripts/minimalVimrc.sh
 source $HOME/dotfiles/scripts/tracker.sh
 source $HOME/dotfiles/scripts/ff.sh
 source $HOME/dotfiles/scripts/fl.sh
-source $HOME/dotfiles/scripts/pomodoroWork.sh
 
 # command not found plugin
 if brew command command-not-found-init > /dev/null 2>&1; then eval "$(brew command-not-found-init)"; fi

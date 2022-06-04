@@ -27,7 +27,7 @@ echo "Description:\n$body"
 
 branch_name=$(arc info | grep -o -Ee "branch: .*" | cut -d ' ' -f 2)
 
-# TODO: adapt byt git
+# TODO: adapt by git (протухло?)
 echo -e "$title\n\n## Какую задачу решаем\n$body\n### Комментарии разработчика\n—\n" | vipe > $HOME/.moon/vcs/__pr_body_msg
 
 isArcEnv=
