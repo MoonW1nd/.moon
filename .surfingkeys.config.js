@@ -1,14 +1,34 @@
+const {
+    aceVimMap,
+    mapkey,
+    imap,
+    imapkey,
+    iunmap,
+    getClickableElements,
+    vmapkey,
+    map,
+    unmap,
+    vunmap,
+    cmap,
+    addSearchAlias,
+    removeSearchAlias,
+    tabOpenLink,
+    readText,
+    Clipboard,
+    Front,
+    Hints,
+    Visual,
+    RUNTIME
+} = api;
+
 // an example to create a new mapping `ctrl-y`
-// mapkey('<Ctrl-y>', 'Show me the money', function() {
-//     Front.showPopup('a well-known phrase uttered by characters in the 1996 film Jerry Maguire (Escape to close).');
-// });
+//mapkey('<Ctrl-y>', 'Show me the money', function() {
+//   Front.showPopup('a well-known phrase uttered by characters in the 1996 film Jerry Maguire (Escape to close).');
+//});
 
 // an example to replace `T` with `gt`, click `Default mappings` to see how `T` works.
 map('gt', 'T');
 map('<Ctrl-[>', '<Esc>');
-
-// an example to remove mapkey `Ctrl-i`
-// unmap('<Ctrl-i>');
 
 // off emoji autocomlete
 iunmap(":");
@@ -17,10 +37,36 @@ iunmap(":");
 // ---- Hints ----
 // Hints have to be defined separately
 // Uncomment to enable
+
+// Tomorrow-Night
+/* -- DELETE LINE TO ENABLE THEME
+Hints.style('border: solid 2px #373B41; color:#52C196; background: initial; background-color: #1D1F21;');
+Hints.style("border: solid 2px #373B41 !important; padding: 1px !important; color: #C5C8C6 !important; background: #1D1F21 !important;", "text");
+Visual.style('marks', 'background-color: #52C19699;');
+Visual.style('cursor', 'background-color: #81A2BE;');
+-- DELETE LINE TO ENABLE THEME */
+
+// Nord
 Hints.style('border: solid 2px #3B4252; color:#A3BE8C; background: initial; background-color: #3B4252;');
 Hints.style("border: solid 0 transparent !important; box-shadow: none !important; background-image: none !important; background: white; color: #fff !important; padding: 2px; background-color: #26aa5a !important;", "text");
 Visual.style('marks', 'background-color: #ffc107b3;');
 Visual.style('cursor', 'background-color: white !important;');
+
+// Doom One
+/* -- DELETE LINE TO ENABLE THEME
+Hints.style('border: solid 2px #282C34; color:#98be65; background: initial; background-color: #2E3440;');
+Hints.style("border: solid 2px #282C34 !important; padding: 1px !important; color: #51AFEF !important; background: #2E3440 !important;", "text");
+Visual.style('marks', 'background-color: #98be6599;');
+Visual.style('cursor', 'background-color: #51AFEF;');
+-- DELETE LINE TO ENABLE THEME */
+
+// Monokai
+/* -- DELETE LINE TO ENABLE THEME
+Hints.style('border: solid 2px #2D2E2E; color:#F92660; background: initial; background-color: #272822;');
+Hints.style("border: solid 2px #2D2E2E !important; padding: 1px !important; color: #A6E22E !important; background: #272822 !important;", "text");
+Visual.style('marks', 'background-color: #A6E22E99;');
+Visual.style('cursor', 'background-color: #F92660;');
+-- DELETE LINE TO ENABLE THEME */
 
 settings.theme = `
 /* Edit these variables for easy theme making */
@@ -31,8 +77,32 @@ settings.theme = `
   --font-weight: normal;
 
   /* -------------- */
-  /* --- THEME  --- */
+  /* --- THEMES --- */
   /* -------------- */
+
+  /* -------------------- */
+  /* -- Tomorrow Night -- */
+  /* -------------------- */
+  /* -- DELETE LINE TO ENABLE THEME
+  --fg: #C5C8C6;
+  --bg: #282A2E;
+  --bg-dark: #1D1F21;
+  --border: #373b41;
+  --main-fg: #81A2BE;
+  --accent-fg: #52C196;
+  --info-fg: #AC7BBA;
+  --select: #585858;
+  -- DELETE LINE TO ENABLE THEME */
+
+  /* Unused Alternate Colors */
+  /* --cyan: #4CB3BC; */
+  /* --orange: #DE935F; */
+  /* --red: #CC6666; */
+  /* --yellow: #CBCA77; */
+
+  /* -------------------- */
+  /* --      NORD      -- */
+  /* -------------------- */
   --fg: #E5E9F0;
   --bg: #3B4252;
   --bg-dark: #2E3440;
@@ -46,6 +116,49 @@ settings.theme = `
   /* --orange: #D08770; */
   /* --red: #BF616A; */
   /* --yellow: #EBCB8B; */
+
+  /* -------------------- */
+  /* --    DOOM ONE    -- */
+  /* -------------------- */
+  /* -- DELETE LINE TO ENABLE THEME
+  --fg: #51AFEF;
+  --bg: #2E3440;
+  --bg-dark: #21242B;
+  --border: #282C34;
+  --main-fg: #51AFEF;
+  --accent-fg: #98be65;
+  --info-fg: #C678DD;
+  --select: #4C566A;
+  -- DELETE LINE TO ENABLE THEME */
+
+  /* Unused Alternate Colors */
+  /* --bg-dark: #21242B; */
+  /* --main-fg-alt: #2257A0; */
+  /* --cyan: #46D9FF; */
+  /* --orange: #DA8548; */
+  /* --red: #FF6C6B; */
+  /* --yellow: #ECBE7B; */
+
+  /* -------------------- */
+  /* --    MONOKAI    -- */
+  /* -------------------- */
+  /* -- DELETE LINE TO ENABLE THEME
+  --fg: #F8F8F2;
+  --bg: #272822;
+  --bg-dark: #1D1E19;
+  --border: #2D2E2E;
+  --main-fg: #F92660;
+  --accent-fg: #E6DB74;
+  --info-fg: #A6E22E;
+  --select: #556172;
+  -- DELETE LINE TO ENABLE THEME */
+
+  /* Unused Alternate Colors */
+  /* --red: #E74C3C; */
+  /* --orange: #FD971F; */
+  /* --blue: #268BD2; */
+  /* --violet: #9C91E4; */
+  /* --cyan: #66D9EF; */
 }
 
 /* ---------- Generic ---------- */
@@ -265,3 +378,5 @@ input {
 }
 
 `;
+
+// click `Save` button to make above settings to take effect.
