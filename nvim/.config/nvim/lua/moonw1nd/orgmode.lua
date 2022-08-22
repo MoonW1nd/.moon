@@ -29,15 +29,20 @@ require('neorg').setup {
     load = {
         ["core.defaults"] = {
             config = {
-
             }
         },
         ["core.norg.concealer"] = {},
         ["core.norg.manoeuvre"] = {},
+        ["core.norg.journal"] = {},
+        ["core.export"] = {},
+        ["core.export.markdown"] = {},
         ["core.norg.dirman"] = {
             config = {
                 workspaces = {
-                    org = "~/org/",
+                    work = "~/org/notes/work/",
+                    life = "~/org/notes/life/",
+                    dev = "~/org/notes/dev/",
+                    all = "~/org/",
                 }
             }
         },
@@ -49,10 +54,11 @@ require('neorg').setup {
         },
         ["core.gtd.base"] = {
             config = {
-                workspace = "org",
+                workspace = "all",
             }
         },
         ["core.integrations.telescope"] = {},
+        ["core.norg.qol.toc"] = {},
         -- ["external.gtd-project-tags"] = {},
     }
 }
@@ -63,11 +69,21 @@ neorg_callbacks.on_event("core.keybinds.events.enable_keybinds", function(_, key
     -- Map all the below keybinds only when the "norg" mode is active
     keybinds.map_event_to_mode("norg", {
         n = { -- Bind keys in normal mode
-            { "<C-s>", "core.integrations.telescope.find_linkable" },
+            { "<C-f>", "core.integrations.telescope.insert_file_link" },
         },
 
         i = { -- Bind in insert mode
-            { "<C-l>", "core.integrations.telescope.insert_link" },
+            { "<C-f>", "core.integrations.telescope.insert_file_link" },
+        },
+    }, {
+        silent = true,
+        noremap = true,
+    })
+
+    keybinds.map_event_to_mode("all", {
+        n = { -- Bind keys in normal mode
+            { "]]", "core.integrations.treesitter.next.heading" },
+            { "[[", "core.integrations.treesitter.previous.heading" },
         },
     }, {
         silent = true,

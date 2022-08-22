@@ -80,6 +80,7 @@ alias opr=$HOME/dotfiles/scripts/openPr.sh
 alias .cpr=$HOME/dotfiles/scripts/createPRwithDescription.sh
 alias .rmt=$HOME/dotfiles/scripts/restartMT.sh
 alias vcs=$HOME/dotfiles/scripts/vcs.sh
+alias wttr=$HOME/dotfiles/scripts/wttr.sh
 alias pms="pomodoro start"
 alias pmf="pomodoro finish"
 alias pmts="termdown 25m && osascript -e 'display notification \"Time to break\" with title \"Pomodoro\" subtitle \"Finish\" sound name \"piece-of-cake-611\"'"
@@ -143,9 +144,9 @@ bindkey "^Q" push-line-or-edit
 bindkey "^v" edit-command-line
 
 # fzf settings
-export FZF_DEFAULT_OPTS="--border --prompt=\"λ \" --height 40% --reverse --history=$HOME/.fzf_history --ansi"
+export FZF_DEFAULT_OPTS="--border --prompt=\"λ \" --height 40% --reverse --history=$HOME/.fzf_history --ansi --bind 'ctrl-j:down,ctrl-k:up,ctrl-d:preview-page-down,ctrl-u:preview-page-up'"
 export FZF_COMPLETION_OPTS="--preview '(bat --map-syntax js:jsx --theme base16 --color=always {} || cat {} || tree -C {}) 2> /dev/null | head -200'"
-export FZF_CTRL_T_OPTS="$FZF_COMPLETION_OPTS"
+export FZF_CTRL_T_OPTS="$FZF_COMPLETION_OPTS "
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*" --glob "!node_modules/*"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
@@ -181,7 +182,7 @@ export PATH=$PATH:$GOPATH/bin
 export MOON_VIM_PLUGIN_PATH="$HOME/.vim/pack/vendor/start/"
 
 # Fort correct work vifm
-export LC_ALL=en_US.UTF-8  
+export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 alias luamake=$HOME/.config/nvim/lua-language-server/3rd/luamake/luamake

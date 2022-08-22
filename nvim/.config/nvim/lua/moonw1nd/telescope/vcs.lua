@@ -62,6 +62,7 @@ local arc_files = function(opts)
     addToSet(excludeFilesSet, "node_modules")
     addToSet(excludeFilesSet, "app")
     addToSet(excludeFilesSet, "freeze")
+    addToSet(excludeFilesSet, "coverage")
 
     local arc_command = {"arc", "ls-files", "-c", "-o"}
 
@@ -102,8 +103,32 @@ M.project_files = function()
     end
 end
 
-M.updated_files = function()
-    local opts = {} -- define here if you want to define something
+local function create_command_handler(config)
+    return function ()
+        local opts
+        local handler
+
+        if helpers.is_arc_env() then
+            handler = config.arc.handler
+            opts = config.arc.opts
+        else
+            handler = config.git.handler
+            opts = config.git.opts
+        end
+
+        local ok = pcall(handler, opts)
+
+        if not ok then
+            utils.notify("builtin.vcs." .. config.name, {
+                msg = "Unexpected error in " .. config.name .. " funcion.",
+                level = "ERROR",
+            })
+        end
+    end
+end
+
+M.status = function()
+    local opts = {}
 
     local ok
 
@@ -127,70 +152,89 @@ M.updated_files = function()
     end
 end
 
-M.pull_request = function()
-    local opts = {} -- define here if you want to define something
-
-    local ok
-
-    if helpers.is_arc_env() then
-        ok = pcall(require"telescope".extensions.arc.pr_list, {
+M.pull_request = create_command_handler({
+    name = "pull_request",
+    arc = {
+        handler = require"telescope".extensions.arc.pr_list,
+        opts = {
             flags = {"--subscriber", "moonw1nd", "--status", "open"},
             prompt_title = "Arc PR list"
-        })
-    else
-        ok = pcall(require"moonw1nd.telescope.gh".pull_request, opts)
-    end
+        }
+    },
+    git = {
+        handler = require"moonw1nd.telescope.gh".pull_request,
+        otps = {}
+    }
+})
 
-    if not ok then
-        utils.notify("builtin.vcs.pull_request", {
-            msg = "Unexpected error on show pull request",
-            level = "ERROR",
-        })
-    end
-end
-
-M.my_pull_request = function()
-    local opts = {} -- define here if you want to define something
-
-    local ok
-
-    if helpers.is_arc_env() then
-        ok = pcall(require"telescope".extensions.arc.pr_list, {
+M.my_pull_request = create_command_handler({
+    name = "my_pull_request",
+    arc = {
+        handler = require"telescope".extensions.arc.pr_list,
+        opts = {
             flags = {"-o"},
             prompt_title = "Arc my PR list"
-        })
-    else
-        ok = pcall(require"moonw1nd.telescope.gh".my_pull_request, opts)
-    end
+        }
+    },
+    git = {
+        handler = require"moonw1nd.telescope.gh".my_pull_request,
+        otps = {}
+    }
+})
 
-    if not ok then
-        utils.notify("builtin.vcs.my_pull_request", {
-            msg = "Unexpected error on show pull request",
-            level = "ERROR",
-        })
-    end
-end
-
-M.reviews_pull_request = function()
-    local opts = {} -- define here if you want to define something
-
-    local ok
-
-    if helpers.is_arc_env() then
-        ok = pcall(require"telescope".extensions.arc.pr_list, {
+M.reviews_pull_request = create_command_handler({
+    name = "reviews_pull_request",
+    arc = {
+        handler = require"telescope".extensions.arc.pr_list,
+        opts = {
             flags = {"-i", "--shipper", "!moonw1nd"},
             prompt_title = "Arc PR need review"
-        })
-    else
-        ok = pcall(require"moonw1nd.telescope.gh".reviews_pull_request, opts)
-    end
+        }
+    },
+    git = {
+        handler = require"moonw1nd.telescope.gh".reviews_pull_request,
+        otps = {}
+    }
+})
 
-    if not ok then
-        utils.notify("builtin.vcs.reviews_pull_request", {
-            msg = "Unexpected error on show pull request",
-            level = "ERROR",
-        })
-    end
-end
+M.commits = create_command_handler({
+    name = "commits",
+    arc = {
+        handler = require("telescope").extensions.arc.commits,
+        opts = {
+            preview_cmd = "arc show --git %s | delta --pager='less -SR'",
+        }
+    },
+    git = {
+        handler = require"telescope.builtin".git_commits,
+        otps = {}
+    }
+})
+
+M.stash = create_command_handler({
+    name = "stash",
+    arc = {
+        handler = require("telescope").extensions.arc.stash,
+        opts = {
+            preview_cmd = "arc stash show --git %s | delta --pager='less -RS'",
+        }
+    },
+    git = {
+        handler = require"telescope.builtin".git_stash,
+        otps = {}
+    }
+})
+
+M.branches = create_command_handler({
+    name = "branches",
+    arc = {
+        handler = require("telescope").extensions.arc.branches,
+        opts = {}
+    },
+    git = {
+        handler = require"telescope.builtin".git_branches,
+        otps = {}
+    }
+})
 
 return M

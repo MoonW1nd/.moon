@@ -33,28 +33,27 @@ Plug("editorconfig/editorconfig-vim") -- consistent coding style
 Plug("skywind3000/asyncrun.vim") -- async run commands
 Plug("moonw1nd/vim-rest-console") -- REST client
 Plug("SirVer/ultisnips") -- snippets
-Plug("quangnguyen30192/cmp-nvim-ultisnips")
 Plug("vim-test/vim-test")
 
 -- @todo: check usefull next plugin
 Plug("preservim/vimux") -- run command from vim in tmux pannel
 Plug("andymass/vim-matchup") -- extended match %
 
-Plug("nvim-orgmode/orgmode")
+-- Note managment
 Plug("nvim-neorg/neorg")
 Plug("nvim-neorg/neorg-telescope")
+
 Plug("dhruvasagar/vim-table-mode") -- usefull table editing
 Plug("monaqa/dial.nvim") -- more usefull increment and decriment functions
-Plug("MunifTanjim/nui.nvim")
+-- Plug("MunifTanjim/nui.nvim") -- has perfomance issue
 
 
 -- Native LSP Support
 Plug("onsails/lspkind-nvim") -- icons for auto complete
 Plug("neovim/nvim-lspconfig")
 Plug("jose-elias-alvarez/nvim-lsp-ts-utils")
-Plug("ray-x/lsp_signature.nvim")
 Plug("hrsh7th/cmp-nvim-lsp")
--- Plug("uga-rosa/cmp-dictionary")
+Plug("uga-rosa/cmp-dictionary")
 Plug("hrsh7th/cmp-nvim-lua") -- nvim-cmp source for neovim Lua API.
 Plug("hrsh7th/cmp-buffer") -- nvim-cmp source buffers
 Plug("hrsh7th/cmp-cmdline") -- completion for command line
@@ -63,6 +62,7 @@ Plug("hrsh7th/cmp-calc") -- math operations completion
 Plug("hrsh7th/cmp-emoji") -- emoji completion
 Plug("ray-x/cmp-treesitter")
 Plug("hrsh7th/nvim-cmp")
+Plug("quangnguyen30192/cmp-nvim-ultisnips")
 
 -- Treesitter
 Plug("nvim-treesitter/nvim-treesitter", {["do"] = ":TSUpdate"})
@@ -110,15 +110,17 @@ Plug("mhinz/vim-startify")
 Plug("godlygeek/tabular")
 Plug("plasticboy/vim-markdown")
 Plug("iamcco/markdown-preview.nvim")
+Plug("mzlogin/vim-markdown-toc")
 Plug("mattn/emmet-vim", {["for"] = {"html", "css", "javascript", "typescript"}})
 Plug("fatih/vim-go", {["do"] = ":GoUpdateBinaries"})
 
 -- -- other
 Plug("wellle/targets.vim") -- improve text objects API
 Plug("machakann/vim-highlightedyank") -- highlight yanked file
-Plug("jiangmiao/auto-pairs") -- auto close pairs
+-- Plug("jiangmiao/auto-pairs") -- auto close pairs
 Plug("AndrewRadev/tagalong.vim") -- rename tags
 Plug("mbbill/undotree") -- undo tree in vim
+
 -- Not usefull ?
 -- Plug("vim-scripts/ReplaceWithRegister") -- replace word on copy buffer
 Plug("tpope/vim-surround") -- surround brackets

@@ -38,11 +38,10 @@ local function force_reinstall_parsers(opts)
     end
 end
 
-require('orgmode').setup_ts_grammar()
 
 require"nvim-treesitter.configs".setup {
-    highlight = {enable = true, disable = {'org'}, additional_vim_regex_highlighting = {'org'}},
-    ensure_installed = {'org', 'norg'},
+    highlight = {enable = true},
+    ensure_installed = {'norg'},
     incremental_selection = {
         enable = true,
         keymaps = {

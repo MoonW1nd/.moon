@@ -42,7 +42,7 @@ command! -bang -nargs=* Rg
 
 command! -bang -nargs=* Rga
   \ call fzf#vim#grep(
-  \   'rg --column --hidden --line-number --no-heading --color=always --glob="!node_modules" --glob="!app" --glob="!freeze" --smart-case '.shellescape(<q-args>), 1,
+  \   'rg --column --hidden --line-number --no-heading --color=always --glob="!node_modules" --glob="!app" --glob="!freeze" --glob="!coverage" --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview({'options': '--delimiter :'}), <bang>0)
 
 command! -bang -nargs=* GRga

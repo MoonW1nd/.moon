@@ -54,6 +54,8 @@ lspConfig.sumneko_lua.setup {
                     [vim.fn.expand("$HOME/.config/nvim/plugged/")] = true,
                     -- path to my nvim plugins in arc
                     [vim.fn.expand("$HOME/Documents/develop/lua/")] = true,
+                    -- luarocks dependency
+                    [vim.fn.expand("/opt/homebrew/lib/luarocks/rocks-5.4/")] = true,
                     -- [vim.fn.expand("$HOME/Documents/develop/work/arcadia/junk/moonw1nd/lua/")] = true,
                 },
             },

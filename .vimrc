@@ -8,7 +8,6 @@
 set nocompatible
 filetype off
 
-
 "
 " Vim Plugin manager
 "
@@ -174,7 +173,6 @@ nmap g* g*zzzv
 nmap g# g#zzzv
 nnoremap J mzJ`z
 
-
 " === Undo with breakpoints ===
 inoremap , ,<c-g>u
 inoremap . .<c-g>u
@@ -184,13 +182,6 @@ inoremap ] ]<c-g>u
 inoremap [ [<c-g>u
 inoremap ! !<c-g>u
 inoremap ? ?<c-g>u
-
-" === Move between windows ===
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
 
 " === Move line UP or Down alt-jk ===
 nnoremap ˚ :m .-2<CR>==
@@ -256,6 +247,11 @@ nnoremap & :&&<CR>
 
 xnoremap & :&&<CR>
 
+" Replace visual selected text
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+" Search visual selected text
+vnoremap <C-s> "hy:/<C-r>h<left><left><left>
 "
 " Plugin Configurations
 "
@@ -319,7 +315,7 @@ let g:airline#themes#clean#palette = 1
 call airline#parts#define_raw('linenr', '%l')
 call airline#parts#define_accent('linenr', 'bold')
 let g:airline_section_z = airline#section#create(['%3p%%  ',
-            \ g:airline_symbols.linenr .' ', 'linenr', ':%c '])
+            \ g:airline_symbols.linenr .' ', 'linenr', ':%v '])
 let g:airline_section_warning = ''
 let g:airline_highlighting_cache = 1
 let g:airline#extensions#wordcount#enabled = 0
@@ -353,6 +349,7 @@ let g:highlightedyank_highlight_duration = 200
 " Markdown
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType markdown setlocal foldlevel=99
+" autocmd FileType markdown setlocal conceallevel=2 cocu=n
 " autocmd FileType markdown set spell
 autocmd FileType markdown map <silent> <leader>m :call TerminalPreviewMarkdown()<CR>
 
@@ -471,41 +468,46 @@ command! Dab %bd|e#|bd#
 
 command! Todo Rga @todo\s\[MoonW1nd]:
 command! CreateStyleFile e %:p:h/styles.module.css
+
+" Not need?
 command! -nargs=1 RunTestAA :AsyncRun npm run test -- --maxWorkers=50\% --reporters ~/dotfiles/utils/jestVimReporter/index.js --testNamePattern='candidate' <q-args>
 
+augroup MoonW1ndVim
+    autocmd!
+    autocmd FocusLost * silent! wa
+    autocmd BufWritePre * silent! call TrimWhitespace()
+    autocmd BufWritePre *.{js,jsx,ts,tsx,cjs,mjs} :silent EslintFixAll
+    autocmd BufWritePre *.{css} :silent lua vim.lsp.buf.formatting()
+    " autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
+    " autocmd BufWritePre *.lua lua require("moonw1nd.lsp.efm").efm_priority_document_format()
 
-autocmd FocusLost * silent! wa
-autocmd BufWritePre * silent! call TrimWhitespace()
-autocmd BufWritePre *.{js,jsx,ts,tsx,cjs,mjs} :silent EslintFixAll
-autocmd BufWritePre *.{css} :silent lua vim.lsp.buf.formatting()
-" autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
-" autocmd BufWritePre *.lua lua require("moonw1nd.lsp.efm").efm_priority_document_format()
+    " autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+    " autocmd BufWritePre *.go lua require("moonw1nd.lsp.go").goimports(1000)
+    autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
+    autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+    autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+    autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
 
-" autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
-" autocmd BufWritePre *.go lua require("moonw1nd.lsp.go").goimports(1000)
-autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
-autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
-autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
-autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+    autocmd FileType yawiki setlocal foldlevel=1
+    "
+    autocmd InsertLeave * :silent! !xkbswitch -s 0
 
-" change lang on leave insert mode
-autocmd! * <buffer>
-autocmd InsertLeave <buffer> :silent! !xkbswitch -s 0
+    " User gq for format to text witdth
+    autocmd Filetype norg setlocal ts=2 sw=2 et rnu conceallevel=2 cocu=n textwidth=120 wrap
+augroup END
 
-autocmd Filetype norg setlocal ts=2 sw=2 et rnu
-
-function! MyFoldText()
-    let l:start_arrow = '----► '
-    let l:lines='[' . (v:foldend - v:foldstart + 1) . ' lines]'
-    let l:first_line=substitute(getline(v:foldstart), '\v *', '', '')
-    return l:start_arrow . l:lines . ': ' . l:first_line . ' '
-endfunction
-
-" Custom display for text when folding
-set foldtext=MyFoldText()
+" function! MyFoldText()
+"     let l:start_arrow = '----► '
+"     let l:lines='[' . (v:foldend - v:foldstart + 1) . ' lines]'
+"     let l:first_line=substitute(getline(v:foldstart), '\v *', '', '')
+"     return l:start_arrow . l:lines . ': ' . l:first_line . ' '
+" endfunction
+"
+" " Custom display for text when folding
+" set foldtext=MyFoldText()
 
 " toggle folding
-nmap <leader>= za
+nmap <leader>z za
 
 nmap <silent> ]c :call NextHunkCycle()<CR>
 nmap <silent> [c :call PrevHunkCycle()<CR>
@@ -549,8 +551,8 @@ function! ShowPRComments(...)
             let pathData = split(f, ':')
 
             if len(pathData) == 2 && pathData[1] =~# '^\d\+$'
-                call add(list, {'text': ''})
                 let dic = {'filename': pathData[0], "lnum": pathData[1]}
+
                 call add(list, dic)
             endif
 
@@ -561,16 +563,28 @@ function! ShowPRComments(...)
 
             if f =~# '^> '
                 call add(list, {'text': ''})
-                let dic = { 'text': ' | ' . nameData[0] . ' ' . nameData[1] }
-                call add(list, dic)
+
+                if len(nameData) == 2
+                    let dic = { 'text': ' | ' . nameData[0] . ' ' . nameData[1] }
+                    call add(list, dic)
+                elseif
+                    let dic = { 'text': ' | ' . nameData[0]}
+                    call add(list, dic)
+                endif
             else
-                let dic = { 'text': nameData[0] . ' ' . nameData[1] }
-                call add(list, dic)
+                if len(nameData) == 2
+                    let dic = { 'text': nameData[0] . ' ' . nameData[1] }
+                    call add(list, dic)
+                elseif
+                    let dic = { 'text': nameData[0]}
+                    call add(list, dic)
+                endif
             endif
 
             let nextName = 0
         elseif f =~# '^>>>>$'
             let inTread = 0
+            call add(list, {'text': ''})
         elseif f =~# '^----$'
             let nextName = 1
         else
@@ -583,16 +597,7 @@ function! ShowPRComments(...)
                 let dic = {'text': f}
                 call add(list, dic)
             endif
-            " call add(list, {'text': '----------'})
         endif
-        "
-        " let data = split(f, ':')
-        "
-        " if len(data) == 2 && data[1] =~# '^\d\+$'
-        "     let dic = {'filename': data[0], "lnum": data[1]}
-        "     call add(list, dic)
-        " endif
-        "
     endfor
 
     " Populate the qf list

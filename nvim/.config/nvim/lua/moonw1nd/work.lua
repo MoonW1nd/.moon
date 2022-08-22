@@ -131,6 +131,7 @@ function M.home_module()
     local dropdownTheme = require("telescope.themes").get_dropdown();
 
     local picker = pickers.new(dropdownTheme, opts)
+
     picker:find()
 end
 

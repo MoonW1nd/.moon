@@ -5,7 +5,7 @@ local previewers = require("telescope.previewers")
 local action_state = require("telescope.actions.state")
 local conf = require("telescope.config").values
 local actions = require("telescope.actions")
-local telescope_gh_actions = require("telescope._extensions.gh_actions")
+-- local telescope_gh_actions = require("telescope._extensions.gh_actions")
 
 require("telescope").setup(
     {

@@ -1,7 +1,7 @@
 require("moonw1nd.plugins");
+-- require("moonw1nd.neorg"); -- perfomance trouble
 require("moonw1nd.cmp");
 require("moonw1nd.lsp")
-require("moonw1nd.lsp_signature")
 require("moonw1nd.treesitter");
 require("moonw1nd.orgmode")
 require("moonw1nd.dial")
