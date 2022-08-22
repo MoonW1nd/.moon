@@ -8,6 +8,8 @@ require("moonw1nd.lsp.html")
 require("moonw1nd.lsp.go")
 require("moonw1nd.lsp.stylelint")
 require("moonw1nd.lsp.svelte")
+require("moonw1nd.lsp.yaml")
+require("moonw1nd.lsp.vim")
 -- Dont work go to definition if set file in this folder
 -- 🤔
 require("moonw1nd.sumneko_lua")
