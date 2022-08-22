@@ -41,6 +41,12 @@ function setup_tmux_conf() {
         || echo '❗️ Could not create symlink to .tmux.conf';
 }
 
+function setup_nvim() {
+    ln -s ~/dotfiles/nvim/.config/nvim ~/.config/nvim \
+        && echo '✅ nvim prefernces symlink created' \
+        || echo '❗️ Could not create symlink to nvim';
+}
+
 function setup_alacritty() {
     ln -s ~/dotfiles/.alacritty.yml ~/.alacritty.yml \
         && echo '✅ .alacritty.yml prefernces symlink created' \
@@ -56,6 +62,7 @@ if [[ "$SKIP_ALL" == "1" ]]; then
     [[ "$RUN_setup_karabiner_settings" == "1" ]] && setup_karabiner_settings;
     [[ "$RUN_setup_zshrc" == "1" ]] && setup_zshrc;
     [[ "$RUN_setup_skhdrc" == "1" ]] && setup_skhdrc;
+    [[ "$RUN_setup_nvim" == "1" ]] && setup_nvim;
 else
     echo "running all scripts"
 
@@ -65,4 +72,5 @@ else
     setup_karabiner_settings;
     setup_zshrc;
     setup_skhdrc;
+    setup_nvim;
 fi
