@@ -400,7 +400,6 @@ endfunction
 
 " for project wide search
 nmap <leader>/ <Plug>(FerretLack)
-
 " carbon sh now
 vnoremap <F8> :CarbonNowSh<CR>
 
@@ -567,7 +566,7 @@ function! ShowPRComments(...)
                 if len(nameData) == 2
                     let dic = { 'text': ' | ' . nameData[0] . ' ' . nameData[1] }
                     call add(list, dic)
-                elseif
+                else
                     let dic = { 'text': ' | ' . nameData[0]}
                     call add(list, dic)
                 endif
@@ -575,7 +574,7 @@ function! ShowPRComments(...)
                 if len(nameData) == 2
                     let dic = { 'text': nameData[0] . ' ' . nameData[1] }
                     call add(list, dic)
-                elseif
+                else
                     let dic = { 'text': nameData[0]}
                     call add(list, dic)
                 endif

@@ -20,6 +20,7 @@ brew install exa # modern ls
 brew install fd # modern find
 brew install freetype # library to render fonts
 brew install fzf # cli fuzzy finder written in Go
+$(brew --prefix)/opt/fzf/install # install useful key bindings
 brew install gh # github cli
 brew install git # updated version
 brew install git-delta # improved diff highlight
@@ -29,6 +30,8 @@ brew install jpeg # image manipulation lib
 brew install jq # cli for working with json
 brew install neovim # vim but better
 brew install node # nodejs & npm
+brew install yarn # analog npm
+brew install pnpm # analog npm
 brew install openssl
 brew install procs # ps in rust
 brew install python
@@ -37,13 +40,16 @@ brew install rbenv # ruby version manager
 brew install ripgrep
 brew install tmux # terminal multiplexer
 brew install tree # cli to display directories as trees
+brew install ccat # cat with ansi
 brew install vim # get the recent vim version
 brew install vifm # get vim like file manager
 brew install wget # cli to download stuff
-# brew install yarn # npm alternative
 brew install the_silver_searcher
 brew install zsh # bash but better
 brew install coreutils # useful Linux utils in mac
+brew install starship # best prompt
+brew install neofetch # infor about system
+brew install zk # create notes from tamplate
 
 # install nvm
 brew install nvm
@@ -62,6 +68,8 @@ brew install alfred # spotlight but useful
 # brew install obs # streaming & screen recording
 # brew install telegram # chats
 brew install vlc # media player
+brew install --cask yandex-music-unofficial
+
 
 
 # fonts
@@ -69,7 +77,16 @@ brew install vlc # media player
 # brew tap homebrew/cask-fonts
 # brew install --cask font-fira-code
 
-# vimfm colors
-rm -rf ~/.config/vifm/colors
 
-git clone https://github.com/vifm/vifm-colors ~/.config/vifm/color
+# install o-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# install go version manager
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+
+# install skhd
+brew install koekeishiya/formulae/skhd
+brew services start skhd
+
+# install amethyst
+brew install --cask amethyst

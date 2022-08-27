@@ -3,6 +3,7 @@ local ts_utils = require("nvim-lsp-ts-utils")
 local lsp_settings = require("moonw1nd.lsp.settings");
 
 nvim_lsp.tsserver.setup {
+    -- init_options = ts_utils.init_options,
     capabilities = lsp_settings.capabilities,
     flags = {debounce_text_changes = 150},
     on_attach = function(client, bufnr)
@@ -25,8 +26,8 @@ nvim_lsp.tsserver.setup {
             import_all_select_source = false,
 
             -- update imports on file move
-            update_imports_on_move = false,
-            require_confirmation_on_move = false,
+            update_imports_on_move = true,
+            require_confirmation_on_move = true,
             watch_dir = nil,
 
             -- filter diagnostics
