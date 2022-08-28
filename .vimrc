@@ -248,7 +248,7 @@ nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 
 " Replace visual selected text
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+vnoremap <C-r> "hy:%smagic/<C-r>h//gc<left><left><left>
 
 " Search visual selected text
 vnoremap <C-s> "hy:/<C-r>h<left><left><left>

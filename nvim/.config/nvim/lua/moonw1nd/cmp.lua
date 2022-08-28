@@ -99,6 +99,20 @@ cmp.setup(
                     }
                 }
             }, {"i", "c"}),
+            ["<C-x><C-n>"] = cmp.mapping.complete({
+                config = {
+                    sources = {
+                        {
+                            name = "buffer",
+                            options = {
+                                get_bufnrs = function()
+                                    return vim.api.nvim_list_bufs()
+                                end,
+                            },
+                        },
+                    }
+                }
+            }, {"i", "c"}),
         },
         sources = cmp.config.sources(
             {
