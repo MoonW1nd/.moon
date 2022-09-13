@@ -10,6 +10,7 @@ require("moonw1nd.lsp.stylelint")
 require("moonw1nd.lsp.svelte")
 require("moonw1nd.lsp.yaml")
 require("moonw1nd.lsp.vim")
+require("moonw1nd.lsp.zk")
 -- Dont work go to definition if set file in this folder
 -- 🤔
 require("moonw1nd.sumneko_lua")

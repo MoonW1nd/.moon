@@ -69,6 +69,7 @@ brew install alfred # spotlight but useful
 # brew install telegram # chats
 brew install vlc # media player
 brew install --cask yandex-music-unofficial
+brew install --cask keycastr # show key pressed on window
 
 
 

@@ -13,12 +13,12 @@ require('telekasten').setup({
     -- dir names for special notes (absolute path or subdir name)
     dailies = home .. '/' .. 'daily',
     weeklies = home .. '/' .. 'weekly',
-    templates = home .. '/' .. 'templates',
+    templates = home .. '/' .. '.zk/templates',
 
     -- image (sub)dir for pasting
     -- dir name (absolute path or subdir name)
     -- or nil if pasted images shouldn't go into a special subdir
-    image_subdir = "img",
+    image_subdir = "storage/img",
 
     -- markdown file extension
     extension    = ".md",
@@ -44,15 +44,15 @@ require('telekasten').setup({
 
     -- template for new notes (new_note, follow_link)
     -- set to `nil` or do not specify if you do not want a template
-    template_new_note = home .. '/' .. 'templates/new_note.md',
+    template_new_note = home .. '/' .. '.zk/templates/new_note.md',
 
     -- template for newly created daily notes (goto_today)
     -- set to `nil` or do not specify if you do not want a template
-    template_new_daily = home .. '/' .. 'templates/daily.md',
+    template_new_daily = home .. '/' .. '.zk/templates/daily.md',
 
     -- template for newly created weekly notes (goto_thisweek)
     -- set to `nil` or do not specify if you do not want a template
-    template_new_weekly= home .. '/' .. 'templates/weekly.md',
+    template_new_weekly= home .. '/' .. '.zk/templates/weekly.md',
 
     -- image link style
     -- wiki:     ![[image name]]
@@ -60,7 +60,7 @@ require('telekasten').setup({
     image_link_style = "markdown",
 
     -- default sort option: 'filename', 'modified'
-    sort = "filename",
+    sort = "modified",
 
     -- integrate with calendar-vim
     plug_into_calendar = true,
@@ -125,3 +125,34 @@ require('telekasten').setup({
     -- should all links be updated when a file is renamed
     rename_update_links = true,
 })
+
+-- require("zk").setup()
+
+-- Add the key mappings only for Markdown files in a zk notebook.
+-- if require("zk.util").notebook_root(vim.fn.expand('%:p')) ~= nil then
+--   local function map(...) vim.api.nvim_buf_set_keymap(0, ...) end
+--   local opts = { noremap=true, silent=false }
+--
+--   -- map("n", "<CR>", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+--   -- Open the link under the caret.
+--
+--   -- Create a new note after asking for its title.
+--   -- This overrides the global `<leader>zn` mapping to create the note in the same directory as the current buffer.
+--   -- map("n", "<leader>zn", "<Cmd>ZkNew { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<CR>", opts)
+--   -- -- Create a new note in the same directory as the current buffer, using the current selection for title.
+--   -- map("v", "<leader>znt", ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<CR>", opts)
+--   -- Create a new note in the same directory as the current buffer, using the current selection for note content and asking for its title.
+--   -- map("v", "<leader>znc", ":'<,'>ZkNewFromContentSelection { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<CR>", opts)
+--
+--   -- Open notes linking to the current buffer.
+--   -- map("n", "<leader>zb", "<Cmd>ZkBacklinks<CR>", opts)
+--   -- Alternative for backlinks using pure LSP and showing the source context.
+--   --map('n', '<leader>zb', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
+--   -- Open notes linked by the current buffer.
+--   -- map("n", "<leader>zl", "<Cmd>ZkLinks<CR>", opts)
+--
+--   -- Preview a linked note.
+--   map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+--   -- Open the code actions for a visual selection.
+--   -- map("v", "<leader>za", ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", opts)
+-- end

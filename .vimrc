@@ -480,7 +480,7 @@ augroup MoonW1ndVim
     " autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100)
     " autocmd BufWritePre *.lua lua require("moonw1nd.lsp.efm").efm_priority_document_format()
 
-    " autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+    autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
     " autocmd BufWritePre *.go lua require("moonw1nd.lsp.go").goimports(1000)
     autocmd BufNewFile,BufRead tsconfig.json set filetype=jsonc
     autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
@@ -493,6 +493,11 @@ augroup MoonW1ndVim
 
     " User gq for format to text witdth
     autocmd Filetype norg setlocal ts=2 sw=2 et rnu conceallevel=2 cocu=n textwidth=120 wrap
+
+    autocmd FileType markdown set autowriteall
+    autocmd BufWritePre *.md silent! Prettier
+    " Use the following if your buffer is set to become hidden
+    autocmd BufLeave *.md silent! wall
 augroup END
 
 " function! MyFoldText()

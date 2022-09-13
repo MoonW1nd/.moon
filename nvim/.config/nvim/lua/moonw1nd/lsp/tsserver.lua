@@ -6,6 +6,7 @@ nvim_lsp.tsserver.setup {
     -- init_options = ts_utils.init_options,
     capabilities = lsp_settings.capabilities,
     flags = {debounce_text_changes = 150},
+    cmd = { "typescript-language-server", "--stdio" },
     on_attach = function(client, bufnr)
         -- defaults
         ts_utils.setup {

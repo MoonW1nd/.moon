@@ -25,6 +25,7 @@
 --   }
 -- })
 --
+-- @deprecated переехать на работу с markdown
 require('neorg').setup {
     load = {
         ["core.defaults"] = {

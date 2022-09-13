@@ -6,7 +6,7 @@ local function get_kind(kind_item)
 end
 
 vim.opt.completeopt = "menuone,noselect"
-vim.opt.dictionary:append("/Users/moonw1nd/dotfiles/livecoding_dict")
+-- vim.opt.dictionary:append("/Users/moonw1nd/dotfiles/livecoding_dict")
 
 cmp.setup(
     {
@@ -64,28 +64,36 @@ cmp.setup(
             ),
 
             -- Trigger completion with default source
-            ["<C-x><C-o>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
+            ["<C-x><C-o>"] = cmp.mapping.complete(),
 
             -- Trigger completion only snippets
-            ["<C-t>"] = cmp.mapping.complete({
+            ["<C-t>"] = cmp.mapping(cmp.mapping.complete({
                 config = {
                     sources = {
                         { name = "ultisnips" }
                     }
                 }
-            }, {"i", "c"}),
+            }), {"i", "c"}),
+
+            ["<C-d>"] = cmp.mapping.complete({
+                config = {
+                    sources = {
+                        {name = "dictionary"},
+                    }
+                }
+            }),
 
             -- Trigger completion only LSP
-            ["<C-p>"] = cmp.mapping.complete({
+            ["<C-p>"] = cmp.mapping(cmp.mapping.complete({
                 config = {
                     sources = {
                         { name = "nvim_lsp" }
                     }
                 }
-            }, {"i", "c"}),
+            }), {"i", "c"}),
 
             -- Trigger completion only buffers
-            ["<C-n>"] = cmp.mapping.complete({
+            ["<C-n>"] = cmp.mapping(cmp.mapping.complete({
                 config = {
                     sources = {
                         {
@@ -98,8 +106,9 @@ cmp.setup(
                         },
                     }
                 }
-            }, {"i", "c"}),
-            ["<C-x><C-n>"] = cmp.mapping.complete({
+            }), {"i", "c"}),
+
+            ["<C-x><C-n>"] = cmp.mapping(cmp.mapping.complete({
                 config = {
                     sources = {
                         {
@@ -112,15 +121,16 @@ cmp.setup(
                         },
                     }
                 }
-            }, {"i", "c"}),
+            }), {"i", "c"}),
         },
+
         sources = cmp.config.sources(
             {
-                {name = "dictionary", keyword_length = 2},
                 {name = "nvim_lsp"},
                 {name = "calc"},
                 {name = "emoji"},
                 {name = "path"},
+                -- {name = "dictionary"},
             }
         ),
     }
@@ -149,3 +159,11 @@ cmp.setup.cmdline(
         completion = {autocomplete = false},
     }
 )
+
+-- require("cmp_dictionary").setup({
+--     dic = {
+--         ["*"] = { "/Users/moonw1nd/dotfiles/livecoding.dict" },
+--     },
+--     first_case_insensitive = true,
+--     -- debug = true,
+-- })

@@ -11,7 +11,9 @@ require("moonw1nd.telescope");
 require("moonw1nd.refactoring");
 require("moonw1nd.comment");
 require("moonw1nd.env")
-require("moonw1nd.vcs")
+require("moonw1nd.mkdnflow")
+require("moonw1nd.zettelkasten")
+-- require("moonw1nd.vcs")
 
 
 function _G.ReloadConfig()

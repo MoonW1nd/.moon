@@ -31,9 +31,9 @@ Plug("editorconfig/editorconfig-vim") -- consistent coding style
 -- ================= Functionalities =================
 -- Plug('neoclide/coc.nvim', {['branch'] = 'release'})         -- auto completion, Lang servers and stuff
 Plug("skywind3000/asyncrun.vim") -- async run commands
-Plug("moonw1nd/vim-rest-console") -- REST client
 Plug("SirVer/ultisnips") -- snippets
 Plug("vim-test/vim-test")
+Plug("moonw1nd/vim-rest-console") -- REST client
 
 -- @todo: check usefull next plugin
 Plug("preservim/vimux") -- run command from vim in tmux pannel
@@ -42,6 +42,9 @@ Plug("andymass/vim-matchup") -- extended match %
 -- Note managment
 Plug("nvim-neorg/neorg")
 Plug("nvim-neorg/neorg-telescope")
+Plug("jakewvincent/mkdnflow.nvim")
+Plug("renerocksai/telekasten.nvim")
+Plug("mickael-menu/zk-nvim")
 
 Plug("dhruvasagar/vim-table-mode") -- usefull table editing
 Plug("monaqa/dial.nvim") -- more usefull increment and decriment functions
@@ -84,11 +87,15 @@ Plug("ThePrimeagen/harpoon")
 -- Plug("nvim-telescope/telescope-github.nvim")
 -- replace after merging
 Plug("MoonW1nd/telescope-github.nvim")
+
+Plug('prettier/vim-prettier', {['do'] = "yarn install --frozen-lockfile --production"})
 -- Hack for my plugin
 Plug("~/Documents/develop/lua/telescope-arc.nvim")
 Plug("nvim-telescope/telescope.nvim")
 Plug("nvim-telescope/telescope-fzf-native.nvim", {["do"] = "make"})
 Plug("nvim-telescope/telescope-live-grep-raw.nvim")
+
+-- Maybe not usefull
 Plug("wincent/ferret")
 
 -- navigation

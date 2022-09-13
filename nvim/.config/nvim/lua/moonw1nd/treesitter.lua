@@ -40,7 +40,10 @@ end
 
 
 require"nvim-treesitter.configs".setup {
-    highlight = {enable = true},
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = { "markdown" }
+    },
     ensure_installed = {'norg'},
     incremental_selection = {
         enable = true,
