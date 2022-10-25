@@ -32,12 +32,12 @@ COMPLETION_WAITING_DOTS="true"
 
 plugins=(
     sudo
-    copydir
+    # copydir
     copyfile
     copybuffer
     aliases
     history
-    zsh-autosuggestions
+    # zsh-autosuggestions # вернуть
     urltools
     web-search
     vi-mode
@@ -87,6 +87,7 @@ alias pmts="termdown 25m && osascript -e 'display notification \"Time to break\"
 alias lsrv="live-server --port=1991"
 alias ya='$HOME/Documents/develop/work/arcadia/ya'
 alias vssh='$HOME/dotfiles/scripts/vssh.sh'
+alias fx="fuck"
 
 # dir manipulation
 alias ..='cd ..'
@@ -176,6 +177,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$PATH:$HOME/dotfiles/vifm/vifmimg/vifmimg"
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
+export PATH="$PATH:$HOME/bin"
 export GOPATH=$HOME/go
 export GOROOT="/opt/homebrew/Cellar/go/1.18.1/libexec/"
 export PATH=$PATH:$GOPATH/bin
@@ -193,7 +195,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 
-# zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 source ~/dotfiles/scripts/prompt.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -203,3 +205,6 @@ neofetch
 # fpath=($fpath "/Users/moonw1nd/.zfunctions")
 # autoload -U promptinit; promptinit
 # prompt spaceship
+
+source /Users/moonw1nd/.yql/shell_completion
+eval $(thefuck --alias)

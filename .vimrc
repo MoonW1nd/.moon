@@ -498,6 +498,7 @@ augroup MoonW1ndVim
     autocmd BufWritePre *.md silent! Prettier
     " Use the following if your buffer is set to become hidden
     autocmd BufLeave *.md silent! wall
+    au BufRead,BufNewFile *.njk setfiletype html
 augroup END
 
 " function! MyFoldText()
