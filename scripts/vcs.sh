@@ -27,9 +27,9 @@ get_ticket_name() {
 
 
 if [ "$1" = "checkout" ] || [ $1 = "co" ]; then
-    if [ "$2" != "-b" ] && [ "$command" = "git" ]; then
-        $command checkout $($command branch -r | fzf)
-    elif [ "$command" = "arc" ] && [ -z "$2" ]; then
+    if [ "$2" == "-bl" ] && [ "$command" = "git" ]; then
+        $command checkout $($command branch -l | fzf)
+    elif [ "$command" = "arc" ] && [ "$2" == "-bl" ]; then
         $command checkout $($command branch --list | fzf)
     elif [ "$command" = "arc" ] && [ "$2" == "-bt" ]; then
         ticketInfo=$(moontool info -o | fzf)
@@ -56,7 +56,7 @@ elif [ "$1" = "diff" ]; then
         $command $@
     fi
 elif [ "$1" = "rm" ]; then
-    selectedFiles=$($command status -s | fzf --multi |xargs -I '{}' bash -c 'echo {} | cut -d " " -f 2' | xargs)
+    selectedFiles=$($command status -s | fzf --multi |xargs -I '{}' bash -c 'echo {} | sed -e "s/^.* //"' | xargs)
 
     if [ -z $selectedFiles ]; then
         echo "[WARN] Not selected files to remove."
