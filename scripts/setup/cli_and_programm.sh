@@ -50,6 +50,9 @@ brew install coreutils # useful Linux utils in mac
 brew install starship # best prompt
 brew install neofetch # infor about system
 brew install zk # create notes from tamplate
+brew install thefuck # auto fix command https://github.com/nvbn/thefuck
+
+npm install -g juliangruber/vipe
 
 # install nvm
 brew install nvm
