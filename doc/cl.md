@@ -19,6 +19,7 @@ brew install fzf
 $(brew --prefix)/opt/fzf/install
 
 ```
+
 ### silver search (ag)
 
 [github](https://github.com/ggreer/the_silver_searcher)
@@ -44,6 +45,7 @@ brew install exa
 ```
 
 ### delta
+
 > Better git diff experiance
 
 [github](https://github.com/dandavison/delta)
@@ -56,6 +58,7 @@ brew install git-delta
 
 [github](https://github.com/stedolan/jq)
 Json formater, useful with curl
+
 ```shell
 brew install jq
 ```
@@ -73,7 +76,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 [github](https://github.com/myshov/xkbswitch-macosx/blob/master/README.md)
 
 For installation put executable file from bin directory in any directory in your $PATH
-variable. For example you can put it into  `/usr/local/bin` with this command (if source
+variable. For example you can put it into `/usr/local/bin` with this command (if source
 files of utility in your `Download` directory):
 
 ```shell
@@ -94,6 +97,7 @@ brew install fd
 ```
 
 ### moreutils
+
 need for use `vipe` in command
 
 ```shell
@@ -109,6 +113,9 @@ brew install tmuxinator
 ```
 
 ### locate
+
 Утилитка для поиска файлов на файловой системе
 
 ### cdu
+
+### Obsidian
