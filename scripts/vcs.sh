@@ -5,7 +5,7 @@ if [ ! -z "$(arc info 2>/dev/null)" ]; then
 elif [ ! -z "$(git rev-parse --show-toplevel 2>/dev/null)" ]; then
     command=git
 else
-    echo "[WARN] Not supported vcs"
+    echo "[WARN] Not init vcs or not supported"
     exit 1
 fi
 
