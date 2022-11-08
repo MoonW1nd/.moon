@@ -1,4 +1,8 @@
+#!/usr/bin/env bash
+
 command=
+
+COMMIT_MESSAGE_FILE_PATH=$HOME/.moon/vcs/__commit_body_msg
 
 if [ ! -z "$(arc info 2>/dev/null)" ]; then
     command=arc
@@ -107,9 +111,16 @@ elif [ "$1" = "branch" ] || [ "$1" = "br" ]; then
         fi
     fi
 elif [ "$1" = "tc" ]; then
+    ticket_name=$(get_ticket_name)
+
+    if [ -z "$ticket_name" ]; then
+        $command commit -m "$@"
+    fi
+
     if [ -z "$2" ]; then
-        echo "[WARN] Need set commit message"
-        exit 1
+        echo -e "# Write commit massage\n\nTicket: $(get_ticket_name)" | vipe > $COMMIT_MESSAGE_FILE_PATH
+        $command commit -m "$(cat $COMMIT_MESSAGE_FILE_PATH)"
+        exit $?
     fi
 
     shift
