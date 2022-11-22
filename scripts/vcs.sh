@@ -32,10 +32,14 @@ get_ticket_name() {
 # Checkout on existing branch
 if [ "$1" = "cob" ]; then
     $command checkout $($command branch --list | fzf)
+elif [ "$1" = "cul" ]; then
+    $command commit --amend --no-edit
+elif [ "$1" = "cu" ]; then
+    $command commit --amend
 # Checkout comand
 elif [ "$1" = "checkout" ] || [ "$1" = "co" ]; then
     if [ "$2" == "-bl" ]; then
-        $command checkout $($command branch -list | fzf)
+        $command checkout $($command branch --list | fzf)
     elif [ "$command" = "arc" ] && [ "$2" == "-bt" ]; then
         ticketInfo=$(moontool info -o | fzf)
 
