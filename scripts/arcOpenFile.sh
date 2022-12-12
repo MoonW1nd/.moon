@@ -5,7 +5,7 @@ absolute_file_path=
 if [ -z "$1" ]; then
     absolute_file_path=$PWD
 else
-    has_arc_url=$(echo $absolute_file_path | grep -e 'arcadia/.\+' -o)
+    has_arc_url=$(echo $1 | grep -e 'arcadia/.\+' -o)
 
     if [ -z "$has_arc_url" ]; then
         absolute_file_path=$PWD/$1

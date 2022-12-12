@@ -34,6 +34,10 @@ if [ "$1" = "cob" ]; then
     $command checkout $($command branch --list | fzf)
 elif [ "$1" = "cul" ]; then
     $command commit --amend --no-edit
+elif [ "$1" = "sul" ]; then
+    $command add .
+    $command commit --amend --no-edit
+    $command push -f
 elif [ "$1" = "cu" ]; then
     $command commit --amend
 # Checkout comand
@@ -50,7 +54,7 @@ elif [ "$1" = "checkout" ] || [ "$1" = "co" ]; then
 
         text="# Set branch name for Tracker ticket.\n# $ticketInfo.\n$(echo $ticketInfo | sed 's/ \{1,\}/_/g' | cut -d '_' -f 2)"
 
-        $command checkout -b $(echo $text | vipe | grep -e "^\w\+")
+        $command checkout -b $(echo -e $text | vipe | grep -e "^\w\+")
     else
         shift
         $command checkout $@
